@@ -5,51 +5,60 @@ using System.Text;
 using System.Threading.Tasks;
 using System;
 using System.Data;
-using MySql.Data.MySqlClient;
 using System.Data.Common;
+using System.Data.SqlClient;
 
-namespace IMS.Classes
+namespace IMS.DBHandler
 {
-    public class DBHandler
+    public class DatabaseHandler
     {
         private readonly string _connectionString;
-        private MySqlConnection _connection;
+        private SqlConnection _connection;
 
-        public DBHandler(string server, string database, string uid, string password){
+        public DatabaseHandler(string server, string database, string uid, string password)
+        {
             /*
              * Replace placeholders
              */
-            _connectionString = $"Server={server};Database={database};Uid={uid};Pwd={password};";
-            _connection = new MySqlConnection(_connectionString);
+            _connectionString = $"Server={server};Database={database};User Id={uid};Password={password};";
+            _connection = new SqlConnection(_connectionString);
         }
 
-        public bool OpenConnection(){ // Opens connection
-            try{
+        public bool OpenConnection()
+        { // Opens connection
+            try
+            {
                 _connection.Open();
                 return true;
             }
-            catch (MySqlException ex){
-                Console.WriteLine($"Error: {ex.Message}");
+            catch (SqlException ex)
+            {
+                //Console.WriteLine($"Error: {ex.Message}");
+                MessageBox.Show($"Error: {ex.Message}"); //Debug
                 return false;
             }
         }
-
         public bool CloseConnection() // Closes connection
         {
-            try{
+            try
+            {
                 _connection.Close();
                 return true;
             }
-            catch (MySqlException ex){
-                Console.WriteLine($"Error: {ex.Message}");
+            catch (SqlException ex)
+            {
+                //Console.WriteLine($"Error: {ex.Message}");
+                MessageBox.Show($"Error: {ex.Message}"); //Debug
                 return false;
             }
         }
 
         public int ExecuteNonQuery(string query) // Non-Query
         {
-            if (OpenConnection() == true){
-                using (MySqlCommand command = new MySqlCommand(query, _connection)){
+            if (OpenConnection() == true)
+            {
+                using (SqlCommand command = new SqlCommand(query, _connection))
+                {
                     int result = command.ExecuteNonQuery();
                     CloseConnection();
                     return result;
@@ -63,10 +72,13 @@ namespace IMS.Classes
 
         public DataTable ExecuteQuery(string query) // Query
         {
-            if (OpenConnection() == true){
-                using (MySqlCommand command = new MySqlCommand(query, _connection)){
+            if (OpenConnection() == true)
+            {
+                using (SqlCommand command = new SqlCommand(query, _connection))
+                {
                     DataTable dataTable = new DataTable();
-                    using (MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command)){
+                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+                    {
                         dataAdapter.Fill(dataTable);
                     }
                     CloseConnection();
