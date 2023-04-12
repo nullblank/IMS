@@ -1,25 +1,26 @@
 using System.Configuration;
 using System.Data;
 using IMS.DBHandler;
+using System.IO;
 
 namespace IMS
 {
-    public partial class Form1 : Form
+    public partial class Form_Login : Form
     {
         string server = ConfigurationManager.AppSettings["ServerName"];
         string database = ConfigurationManager.AppSettings["DatabaseName"];
         string username = ConfigurationManager.AppSettings["UserName"];
         string password = ConfigurationManager.AppSettings["Password"];
         DatabaseHandler handler;
-        public Form1()
+        public Form_Login()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Server: {server} | Database: {database} | Username: {username} | Password: {password}" );
-            handler = new DatabaseHandler(server, database, username, password);//Debug
+            MessageBox.Show($"Server: {server} | Database: {database} | Username: {username} | Password: {password}" );// Debug
+            handler = new DatabaseHandler(server, database, username, password);// Debug
             DataTable dataTable = handler.ExecuteQuery("SELECT * FROM MyTable");
         }
 

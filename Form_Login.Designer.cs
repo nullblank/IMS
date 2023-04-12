@@ -1,6 +1,6 @@
 ﻿namespace IMS
 {
-    partial class Form1
+    partial class Form_Login
     {
         /// <summary>
         ///  Required designer variable.
@@ -52,15 +52,15 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // Form1
+            // Form_Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(541, 432);
             Controls.Add(button2);
             Controls.Add(button1);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "Form_Login";
+            Text = "Form_Login";
             ResumeLayout(false);
         }
 
