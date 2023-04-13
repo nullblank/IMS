@@ -69,10 +69,48 @@ namespace IMS.NetUtil
             return macAddress;
         }
 
-        public string GetComputerName()
+        private string GetComputerName()
         {
             string computerName = Environment.MachineName;
             return computerName;
+        }
+
+        private void LogAction(string action)
+        {
+            string localIp = GetLocalIP();
+            string macAddr = GetMacAddress();
+            string desktopName = GetComputerName();
+            try
+            {
+                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME) VALUES ('{action}', '{localIp}', '{macAddr}', '{desktopName}')");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+            finally
+            {
+                handler.CloseConnection();
+            }
+        }
+
+        private void LogUserAction(string action, string user)
+        {
+            string localIp = GetLocalIP();
+            string macAddr = GetMacAddress();
+            string desktopName = GetComputerName();
+            try
+            {
+                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME) VALUES ('{user}','{action}', '{localIp}', '{macAddr}', '{desktopName}')");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+            finally
+            {
+                handler.CloseConnection();
+            }
         }
 
         public void Login(string user, string pass)
@@ -90,6 +128,7 @@ namespace IMS.NetUtil
                     else
                     {
                         MessageBox.Show("Invalid Login!");
+                        LogAction("Attempted Login!");
                     }
                 }
                 else
@@ -100,6 +139,10 @@ namespace IMS.NetUtil
             catch (SqlException ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                handler.CloseConnection();
             }
         }
     }

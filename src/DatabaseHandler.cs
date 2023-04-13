@@ -17,15 +17,12 @@ namespace IMS.DBHandler
 
         public DatabaseHandler(string server, string database, string uid, string password)
         {
-            /*
-             * Replace placeholders
-             */
             _connectionString = $"Server={server};Database={database};User Id={uid};Password={password};";
             _connection = new SqlConnection(_connectionString);
         }
 
-        public bool OpenConnection()
-        { // Opens connection
+        public bool OpenConnection() // Opens connection
+        { 
             try
             {
                 _connection.Open();
@@ -51,7 +48,7 @@ namespace IMS.DBHandler
             }
         }
 
-        public void CheckConnection()
+        public void CheckConnection() //Checks Connection
         {
             try
             {
@@ -68,7 +65,7 @@ namespace IMS.DBHandler
             }
         }
 
-        public int ExecuteNonQuery(string query) // Non-Query
+        public int ExecuteNonQuery(string query) // Returns no row
         {
             if (OpenConnection() == true)
             {
@@ -85,7 +82,7 @@ namespace IMS.DBHandler
             }
         }
 
-        public DataTable ExecuteQuery(string query) // Query
+        public DataTable ExecuteQuery(string query) // Returns rows in the form of a datatable
         {
             try
             {
