@@ -33,8 +33,7 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                //Console.WriteLine($"Error: {ex.Message}");
-                MessageBox.Show($"Error: {ex.Message}"); //Debug
+                Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
         }
@@ -47,9 +46,25 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                //Console.WriteLine($"Error: {ex.Message}");
-                MessageBox.Show($"Error: {ex.Message}"); //Debug
+                Console.WriteLine($"Error: {ex.Message}");
                 return false;
+            }
+        }
+
+        public void CheckConnection()
+        {
+            try
+            {
+                _connection.Open();
+                MessageBox.Show("Connection successful!");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
             }
         }
 
@@ -66,14 +81,15 @@ namespace IMS.DBHandler
             }
             else
             {
-                return -1;
+                return 0;
             }
         }
 
         public DataTable ExecuteQuery(string query) // Query
         {
-            if (OpenConnection() == true)
+            try
             {
+                OpenConnection();
                 using (SqlCommand command = new SqlCommand(query, _connection))
                 {
                     DataTable dataTable = new DataTable();
@@ -85,9 +101,14 @@ namespace IMS.DBHandler
                     return dataTable;
                 }
             }
-            else
+            catch (SqlException ex)
             {
+                MessageBox.Show($"Error: {ex.Message}");
                 return null;
+            }
+            finally
+            {
+                CloseConnection();
             }
         }
 
