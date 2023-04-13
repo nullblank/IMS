@@ -1,0 +1,106 @@
+﻿using IMS.DBHandler;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Configuration;
+
+namespace IMS.NetUtil
+{
+    public class NetworkUtilities
+    {
+        DatabaseHandler handler;
+        private void InitDb() //Initialize Database handler
+        {
+            string server = ConfigurationManager.AppSettings["ServerName"];
+            string database = ConfigurationManager.AppSettings["DatabaseName"];
+            string username = ConfigurationManager.AppSettings["UserName"];
+            string password = ConfigurationManager.AppSettings["Password"];
+            handler = new DatabaseHandler(server, database, username, password);
+        }
+        public void CheckConnection()
+        {
+            InitDb();
+            handler.CheckConnection();
+        }
+        public string GetLocalIP()
+        {
+            try
+            {
+                string localIpAddress = "";
+                var host = Dns.GetHostEntry(Dns.GetHostName());
+                foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork))
+                {
+                    localIpAddress = ip.ToString();
+                    break;
+                }
+                return localIpAddress;
+            }
+            catch (NetworkInformationException ex)
+            {
+                MessageBox.Show($"Network Error: {ex.Message}");
+                return null;
+            }
+        }
+
+        public string GetMacAddress()
+        {
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            string macAddress = string.Empty;
+            foreach (NetworkInterface adapter in nics)
+            {
+                if (macAddress == string.Empty) // only return MAC Address from first card  
+                {
+                    IPInterfaceProperties properties = adapter.GetIPProperties();
+                    macAddress = adapter.GetPhysicalAddress().ToString();
+                    if (!string.IsNullOrEmpty(macAddress))
+                    {
+                        macAddress = string.Join(":", Enumerable.Range(0, macAddress.Length / 2)
+                            .Select(i => macAddress.Substring(i * 2, 2)));
+                    }
+                }
+            }
+            return macAddress;
+        }
+
+        public string GetComputerName()
+        {
+            string computerName = Environment.MachineName;
+            return computerName;
+        }
+
+        public void Login(string user, string pass)
+        {
+            try
+            {
+                InitDb();
+                if (handler != null)
+                {
+                    DataTable results = handler.ExecuteQuery($"SELECT COUNT(*) FROM IMS_USR WHERE USR_NME COLLATE Latin1_General_CS_AS = '{user}' AND USR_PWD COLLATE Latin1_General_CS_AS = '{pass}'");
+                    if (results != null && (int)results.Rows[0][0] > 0)
+                    {
+                        MessageBox.Show("Login Successful!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Login!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Database connection not initialized.");
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+    }
+}
