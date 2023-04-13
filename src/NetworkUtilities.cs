@@ -18,18 +18,14 @@ namespace IMS.NetUtil
         DatabaseHandler handler;
         private void InitDb() //Initialize Database handler
         {
-            string server = ConfigurationManager.AppSettings["ServerName"];
-            string database = ConfigurationManager.AppSettings["DatabaseName"];
-            string username = ConfigurationManager.AppSettings["UserName"];
-            string password = ConfigurationManager.AppSettings["Password"];
-            handler = new DatabaseHandler(server, database, username, password);
+            handler = new DatabaseHandler();
         }
-        public void CheckConnection()
+        public void CheckConnection() //Checks connection between client and database
         {
             InitDb();
             handler.CheckConnection();
         }
-        public string GetLocalIP()
+        public string GetLocalIP() //Gets current local IP address
         {
             try
             {
@@ -48,8 +44,7 @@ namespace IMS.NetUtil
                 return null;
             }
         }
-
-        public string GetMacAddress()
+        public string GetMacAddress() //Gets computer's MAC Address
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
             string macAddress = string.Empty;
@@ -68,14 +63,12 @@ namespace IMS.NetUtil
             }
             return macAddress;
         }
-
-        private string GetComputerName()
+        private string GetComputerName() //Gets Desktop's name
         {
             string computerName = Environment.MachineName;
             return computerName;
         }
-
-        private void LogAction(string action)
+        private void LogAction(string action) //Logs actions outside of a user's session
         {
             string localIp = GetLocalIP();
             string macAddr = GetMacAddress();
@@ -93,8 +86,7 @@ namespace IMS.NetUtil
                 handler.CloseConnection();
             }
         }
-
-        private void LogUserAction(string action, string user)
+        private void LogUserAction(string action, string user) //Logs actions done within a user's session
         {
             string localIp = GetLocalIP();
             string macAddr = GetMacAddress();
@@ -112,8 +104,7 @@ namespace IMS.NetUtil
                 handler.CloseConnection();
             }
         }
-
-        public void Login(string user, string pass)
+        public void Login(string user, string pass) //Attempts login with given username and password. | Encrypt Later
         {
             try
             {
@@ -124,11 +115,12 @@ namespace IMS.NetUtil
                     if (results != null && (int)results.Rows[0][0] > 0)
                     {
                         MessageBox.Show("Login Successful!");
+                        //Add LogUserAction
                     }
                     else
                     {
                         MessageBox.Show("Invalid Login!");
-                        LogAction("Attempted Login!");
+                        //LogAction("Attempted Login!");
                     }
                 }
                 else

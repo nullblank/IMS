@@ -8,7 +8,7 @@ using IMS.NetUtil;
 namespace IMS
 {
     public partial class Form_Login : Form
-    {   
+    {
         NetworkUtilities netutil = new NetworkUtilities();
         public Form_Login()
         {

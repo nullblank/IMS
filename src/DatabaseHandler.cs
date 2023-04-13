@@ -7,6 +7,7 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace IMS.DBHandler
 {
@@ -14,13 +15,15 @@ namespace IMS.DBHandler
     {
         private readonly string _connectionString;
         private SqlConnection _connection;
-
-        public DatabaseHandler(string server, string database, string uid, string password)
+        public DatabaseHandler()
         {
-            _connectionString = $"Server={server};Database={database};User Id={uid};Password={password};";
+            string server = ConfigurationManager.AppSettings["ServerName"];
+            string database = ConfigurationManager.AppSettings["DatabaseName"];
+            string username = ConfigurationManager.AppSettings["UserName"];
+            string password = ConfigurationManager.AppSettings["Password"];
+            _connectionString = $"Server={server};Database={database};User Id={username};Password={password};";
             _connection = new SqlConnection(_connectionString);
         }
-
         public bool OpenConnection() // Opens connection
         { 
             try
@@ -47,7 +50,6 @@ namespace IMS.DBHandler
                 return false;
             }
         }
-
         public void CheckConnection() //Checks Connection
         {
             try
@@ -59,29 +61,34 @@ namespace IMS.DBHandler
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            finally
-            {
-                _connection.Close();
-            }
+            finally { CloseConnection(); }
         }
-
         public int ExecuteNonQuery(string query) // Returns no row
         {
-            if (OpenConnection() == true)
+            try
             {
-                using (SqlCommand command = new SqlCommand(query, _connection))
+                if (OpenConnection() == true)
                 {
-                    int result = command.ExecuteNonQuery();
-                    CloseConnection();
-                    return result;
+                    using (SqlCommand command = new SqlCommand(query, _connection))
+                    {
+                        int result = command.ExecuteNonQuery();
+                        CloseConnection();
+                        return result;
+                    }
                 }
+                else
+                {
+                    return 0;
+                }
+
             }
-            else
+            catch (SqlException ex)
             {
+                MessageBox.Show($"Error: {ex.Message}");
                 return 0;
             }
+            finally { CloseConnection(); }
         }
-
         public DataTable ExecuteQuery(string query) // Returns rows in the form of a datatable
         {
             try
@@ -103,10 +110,7 @@ namespace IMS.DBHandler
                 MessageBox.Show($"Error: {ex.Message}");
                 return null;
             }
-            finally
-            {
-                CloseConnection();
-            }
+            finally { CloseConnection(); }
         }
 
     }
