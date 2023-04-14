@@ -112,6 +112,5 @@ namespace IMS.DBHandler
             }
             finally { CloseConnection(); }
         }
-
     }
 }

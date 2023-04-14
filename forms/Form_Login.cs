@@ -14,17 +14,15 @@ namespace IMS
         {
             InitializeComponent();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) //Login
         {
             string user = txtUsername.Text;
             string pass = txtPassword.Text;
             netutil.Login(user, pass);
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) //Check Connection
         {
             netutil.CheckConnection();
         }
-
     }
 }
