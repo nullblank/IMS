@@ -95,7 +95,7 @@ namespace IMS.NetUtil
             string desktopName = GetComputerName();
             try
             {
-                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ROL, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID) VALUES ('{session.GetSessionUsername}', '{session.GetRole}', '{action}', '{localIp}', '{macAddr}', '{desktopName}', '{session.GetSessionID}')");
+                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ROL, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID) VALUES ('{session.GetSessionUsername()}', '{session.GetRole()}', '{action}', '{localIp}', '{macAddr}', '{desktopName}', '{session.GetSessionID()}')");
             }
             catch (SqlException ex)
             {
@@ -133,7 +133,7 @@ namespace IMS.NetUtil
                     else
                     {
                         MessageBox.Show("Invalid Login!");
-                        //LogAction("Attempted Login!");
+                        LogAction("Attempted Login!");
                         return false;
                     }
                 }
