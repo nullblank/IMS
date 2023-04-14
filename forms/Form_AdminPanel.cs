@@ -27,9 +27,16 @@ namespace IMS.forms
 
         private void btnLogs_Click(object sender, EventArgs e)
         {
+            Audit audit = new Audit(_handler, _session);
             if (_session.SessionExists() == true)
             {
-                this.Hide();
+                Form_Logs form_Logs = new Form_Logs(_handler, _session);
+                audit.LogUserAction("Viewed the logs.", _session);
+                form_Logs.Show();
+            }
+            else
+            {
+                audit.LogAction("Ilegal access to logs!");
             }
         }
     }

@@ -17,15 +17,16 @@ namespace IMS.NetUtil
 {
     public class NetworkUtilities
     {
-        DatabaseHandler handler;
+        DatabaseHandler _handler;
+        Audit audit;
         private void InitDb() //Initialize Database handler
         {
-            handler = new DatabaseHandler();
+            _handler = new DatabaseHandler();
         }
         public void CheckConnection() //Checks connection between client and database
         {
             InitDb();
-            handler.CheckConnection();
+            _handler.CheckConnection();
         }
         public string GetLocalIP() //Gets current local IP address
         {
@@ -65,66 +66,32 @@ namespace IMS.NetUtil
             }
             return macAddress;
         }
-        private string GetComputerName() //Gets Desktop's name
+        public string GetComputerName() //Gets Desktop's name
         {
             string computerName = Environment.MachineName;
             return computerName;
-        }
-        private void LogAction(string action) //Logs actions outside of a user's session
-        {
-            string localIp = GetLocalIP();
-            string macAddr = GetMacAddress();
-            string desktopName = GetComputerName();
-            try
-            {
-                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME) VALUES ('{action}', '{localIp}', '{macAddr}', '{desktopName}')");
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-            }
-            finally
-            {
-                handler.CloseConnection();
-            }
-        }
-        private void LogUserAction(string action, SessionHandler session) //Logs actions done within a user's session
-        {
-            string localIp = GetLocalIP();
-            string macAddr = GetMacAddress();
-            string desktopName = GetComputerName();
-            try
-            {
-                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ROL, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID) VALUES ('{session.GetSessionUsername()}', '{session.GetRole()}', '{action}', '{localIp}', '{macAddr}', '{desktopName}', '{session.GetSessionID()}')");
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-            }
-            finally
-            {
-                handler.CloseConnection();
-            }
         }
         public bool Login(string user, string pass) //Attempts login with given username and password. | Encrypt Later
         {
             try
             {
                 InitDb();
-                if (handler != null)
+                if (_handler != null)
                 {
-                    DataTable results = handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME COLLATE Latin1_General_CS_AS = '{user}' AND USR_PWD COLLATE Latin1_General_CS_AS = '{pass}'");
+                    DataTable results = _handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME COLLATE Latin1_General_CS_AS = '{user}' AND USR_PWD COLLATE Latin1_General_CS_AS = '{pass}'");
                     if (results.Rows.Count > 0)
                     {
                         MessageBox.Show("Login Successful!");
                         int role = (int)results.Rows[0][4];
                         SessionHandler session = new SessionHandler();
-                        session.NewSession(user, role, handler);
-                        LogUserAction("Successful Login", session);
+                        audit = new Audit(_handler, session);
+                        session.NewSession(user, role, _handler);
+                        
+                        audit.LogUserAction("Successful Login", session);
                         switch (role)
                         {
                             case 1:
-                                Form_AdminPanel form_AdminPanel = new Form_AdminPanel(handler, session);
+                                Form_AdminPanel form_AdminPanel = new Form_AdminPanel(_handler, session);
                                 form_AdminPanel.Show();
                                 break;
                         }
@@ -133,7 +100,8 @@ namespace IMS.NetUtil
                     else
                     {
                         MessageBox.Show("Invalid Login!");
-                        LogAction("Attempted Login!");
+                        audit = new Audit(_handler);
+                        audit.LogAction("Attempted Login!");
                         return false;
                     }
                 }
@@ -150,7 +118,7 @@ namespace IMS.NetUtil
             }
             finally //Close connection after everything else
             {
-                handler.CloseConnection();
+                _handler.CloseConnection();
             }
         }
     }

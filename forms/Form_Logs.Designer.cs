@@ -28,12 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form_Logs";
+            dgvLogs = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
+            SuspendLayout();
+            // 
+            // dgvLogs
+            // 
+            dgvLogs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLogs.Location = new Point(12, 12);
+            dgvLogs.Name = "dgvLogs";
+            dgvLogs.RowHeadersWidth = 51;
+            dgvLogs.RowTemplate.Height = 29;
+            dgvLogs.RowTemplate.ReadOnly = true;
+            dgvLogs.Size = new Size(815, 502);
+            dgvLogs.TabIndex = 0;
+            // 
+            // Form_Logs
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(839, 526);
+            Controls.Add(dgvLogs);
+            Name = "Form_Logs";
+            Text = "Form_Logs";
+            Load += Form_Logs_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvLogs).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView dgvLogs;
     }
 }
