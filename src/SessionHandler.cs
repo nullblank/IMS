@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace IMS.src
 {
@@ -12,8 +13,16 @@ namespace IMS.src
         string _username;
         public SessionHandler(string username)
         {
+            //Something something...
+        }
+        public void NewSession(string username)
+        {
             GenerateSessionID();
             _username = username;
+        }
+        public bool SessionExists()
+        {
+            return _session != null && _username != null;
         }
         public string GetSessionUsername()
         {

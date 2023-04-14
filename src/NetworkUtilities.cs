@@ -86,14 +86,14 @@ namespace IMS.NetUtil
                 handler.CloseConnection();
             }
         }
-        private void LogUserAction(string action, string user) //Logs actions done within a user's session
+        private void LogUserAction(string action, string user, string session) //Logs actions done within a user's session
         {
             string localIp = GetLocalIP();
             string macAddr = GetMacAddress();
             string desktopName = GetComputerName();
             try
             {
-                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME) VALUES ('{user}','{action}', '{localIp}', '{macAddr}', '{desktopName}')");
+                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID) VALUES ('{user}','{action}', '{localIp}', '{macAddr}', '{desktopName}', '{session}')");
             }
             catch (SqlException ex)
             {
