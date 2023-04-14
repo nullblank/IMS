@@ -12,20 +12,7 @@ namespace IMS.src
     internal class Audit
     {
         DatabaseHandler _handler;
-        SessionHandler _session;
         NetworkUtilities _networkUtilities;
-        string _localIp;
-        string _macAddr;
-        string _desktopName;
-        public Audit(DatabaseHandler handler, SessionHandler session)
-        {
-            _handler = handler;
-            _session = session;
-            _networkUtilities = new NetworkUtilities();
-            _localIp = _networkUtilities.GetLocalIP();
-            _macAddr = _networkUtilities.GetMacAddress();
-            _desktopName = _networkUtilities.GetComputerName();
-        }
         public Audit(DatabaseHandler handler)
         {
             _handler = handler;
@@ -35,7 +22,9 @@ namespace IMS.src
         {
             try
             {
-                _handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME) VALUES ('{action}', '{_localIp}', '{_macAddr}', '{_desktopName}')");
+                string columns = "LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME";
+                string values = $"'{action}', '{_networkUtilities.GetLocalIP()}', '{_networkUtilities.GetMacAddress()}', '{_networkUtilities.GetComputerName()}'";
+                _handler.ExecuteQuery($"INSERT INTO IMS_LOG ({columns}) VALUES ({values})");
             }
             catch (SqlException ex)
             {
@@ -50,7 +39,9 @@ namespace IMS.src
         {
             try
             {
-                _handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ROL, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID) VALUES ('{session.GetSessionUsername()}', '{session.GetRole()}', '{action}', '{_localIp}', '{_macAddr}', '{_desktopName}', '{session.GetSessionID()}')");
+                string columns = "LOG_USR, LOG_ROL, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID";
+                string values = $"'{session.GetSessionUsername()}', '{session.GetRole()}', '{action}', '{_networkUtilities.GetLocalIP()}', '{_networkUtilities.GetMacAddress()}', '{_networkUtilities.GetComputerName()}', '{session.GetSessionID()}'";
+                _handler.ExecuteQuery($"INSERT INTO IMS_LOG ({columns}) VALUES ({values})");
             }
             catch (SqlException ex)
             {

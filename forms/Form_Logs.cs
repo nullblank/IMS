@@ -1,4 +1,5 @@
 ﻿using IMS.DBHandler;
+using IMS.NetUtil;
 using IMS.src;
 using MySqlX.XDevAPI;
 using System;
@@ -25,16 +26,35 @@ namespace IMS.forms
             _session = session;
         }
 
-        private void Form_Logs_Load(object sender, EventArgs e)
+        private void InitLogs()
         {
             if (_session.SessionExists() == true)
             {
                 DataTable results = new DataTable();
-                results = _handler.ExecuteQuery("SELECT * FROM IMS_LOG");
+                results = _handler.ExecuteQuery("SELECT * FROM IMS_LOG ORDER BY LOG_TMP DESC");
                 dgvLogs.DataSource = results;
-                
+                dgvLogs.Columns[3].Width = 150;
+                dgvLogs.Columns[8].Width = 200;
+
             }
-            
+            else
+            {
+                MessageBox.Show("WARNING: ILEGAL ACCESS DETECTED. CLOSING WINDOW!");
+                Audit audit = new Audit(_handler);
+                audit.LogAction("Illegal Access on: Form_Logs");
+            }
+        }
+
+        private void Form_Logs_Load(object sender, EventArgs e)
+        {
+            InitLogs();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Audit audit = new Audit(_handler);
+            audit.LogUserAction("User refreshed the logs.", _session);
+            InitLogs();
         }
     }
 }

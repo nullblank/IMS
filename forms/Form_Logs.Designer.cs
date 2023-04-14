@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             dgvLogs = new DataGridView();
+            btnRefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
             SuspendLayout();
             // 
@@ -36,19 +37,30 @@
             // 
             dgvLogs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLogs.Location = new Point(12, 12);
+            dgvLogs.Location = new Point(12, 47);
             dgvLogs.Name = "dgvLogs";
             dgvLogs.RowHeadersWidth = 51;
             dgvLogs.RowTemplate.Height = 29;
             dgvLogs.RowTemplate.ReadOnly = true;
-            dgvLogs.Size = new Size(815, 502);
+            dgvLogs.Size = new Size(1283, 548);
             dgvLogs.TabIndex = 0;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.Location = new Point(12, 12);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(94, 29);
+            btnRefresh.TabIndex = 1;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // Form_Logs
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(839, 526);
+            ClientSize = new Size(1307, 607);
+            Controls.Add(btnRefresh);
             Controls.Add(dgvLogs);
             Name = "Form_Logs";
             Text = "Form_Logs";
@@ -60,5 +72,6 @@
         #endregion
 
         private DataGridView dgvLogs;
+        private Button btnRefresh;
     }
 }

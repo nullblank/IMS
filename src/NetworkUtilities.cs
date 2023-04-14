@@ -84,9 +84,8 @@ namespace IMS.NetUtil
                         MessageBox.Show("Login Successful!");
                         int role = (int)results.Rows[0][4];
                         SessionHandler session = new SessionHandler();
-                        audit = new Audit(_handler, session);
                         session.NewSession(user, role, _handler);
-                        
+                        audit = new Audit(_handler);
                         audit.LogUserAction("Successful Login", session);
                         switch (role)
                         {

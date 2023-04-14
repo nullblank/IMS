@@ -27,7 +27,7 @@ namespace IMS.forms
 
         private void btnLogs_Click(object sender, EventArgs e)
         {
-            Audit audit = new Audit(_handler, _session);
+            Audit audit = new Audit(_handler);
             if (_session.SessionExists() == true)
             {
                 Form_Logs form_Logs = new Form_Logs(_handler, _session);
