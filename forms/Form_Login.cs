@@ -27,5 +27,18 @@ namespace IMS
         {
             netutil.CheckConnection();
         }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string user = txtUsername.Text;
+                string pass = txtPassword.Text;
+                if (netutil.Login(user, pass) == true)
+                {
+                    this.Hide();
+                }
+            }
+        }
     }
 }

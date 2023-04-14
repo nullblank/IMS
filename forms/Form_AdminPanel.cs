@@ -1,6 +1,7 @@
 ﻿using IMS.DBHandler;
 using IMS.src;
 using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.VisualBasic.Devices;
 using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,23 @@ namespace IMS.forms
             else
             {
                 audit.LogAction("Ilegal access to logs!");
+            }
+        }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+            Audit audit = new Audit(_handler);
+            if (_session.SessionExists() == true)
+            {
+                Form_Users form_Logs = new Form_Users(_handler, _session);
+                audit.LogUserAction("Viewed the user management.", _session);
+                form_Logs.Show();
+            }
+            else
+            {
+                MessageBox.Show("WARNING: ILLEGAL ACCESS DETECTED. CLOSING WINDOW!");
+                audit.LogAction("Illegal Access on: Form_Admin -> Form_Users");
+                this.Hide();
             }
         }
     }

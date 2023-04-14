@@ -1,12 +1,10 @@
 ﻿using IMS.DBHandler;
 using IMS.NetUtil;
 using IMS.src;
-using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,47 +13,39 @@ using System.Windows.Forms;
 
 namespace IMS.forms
 {
-    public partial class Form_Logs : Form
+    public partial class Form_Users : Form
     {
         DatabaseHandler _handler;
         SessionHandler _session;
-        public Form_Logs(DatabaseHandler handler, SessionHandler session)
+        NetworkUtilities _netutil;
+        public Form_Users(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
             _handler = handler;
             _session = session;
+            _netutil = new NetworkUtilities();
         }
 
-        private void InitLogs()
+        private void InitUsers()
         {
             if (_session.SessionExists() == true)
             {
                 DataTable results = new DataTable();
-                results = _handler.ExecuteQuery("SELECT * FROM IMS_LOG ORDER BY LOG_TMP DESC");
-                dgvLogs.DataSource = results;
-                dgvLogs.Columns[3].Width = 150;
-                dgvLogs.Columns[8].Width = 200;
+                results = _handler.ExecuteQuery("SELECT * FROM IMS_USR");
+                dgvUsers.DataSource = results;
 
             }
             else
             {
                 MessageBox.Show("WARNING: ILLEGAL ACCESS DETECTED. CLOSING WINDOW!");
                 Audit audit = new Audit(_handler);
-                audit.LogAction("Illegal Access on: Form_Logs");
+                audit.LogAction("Illegal Access on: Form_Users");
                 this.Hide();
             }
         }
-
-        private void Form_Logs_Load(object sender, EventArgs e)
+        private void Form_Users_Load(object sender, EventArgs e)
         {
-            InitLogs();
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Audit audit = new Audit(_handler);
-            audit.LogUserAction("User refreshed the logs.", _session);
-            InitLogs();
+            InitUsers();
         }
     }
 }

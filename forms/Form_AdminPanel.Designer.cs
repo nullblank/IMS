@@ -30,13 +30,16 @@
         {
             btnLogs = new Button();
             btnLogout = new Button();
+            btnUsers = new Button();
             SuspendLayout();
             // 
             // btnLogs
             // 
-            btnLogs.Location = new Point(12, 409);
+            btnLogs.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btnLogs.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnLogs.Location = new Point(58, 99);
             btnLogs.Name = "btnLogs";
-            btnLogs.Size = new Size(94, 29);
+            btnLogs.Size = new Size(259, 30);
             btnLogs.TabIndex = 0;
             btnLogs.Text = "View Logs";
             btnLogs.UseVisualStyleBackColor = true;
@@ -44,20 +47,37 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(694, 409);
+            btnLogout.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btnLogout.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnLogout.Location = new Point(58, 169);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(94, 29);
+            btnLogout.Size = new Size(259, 30);
             btnLogout.TabIndex = 1;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = true;
+            // 
+            // btnUsers
+            // 
+            btnUsers.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btnUsers.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnUsers.Location = new Point(58, 134);
+            btnUsers.Name = "btnUsers";
+            btnUsers.Size = new Size(259, 30);
+            btnUsers.TabIndex = 2;
+            btnUsers.Text = "Manage Users";
+            btnUsers.UseVisualStyleBackColor = true;
+            btnUsers.Click += btnUsers_Click;
             // 
             // Form_AdminPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnLogout);
+            ClientSize = new Size(378, 310);
+            Controls.Add(btnUsers);
             Controls.Add(btnLogs);
+            Controls.Add(btnLogout);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form_AdminPanel";
             Text = "IMS Admin Panel";
             ResumeLayout(false);
@@ -67,5 +87,6 @@
 
         private Button btnLogs;
         private Button btnLogout;
+        private Button btnUsers;
     }
 }
