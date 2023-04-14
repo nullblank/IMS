@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Configuration;
+using IMS.src;
+using IMS.forms;
 
 namespace IMS.NetUtil
 {
@@ -86,14 +88,14 @@ namespace IMS.NetUtil
                 handler.CloseConnection();
             }
         }
-        private void LogUserAction(string action, string user, string session) //Logs actions done within a user's session
+        private void LogUserAction(string action, SessionHandler session) //Logs actions done within a user's session
         {
             string localIp = GetLocalIP();
             string macAddr = GetMacAddress();
             string desktopName = GetComputerName();
             try
             {
-                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID) VALUES ('{user}','{action}', '{localIp}', '{macAddr}', '{desktopName}', '{session}')");
+                handler.ExecuteQuery($"INSERT INTO IMS_LOG (LOG_USR, LOG_ROL, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID) VALUES ('{session.GetSessionUsername}', '{session.GetRole}', '{action}', '{localIp}', '{macAddr}', '{desktopName}', '{session.GetSessionID}')");
             }
             catch (SqlException ex)
             {
@@ -104,33 +106,47 @@ namespace IMS.NetUtil
                 handler.CloseConnection();
             }
         }
-        public void Login(string user, string pass) //Attempts login with given username and password. | Encrypt Later
+        public bool Login(string user, string pass) //Attempts login with given username and password. | Encrypt Later
         {
             try
             {
                 InitDb();
                 if (handler != null)
                 {
-                    DataTable results = handler.ExecuteQuery($"SELECT COUNT(*) FROM IMS_USR WHERE USR_NME COLLATE Latin1_General_CS_AS = '{user}' AND USR_PWD COLLATE Latin1_General_CS_AS = '{pass}'");
-                    if (results != null && (int)results.Rows[0][0] > 0)
+                    DataTable results = handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME COLLATE Latin1_General_CS_AS = '{user}' AND USR_PWD COLLATE Latin1_General_CS_AS = '{pass}'");
+                    if (results.Rows.Count > 0)
                     {
                         MessageBox.Show("Login Successful!");
-                        //Add LogUserAction
+                        int role = (int)results.Rows[0][4];
+                        SessionHandler session = new SessionHandler();
+                        session.NewSession(user, role, handler);
+                        LogUserAction("Successful Login", session);
+                        switch (role)
+                        {
+                            case 1:
+                                Form_AdminPanel form_AdminPanel = new Form_AdminPanel();
+                                form_AdminPanel.Show();
+                                break;
+                        }
+                        return true;
                     }
                     else
                     {
                         MessageBox.Show("Invalid Login!");
                         //LogAction("Attempted Login!");
+                        return false;
                     }
                 }
                 else
                 {
                     MessageBox.Show("Database connection not initialized.");
+                    return false;
                 }
             }
             catch (SqlException ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+                return false;
             }
             finally
             {

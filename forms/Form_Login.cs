@@ -18,7 +18,10 @@ namespace IMS
         {
             string user = txtUsername.Text;
             string pass = txtPassword.Text;
-            netutil.Login(user, pass);
+            if (netutil.Login(user, pass) == true)
+            {
+                this.Hide();
+            }
         }
         private void button2_Click(object sender, EventArgs e) //Check Connection
         {

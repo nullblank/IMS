@@ -1,5 +1,8 @@
-﻿using System;
+﻿using IMS.DBHandler;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +14,25 @@ namespace IMS.src
     {
         string _session;
         string _username;
-        public SessionHandler(string username)
+        string _role;
+        public SessionHandler()
         {
             //Something something...
         }
-        public void NewSession(string username)
+        public void NewSession(string username, int role, DatabaseHandler handler)
         {
             GenerateSessionID();
+            DataTable results = handler.ExecuteQuery($"SELECT * FROM IMS_RFN_ROL WHERE ROL_COD  = '{role.ToString()}'");
             _username = username;
+            _role = results.Rows[0][2].ToString();
         }
         public bool SessionExists()
         {
             return _session != null && _username != null;
+        }
+        public string GetRole()
+        {
+            return _role;
         }
         public string GetSessionUsername()
         {
@@ -36,6 +46,7 @@ namespace IMS.src
         {
             _session = null;
             _username = null;
+            _role = null;
         }
         private void GenerateSessionID()
         {
