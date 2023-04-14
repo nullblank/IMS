@@ -124,7 +124,7 @@ namespace IMS.NetUtil
                         switch (role)
                         {
                             case 1:
-                                Form_AdminPanel form_AdminPanel = new Form_AdminPanel();
+                                Form_AdminPanel form_AdminPanel = new Form_AdminPanel(handler, session);
                                 form_AdminPanel.Show();
                                 break;
                         }
@@ -148,7 +148,7 @@ namespace IMS.NetUtil
                 MessageBox.Show("Error: " + ex.Message);
                 return false;
             }
-            finally
+            finally //Close connection after everything else
             {
                 handler.CloseConnection();
             }

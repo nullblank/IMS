@@ -40,6 +40,7 @@
             btnLogs.TabIndex = 0;
             btnLogs.Text = "View Logs";
             btnLogs.UseVisualStyleBackColor = true;
+            btnLogs.Click += btnLogs_Click;
             // 
             // btnLogout
             // 
