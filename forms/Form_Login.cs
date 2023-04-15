@@ -4,6 +4,7 @@ using IMS.DBHandler;
 using System.IO;
 using System.Data.SqlClient;
 using IMS.NetUtil;
+using IMS.src;
 
 namespace IMS
 {
@@ -26,6 +27,9 @@ namespace IMS
         private void button2_Click(object sender, EventArgs e) //Check Connection
         {
             netutil.CheckConnection();
+            DatabaseHandler handler = new DatabaseHandler();
+            Audit audit = new Audit(handler);
+            audit.LogAction("Connection Test");
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
