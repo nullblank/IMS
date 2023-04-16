@@ -38,7 +38,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(104, 106);
+            button1.Location = new Point(122, 141);
             button1.Name = "button1";
             button1.Size = new Size(201, 29);
             button1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(104, 194);
+            button2.Location = new Point(122, 229);
             button2.Name = "button2";
             button2.Size = new Size(201, 29);
             button2.TabIndex = 1;
@@ -58,14 +58,14 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(104, 12);
+            txtUsername.Location = new Point(122, 47);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(201, 27);
             txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(104, 62);
+            txtPassword.Location = new Point(122, 97);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(201, 27);
@@ -75,7 +75,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(14, 15);
+            label1.Location = new Point(32, 50);
             label1.Name = "label1";
             label1.Size = new Size(75, 20);
             label1.TabIndex = 4;
@@ -84,7 +84,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(14, 65);
+            label2.Location = new Point(32, 100);
             label2.Name = "label2";
             label2.Size = new Size(70, 20);
             label2.TabIndex = 5;
@@ -94,7 +94,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(365, 248);
+            ClientSize = new Size(399, 294);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(txtPassword);
