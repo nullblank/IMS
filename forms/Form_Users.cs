@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,13 @@ namespace IMS.forms
             if (_session.SessionExists() == true)
             {
                 DataTable results = new DataTable();
-                results = _handler.ExecuteQuery("SELECT * FROM IMS_USR");
+                string query = "SELECT u.USR_IDX, u.USR_COD, u.USR_NME, u.USR_PWD," +
+                    " CASE WHEN u.USR_ROL = r.ROL_COD THEN r.ROL_DES ELSE NULL END AS ROL_DES," +
+                    " CASE WHEN u.USR_OFF = o.OFF_COD THEN o.OFF_DES ELSE NULL END AS OFF_DES" +
+                    " FROM IMS_USR u" +
+                    " LEFT JOIN IMS_RFN_ROL r ON u.USR_ROL = r.ROL_COD" +
+                    " LEFT JOIN IMS_RFN_OFF o ON u.USR_OFF = o.OFF_COD";
+                results = _handler.ExecuteQuery(query);
                 dgvUsers.DataSource = results;
 
             }
@@ -46,6 +53,23 @@ namespace IMS.forms
         private void Form_Users_Load(object sender, EventArgs e)
         {
             InitUsers();
+            using (SqlDataReader reader = _handler.GetColumnData("IMS_RFN_OFF", "OFF_DES"))
+            {
+                while (reader.Read())
+                {
+                    string value = reader.GetString(0);
+                    cbOffice.Items.Add(value);
+                }
+            }
+            using (SqlDataReader reader = _handler.GetColumnData("IMS_RFN_ROL", "ROL_DES"))
+            {
+                while (reader.Read())
+                {
+                    string value = reader.GetString(0);
+                    cbPerms.Items.Add(value);
+                }
+            }
+            _handler.CloseConnection();
         }
     }
 }

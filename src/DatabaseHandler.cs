@@ -29,7 +29,11 @@ namespace IMS.DBHandler
         { 
             try
             {
-                _connection.Open();
+                if (_connection.State == ConnectionState.Open) {}
+                else
+                {
+                    _connection.Open();
+                }
                 return true;
             }
             catch (SqlException ex)
@@ -42,7 +46,11 @@ namespace IMS.DBHandler
         {
             try
             {
-                _connection.Close();
+                if (_connection.State == ConnectionState.Closed) { }
+                else
+                {
+                    _connection.Close();
+                }
                 return true;
             }
             catch (SqlException ex)
@@ -116,9 +124,20 @@ namespace IMS.DBHandler
 
         public SqlDataReader GetColumnData(string table, string column)
         {
-            SqlCommand command = new SqlCommand($"SELECT {column} FROM {table}", _connection);
-            SqlDataReader reader = command.ExecuteReader();
-            return reader;
+            try
+            {
+                OpenConnection() ;
+                using (SqlCommand command = new SqlCommand($"SELECT {column} FROM {table}", _connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    return reader;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                return null;
+            }
         }
     }
 }

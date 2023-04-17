@@ -40,8 +40,8 @@
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             textBox3 = new TextBox();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
+            cbPerms = new ComboBox();
+            cbOffice = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
             SuspendLayout();
             // 
@@ -149,29 +149,31 @@
             textBox3.Size = new Size(151, 27);
             textBox3.TabIndex = 12;
             // 
-            // comboBox1
+            // cbPerms
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(102, 114);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 15;
+            cbPerms.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbPerms.FormattingEnabled = true;
+            cbPerms.Location = new Point(102, 114);
+            cbPerms.Name = "cbPerms";
+            cbPerms.Size = new Size(151, 28);
+            cbPerms.TabIndex = 15;
             // 
-            // comboBox2
+            // cbOffice
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(102, 148);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 28);
-            comboBox2.TabIndex = 16;
+            cbOffice.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbOffice.FormattingEnabled = true;
+            cbOffice.Location = new Point(102, 148);
+            cbOffice.Name = "cbOffice";
+            cbOffice.Size = new Size(151, 28);
+            cbOffice.TabIndex = 16;
             // 
             // Form_Users
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(840, 654);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
+            Controls.Add(cbOffice);
+            Controls.Add(cbPerms);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
@@ -206,7 +208,7 @@
         private TextBox textBox1;
         private TextBox textBox2;
         private TextBox textBox3;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
+        private ComboBox cbPerms;
+        private ComboBox cbOffice;
     }
 }
