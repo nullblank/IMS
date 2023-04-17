@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             dgvUsers = new DataGridView();
-            button1 = new Button();
-            button2 = new Button();
-            button4 = new Button();
+            btnSave = new Button();
+            btnUpdate = new Button();
+            btnNew = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            txtID = new TextBox();
+            txtUsername = new TextBox();
+            txtPassword = new TextBox();
             cbPerms = new ComboBox();
             cbOffice = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -55,33 +55,37 @@
             dgvUsers.RowTemplate.Height = 29;
             dgvUsers.Size = new Size(816, 407);
             dgvUsers.TabIndex = 0;
+            dgvUsers.CellClick += dgvUsers_CellClick;
             // 
-            // button1
+            // btnSave
             // 
-            button1.Location = new Point(12, 182);
-            button1.Name = "button1";
-            button1.Size = new Size(185, 47);
-            button1.TabIndex = 1;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
+            btnSave.Enabled = false;
+            btnSave.Location = new Point(12, 182);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(185, 47);
+            btnSave.TabIndex = 1;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
-            // button2
+            // btnUpdate
             // 
-            button2.Location = new Point(203, 182);
-            button2.Name = "button2";
-            button2.Size = new Size(185, 47);
-            button2.TabIndex = 2;
-            button2.Text = "Update";
-            button2.UseVisualStyleBackColor = true;
+            btnUpdate.Location = new Point(203, 182);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(185, 47);
+            btnUpdate.TabIndex = 2;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnNew
             // 
-            button4.Location = new Point(394, 182);
-            button4.Name = "button4";
-            button4.Size = new Size(185, 47);
-            button4.TabIndex = 4;
-            button4.Text = "New";
-            button4.UseVisualStyleBackColor = true;
+            btnNew.Location = new Point(394, 182);
+            btnNew.Name = "btnNew";
+            btnNew.Size = new Size(185, 47);
+            btnNew.TabIndex = 4;
+            btnNew.Text = "New";
+            btnNew.UseVisualStyleBackColor = true;
+            btnNew.Click += button4_Click;
             // 
             // label1
             // 
@@ -128,30 +132,34 @@
             label5.TabIndex = 9;
             label5.Text = "Office";
             // 
-            // textBox1
+            // txtID
             // 
-            textBox1.Location = new Point(102, 12);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(151, 27);
-            textBox1.TabIndex = 10;
+            txtID.Location = new Point(102, 12);
+            txtID.Name = "txtID";
+            txtID.ReadOnly = true;
+            txtID.Size = new Size(151, 27);
+            txtID.TabIndex = 10;
             // 
-            // textBox2
+            // txtUsername
             // 
-            textBox2.Location = new Point(102, 45);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(151, 27);
-            textBox2.TabIndex = 11;
+            txtUsername.Location = new Point(102, 45);
+            txtUsername.Name = "txtUsername";
+            txtUsername.ReadOnly = true;
+            txtUsername.Size = new Size(151, 27);
+            txtUsername.TabIndex = 11;
             // 
-            // textBox3
+            // txtPassword
             // 
-            textBox3.Location = new Point(102, 78);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(151, 27);
-            textBox3.TabIndex = 12;
+            txtPassword.Location = new Point(102, 78);
+            txtPassword.Name = "txtPassword";
+            txtPassword.ReadOnly = true;
+            txtPassword.Size = new Size(151, 27);
+            txtPassword.TabIndex = 12;
             // 
             // cbPerms
             // 
             cbPerms.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbPerms.Enabled = false;
             cbPerms.FormattingEnabled = true;
             cbPerms.Location = new Point(102, 114);
             cbPerms.Name = "cbPerms";
@@ -161,6 +169,7 @@
             // cbOffice
             // 
             cbOffice.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbOffice.Enabled = false;
             cbOffice.FormattingEnabled = true;
             cbOffice.Location = new Point(102, 148);
             cbOffice.Name = "cbOffice";
@@ -174,17 +183,17 @@
             ClientSize = new Size(840, 654);
             Controls.Add(cbOffice);
             Controls.Add(cbPerms);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txtPassword);
+            Controls.Add(txtUsername);
+            Controls.Add(txtID);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button4);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnNew);
+            Controls.Add(btnUpdate);
+            Controls.Add(btnSave);
             Controls.Add(dgvUsers);
             Name = "Form_Users";
             Text = "Form1";
@@ -197,17 +206,17 @@
         #endregion
 
         private DataGridView dgvUsers;
-        private Button button1;
-        private Button button2;
-        private Button button4;
+        private Button btnSave;
+        private Button btnUpdate;
+        private Button btnNew;
         private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
         private Label label5;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox txtID;
+        private TextBox txtUsername;
+        private TextBox txtPassword;
         private ComboBox cbPerms;
         private ComboBox cbOffice;
     }

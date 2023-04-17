@@ -19,6 +19,7 @@ namespace IMS.forms
         DatabaseHandler _handler;
         SessionHandler _session;
         NetworkUtilities _netutil;
+        string _state;
         public Form_Users(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
@@ -70,6 +71,71 @@ namespace IMS.forms
                 }
             }
             _handler.CloseConnection();
+        }
+
+        private void dgvUsers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedRow = dgvUsers.Rows[e.RowIndex];
+                txtID.Text = selectedRow.Cells["USR_COD"].Value.ToString();
+                txtUsername.Text = selectedRow.Cells["USR_NME"].Value.ToString();
+                txtPassword.Text = selectedRow.Cells["USR_PWD"].Value.ToString();
+                MatchCell(e, "ROL_DES", cbPerms);
+                MatchCell(e, "OFF_DES", cbOffice);
+            }
+        }
+
+        private void MatchCell(DataGridViewCellEventArgs e, string column, ComboBox comboBox)
+        {
+            DataGridViewRow selectedRow = dgvUsers.Rows[e.RowIndex];
+            int itemIndex = comboBox.FindStringExact(selectedRow.Cells[column].Value.ToString());
+            if (itemIndex >= 0)
+            {
+                comboBox.SelectedIndex = itemIndex;
+            }
+        }
+
+        private void ToggleState(string state)
+        {
+            switch (state)
+            {
+                case "New":
+                    _state = state;
+                    txtID.ReadOnly = false; txtID.Clear();
+                    txtUsername.ReadOnly = false; txtUsername.Clear();
+                    txtPassword.ReadOnly = false; txtPassword.Clear();
+                    cbPerms.Enabled = true; cbPerms.SelectedIndex = 0;
+                    cbOffice.Enabled = true; cbOffice.SelectedIndex = 0;
+                    dgvUsers.Enabled = false;
+                    break;
+                case "Gen":
+                    _state = state;
+                    txtID.ReadOnly = true; txtID.Clear();
+                    txtUsername.ReadOnly = true; txtUsername.Clear();
+                    txtPassword.ReadOnly = true; txtPassword.Clear();
+                    cbPerms.Enabled = false; cbPerms.SelectedIndex = 0;
+                    cbOffice.Enabled = false; cbOffice.SelectedIndex = 0;
+                    dgvUsers.Enabled = true;
+                    break;
+                default:
+                    MessageBox.Show("Warning: Unknown State.");
+                    break;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ToggleState("New");
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (_state == "New")
+            {
+                //Query here then
+                ToggleState("Gen");
+            }
         }
     }
 }
