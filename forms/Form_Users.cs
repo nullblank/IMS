@@ -37,7 +37,8 @@ namespace IMS.forms
                 DataTable results = new DataTable();
                 string query = "SELECT u.USR_IDX, u.USR_COD, u.USR_NME, u.USR_PWD," +
                     " CASE WHEN u.USR_ROL = r.ROL_COD THEN r.ROL_DES ELSE NULL END AS ROL_DES," +
-                    " CASE WHEN u.USR_OFF = o.OFF_COD THEN o.OFF_DES ELSE NULL END AS OFF_DES" +
+                    " CASE WHEN u.USR_OFF = o.OFF_COD THEN o.OFF_DES ELSE NULL END AS OFF_DES," +
+                    " u.USR_ACT" +
                     " FROM IMS_USR u" +
                     " LEFT JOIN IMS_RFN_ROL r ON u.USR_ROL = r.ROL_COD" +
                     " LEFT JOIN IMS_RFN_OFF o ON u.USR_OFF = o.OFF_COD";
@@ -85,6 +86,18 @@ namespace IMS.forms
                 txtPassword.Text = selectedRow.Cells["USR_PWD"].Value.ToString();
                 MatchCell(e, "ROL_DES", cbPerms);
                 MatchCell(e, "OFF_DES", cbOffice);
+                if (txtID.Text == "")
+                {
+                    btnUpdate.Enabled = false;
+                }
+                else
+                {
+                    btnUpdate.Enabled = true;
+                }
+            }
+            else
+            {
+                
             }
         }
 
@@ -109,6 +122,7 @@ namespace IMS.forms
                     txtPassword.ReadOnly = false; txtPassword.Clear();
                     cbPerms.Enabled = true; cbPerms.SelectedIndex = 0;
                     cbOffice.Enabled = true; cbOffice.SelectedIndex = 0;
+                    cbActive.Enabled = true; cbActive.SelectedIndex = 0;
                     dgvUsers.Enabled = false;
                     btnNew.Enabled = false;
                     btnUpdate.Enabled = false;
@@ -118,10 +132,11 @@ namespace IMS.forms
                 case "Update":
                     _state = state;
                     txtID.ReadOnly = false;
-                    txtUsername.ReadOnly = false; 
+                    txtUsername.ReadOnly = false;
                     txtPassword.ReadOnly = false;
-                    cbPerms.Enabled = true; 
+                    cbPerms.Enabled = true;
                     cbOffice.Enabled = true;
+                    cbActive.Enabled = true;
                     dgvUsers.Enabled = false;
                     btnNew.Enabled = false;
                     btnUpdate.Enabled = false;
@@ -135,6 +150,7 @@ namespace IMS.forms
                     txtPassword.ReadOnly = true; txtPassword.Clear();
                     cbPerms.Enabled = false; cbPerms.SelectedIndex = 0;
                     cbOffice.Enabled = false; cbOffice.SelectedIndex = 0;
+                    cbActive.Enabled = false; cbActive.SelectedIndex = 0;
                     dgvUsers.Enabled = true;
                     btnNew.Enabled = true;
                     btnUpdate.Enabled = true;
@@ -155,6 +171,23 @@ namespace IMS.forms
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (_state == "New")
+            {
+                //Query here then
+                if (InputCheck(txtUsername.Text, "username") && InputCheck(txtPassword.Text, "password"))
+                {
+                    User user = new User(_handler, _session);
+                    if (user.CreateUser(txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text))
+                    {
+                        ToggleState("Gen");
+                        InitUsers();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Username or Password Does not meet requirements!");
+                }
+            }
+            else if (_state == "Update")
             {
                 //Query here then
                 if (InputCheck(txtUsername.Text, "username") && InputCheck(txtPassword.Text, "password"))
@@ -201,6 +234,5 @@ namespace IMS.forms
             ToggleState("Update");
         }
 
-        
     }
 }

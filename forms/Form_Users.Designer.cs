@@ -43,6 +43,8 @@
             cbPerms = new ComboBox();
             cbOffice = new ComboBox();
             btnCancel = new Button();
+            label6 = new Label();
+            cbActive = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
             SuspendLayout();
             // 
@@ -54,7 +56,7 @@
             dgvUsers.Name = "dgvUsers";
             dgvUsers.RowHeadersWidth = 51;
             dgvUsers.RowTemplate.Height = 29;
-            dgvUsers.Size = new Size(816, 407);
+            dgvUsers.Size = new Size(915, 462);
             dgvUsers.TabIndex = 0;
             dgvUsers.CellClick += dgvUsers_CellClick;
             // 
@@ -71,6 +73,7 @@
             // 
             // btnUpdate
             // 
+            btnUpdate.Enabled = false;
             btnUpdate.Location = new Point(203, 182);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(185, 47);
@@ -119,7 +122,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(269, 15);
+            label4.Location = new Point(292, 14);
             label4.Name = "label4";
             label4.Size = new Size(85, 20);
             label4.TabIndex = 8;
@@ -128,7 +131,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(305, 49);
+            label5.Location = new Point(328, 48);
             label5.Name = "label5";
             label5.Size = new Size(49, 20);
             label5.TabIndex = 9;
@@ -163,7 +166,7 @@
             cbPerms.DropDownStyle = ComboBoxStyle.DropDownList;
             cbPerms.Enabled = false;
             cbPerms.FormattingEnabled = true;
-            cbPerms.Location = new Point(359, 12);
+            cbPerms.Location = new Point(382, 11);
             cbPerms.Name = "cbPerms";
             cbPerms.Size = new Size(151, 28);
             cbPerms.TabIndex = 15;
@@ -173,7 +176,7 @@
             cbOffice.DropDownStyle = ComboBoxStyle.DropDownList;
             cbOffice.Enabled = false;
             cbOffice.FormattingEnabled = true;
-            cbOffice.Location = new Point(359, 46);
+            cbOffice.Location = new Point(382, 45);
             cbOffice.Name = "cbOffice";
             cbOffice.Size = new Size(151, 28);
             cbOffice.TabIndex = 16;
@@ -189,11 +192,33 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(265, 82);
+            label6.Name = "label6";
+            label6.Size = new Size(112, 20);
+            label6.TabIndex = 18;
+            label6.Text = "Enable Account";
+            // 
+            // cbActive
+            // 
+            cbActive.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbActive.Enabled = false;
+            cbActive.FormattingEnabled = true;
+            cbActive.Items.AddRange(new object[] { "No", "Yes" });
+            cbActive.Location = new Point(383, 79);
+            cbActive.Name = "cbActive";
+            cbActive.Size = new Size(151, 28);
+            cbActive.TabIndex = 19;
+            // 
             // Form_Users
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(840, 654);
+            ClientSize = new Size(939, 709);
+            Controls.Add(cbActive);
+            Controls.Add(label6);
             Controls.Add(btnCancel);
             Controls.Add(cbOffice);
             Controls.Add(cbPerms);
@@ -234,5 +259,7 @@
         private ComboBox cbPerms;
         private ComboBox cbOffice;
         private Button btnCancel;
+        private Label label6;
+        private ComboBox cbActive;
     }
 }
