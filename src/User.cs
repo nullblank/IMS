@@ -21,7 +21,7 @@ namespace IMS.src
             _session = session;
         }
 
-        public bool CreateUser(string cod, string username, string password, string permission, string office)
+        public bool CreateUser(string cod, string username, string password, string permission, string office, string isActive)
         {
             try
             {
@@ -42,15 +42,23 @@ namespace IMS.src
                     }
                     else
                     {
-                        query = $"SELECT COUNT(*) FROM IMS_RFN_ROL WHERE ROL_DES = '{permission}'";
+                        query = $"SELECT * FROM IMS_RFN_ROL WHERE ROL_DES = '{permission}'";
                         results = _handler.ExecuteQuery(query);
                         permission = results.Rows[0][0].ToString();
-                        query = $"SELECT COUNT(*) FROM IMS_RFN_OFF WHERE OFF_DES = '{office}'";
+                        query = $"SELECT * FROM IMS_RFN_OFF WHERE OFF_DES = '{office}'";
                         results = _handler.ExecuteQuery(query);
                         office = results.Rows[0][0].ToString();
                         EncryptionHandler encrypt = new EncryptionHandler();
                         password = encrypt.Encrypt(password);
-                        query = $"INSERT INTO IMS_USR (USR_COD, USR_NME, USR_PWD, USR_ROL, USR_OFF, USR_ACT) VALUES ('{cod}', '{username}', '{password}', '{permission}', '{office}', 0)";
+                        if (isActive == "Yes")
+                        {
+                            isActive = "1";
+                        }
+                        else
+                        {
+                            isActive = "0";
+                        }
+                        query = $"INSERT INTO IMS_USR (USR_COD, USR_NME, USR_PWD, USR_ROL, USR_OFF, USR_ACT) VALUES ('{cod}', '{username}', '{password}', '{permission}', '{office}', '{isActive}')";
                         if (_handler.ExecuteNonQuery(query) == 0)
                         {
                             return false;

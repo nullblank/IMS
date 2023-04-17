@@ -176,7 +176,7 @@ namespace IMS.forms
                 if (InputCheck(txtUsername.Text, "username") && InputCheck(txtPassword.Text, "password"))
                 {
                     User user = new User(_handler, _session);
-                    if (user.CreateUser(txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text))
+                    if (user.CreateUser(txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text, cbActive.Text))
                     {
                         ToggleState("Gen");
                         InitUsers();
@@ -193,7 +193,7 @@ namespace IMS.forms
                 if (InputCheck(txtUsername.Text, "username") && InputCheck(txtPassword.Text, "password"))
                 {
                     User user = new User(_handler, _session);
-                    if (user.CreateUser(txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text))
+                    if (user.CreateUser(txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text, cbActive.Text))
                     {
                         ToggleState("Gen");
                         InitUsers();
