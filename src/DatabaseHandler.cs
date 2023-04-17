@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Collections;
 
 namespace IMS.DBHandler
 {
@@ -111,6 +112,13 @@ namespace IMS.DBHandler
                 return null;
             }
             finally { CloseConnection(); }
+        }
+
+        public SqlDataReader GetColumnData(string table, string column)
+        {
+            SqlCommand command = new SqlCommand($"SELECT {column} FROM {table}", _connection);
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
         }
     }
 }
