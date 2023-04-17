@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Configuration;
 
 namespace IMS.src
 {
@@ -13,13 +14,13 @@ namespace IMS.src
         {
             //Free Space for encyption.
         }
-        static void Encrypt(string plaintext) //Encryption plain text string.
+        public string Encrypt(string plaintext) //Encryption plain text string.
         {
             byte[] encryptedBytes = null;//Clear bytes whenever new encryption task is called.
 
             using (Aes aesAlg = Aes.Create())
             {
-                string key = "mySecretKey123";//Key for encryption.
+                string key = ConfigurationManager.AppSettings["Encryption_Key"];
                 aesAlg.Key = Encoding.UTF8.GetBytes(key); // convert the key to a byte array
                 aesAlg.IV = new byte[16]; // use a new IV each time for better security
 
@@ -40,10 +41,8 @@ namespace IMS.src
                     }
                 }
             }
-
             string encryptedText = Convert.ToBase64String(encryptedBytes);
-
-            MessageBox.Show("Encrypted Text: {0}", encryptedText);
+            return encryptedText;
         }
     }
 }

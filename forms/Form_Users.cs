@@ -9,8 +9,10 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace IMS.forms
 {
@@ -108,6 +110,23 @@ namespace IMS.forms
                     cbPerms.Enabled = true; cbPerms.SelectedIndex = 0;
                     cbOffice.Enabled = true; cbOffice.SelectedIndex = 0;
                     dgvUsers.Enabled = false;
+                    btnNew.Enabled = false;
+                    btnUpdate.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    break;
+                case "Update":
+                    _state = state;
+                    txtID.ReadOnly = false;
+                    txtUsername.ReadOnly = false; 
+                    txtPassword.ReadOnly = false;
+                    cbPerms.Enabled = true; 
+                    cbOffice.Enabled = true;
+                    dgvUsers.Enabled = false;
+                    btnNew.Enabled = false;
+                    btnUpdate.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
                     break;
                 case "Gen":
                     _state = state;
@@ -117,6 +136,10 @@ namespace IMS.forms
                     cbPerms.Enabled = false; cbPerms.SelectedIndex = 0;
                     cbOffice.Enabled = false; cbOffice.SelectedIndex = 0;
                     dgvUsers.Enabled = true;
+                    btnNew.Enabled = true;
+                    btnUpdate.Enabled = true;
+                    btnSave.Enabled = false;
+                    btnCancel.Enabled = false;
                     break;
                 default:
                     MessageBox.Show("Warning: Unknown State.");
@@ -134,8 +157,50 @@ namespace IMS.forms
             if (_state == "New")
             {
                 //Query here then
-                ToggleState("Gen");
+                if (InputCheck(txtUsername.Text, "username") && InputCheck(txtPassword.Text, "password"))
+                {
+                    User user = new User(_handler, _session);
+                    if (user.CreateUser(txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text))
+                    {
+                        ToggleState("Gen");
+                        InitUsers();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Username or Password Does not meet requirements!");
+                }
             }
         }
+
+        private bool InputCheck(string stringtocheck, string type)
+        {
+            // Regex pattern for username: only letters and numbers, at least 6 characters long
+            string usernamePattern = "^[a-zA-Z0-9]{6,}$";
+            // Regex pattern for password: at least 8 characters long, containing at least one uppercase letter, one lowercase letter, and one number
+            string passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$";
+            if (type == "username")
+            {
+                bool isUsernameValid = Regex.IsMatch(stringtocheck, usernamePattern);
+                return isUsernameValid;
+            }
+            else
+            {
+                bool isPasswordValid = Regex.IsMatch(stringtocheck, passwordPattern);
+                return isPasswordValid;
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            ToggleState("Gen");
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            ToggleState("Update");
+        }
+
+        
     }
 }

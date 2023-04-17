@@ -38,7 +38,7 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Error at OpenConnection: {ex.Message}");
                 return false;
             }
         }
@@ -55,7 +55,7 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Error at CloseConnection: {ex.Message}");
                 return false;
             }
         }
@@ -68,7 +68,7 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error at CheckConnection: " + ex.Message);
             }
             finally { CloseConnection(); }
         }
@@ -93,7 +93,7 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                MessageBox.Show($"Error at ExecuteNonQuery: {ex.Message}");
                 return 0;
             }
             finally { CloseConnection(); }
@@ -116,7 +116,7 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                MessageBox.Show($"Error at ExecuteQuery: {ex.Message}");
                 return null;
             }
             finally { CloseConnection(); }
@@ -135,7 +135,7 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                MessageBox.Show($"Error at GetColumnData: {ex.Message}");
                 return null;
             }
         }

@@ -82,7 +82,7 @@ namespace IMS.NetUtil
                     if (results.Rows.Count > 0)
                     {
                         MessageBox.Show("Login Successful!");
-                        int role = (int)results.Rows[0][4];
+                        int role = Convert.ToInt32(results.Rows[0][4]);
                         SessionHandler session = new SessionHandler();
                         session.NewSession(user, role, _handler);
                         audit = new Audit(_handler);

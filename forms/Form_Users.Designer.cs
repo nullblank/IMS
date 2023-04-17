@@ -42,6 +42,7 @@
             txtPassword = new TextBox();
             cbPerms = new ComboBox();
             cbOffice = new ComboBox();
+            btnCancel = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
             SuspendLayout();
             // 
@@ -76,6 +77,7 @@
             btnUpdate.TabIndex = 2;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnNew
             // 
@@ -90,7 +92,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(40, 15);
+            label1.Location = new Point(32, 15);
             label1.Name = "label1";
             label1.Size = new Size(57, 20);
             label1.TabIndex = 5;
@@ -99,7 +101,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(22, 48);
+            label2.Location = new Point(14, 48);
             label2.Name = "label2";
             label2.Size = new Size(75, 20);
             label2.TabIndex = 6;
@@ -108,7 +110,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(27, 81);
+            label3.Location = new Point(19, 81);
             label3.Name = "label3";
             label3.Size = new Size(70, 20);
             label3.TabIndex = 7;
@@ -117,7 +119,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 117);
+            label4.Location = new Point(269, 15);
             label4.Name = "label4";
             label4.Size = new Size(85, 20);
             label4.TabIndex = 8;
@@ -126,7 +128,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(48, 151);
+            label5.Location = new Point(305, 49);
             label5.Name = "label5";
             label5.Size = new Size(49, 20);
             label5.TabIndex = 9;
@@ -134,7 +136,7 @@
             // 
             // txtID
             // 
-            txtID.Location = new Point(102, 12);
+            txtID.Location = new Point(94, 12);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
             txtID.Size = new Size(151, 27);
@@ -142,7 +144,7 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(102, 45);
+            txtUsername.Location = new Point(94, 45);
             txtUsername.Name = "txtUsername";
             txtUsername.ReadOnly = true;
             txtUsername.Size = new Size(151, 27);
@@ -150,7 +152,7 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(102, 78);
+            txtPassword.Location = new Point(94, 78);
             txtPassword.Name = "txtPassword";
             txtPassword.ReadOnly = true;
             txtPassword.Size = new Size(151, 27);
@@ -161,7 +163,7 @@
             cbPerms.DropDownStyle = ComboBoxStyle.DropDownList;
             cbPerms.Enabled = false;
             cbPerms.FormattingEnabled = true;
-            cbPerms.Location = new Point(102, 114);
+            cbPerms.Location = new Point(359, 12);
             cbPerms.Name = "cbPerms";
             cbPerms.Size = new Size(151, 28);
             cbPerms.TabIndex = 15;
@@ -171,16 +173,28 @@
             cbOffice.DropDownStyle = ComboBoxStyle.DropDownList;
             cbOffice.Enabled = false;
             cbOffice.FormattingEnabled = true;
-            cbOffice.Location = new Point(102, 148);
+            cbOffice.Location = new Point(359, 46);
             cbOffice.Name = "cbOffice";
             cbOffice.Size = new Size(151, 28);
             cbOffice.TabIndex = 16;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Enabled = false;
+            btnCancel.Location = new Point(585, 182);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(185, 47);
+            btnCancel.TabIndex = 17;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // Form_Users
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(840, 654);
+            Controls.Add(btnCancel);
             Controls.Add(cbOffice);
             Controls.Add(cbPerms);
             Controls.Add(txtPassword);
@@ -219,5 +233,6 @@
         private TextBox txtPassword;
         private ComboBox cbPerms;
         private ComboBox cbOffice;
+        private Button btnCancel;
     }
 }
