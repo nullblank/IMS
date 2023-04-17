@@ -13,6 +13,7 @@ namespace IMS.src
     public class SessionHandler
     {
         string _session;
+        string _userId;
         string _username;
         string _role;
         public SessionHandler()
@@ -25,6 +26,8 @@ namespace IMS.src
             DataTable results = handler.ExecuteQuery($"SELECT * FROM IMS_RFN_ROL WHERE ROL_COD  = '{role.ToString()}'");
             _username = username;
             _role = results.Rows[0][2].ToString();
+            results = handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME  = '{username}'");
+            _userId = results.Rows[0][0].ToString();
         }
         public bool SessionExists()
         {
@@ -37,6 +40,10 @@ namespace IMS.src
         public string GetSessionUsername()
         {
             return _username;
+        }
+        public string GetUserID()
+        {
+            return _userId;
         }
         public string GetSessionID()
         {

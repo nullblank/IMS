@@ -40,7 +40,7 @@ namespace IMS.src
             try
             {
                 string columns = "LOG_USR, LOG_ROL, LOG_ACT, LOG_LIP, LOG_MADR, LOG_DNME, LOG_SEID";
-                string values = $"'{session.GetSessionUsername()}', '{session.GetRole()}', '{action}', '{_networkUtilities.GetLocalIP()}', '{_networkUtilities.GetMacAddress()}', '{_networkUtilities.GetComputerName()}', '{session.GetSessionID()}'";
+                string values = $"'{session.GetUserID()}', '{session.GetRole()}', '{action}', '{_networkUtilities.GetLocalIP()}', '{_networkUtilities.GetMacAddress()}', '{_networkUtilities.GetComputerName()}', '{session.GetSessionID()}'";
                 _handler.ExecuteQuery($"INSERT INTO IMS_LOG ({columns}) VALUES ({values})");
             }
             catch (SqlException ex)
