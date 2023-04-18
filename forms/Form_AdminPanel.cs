@@ -104,5 +104,15 @@ namespace IMS.forms
         {
             ReferenceContainer("IMS_RFN_SUP");
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Audit audit = new Audit(_handler);
+            audit.LogUserAction("User Logged out.", _session);
+            _session.DestroySession();
+            Form_Login form = new Form_Login();
+            form.Show();
+            this.Hide();
+        }
     }
 }

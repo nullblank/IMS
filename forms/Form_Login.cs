@@ -41,5 +41,10 @@ namespace IMS
                 button1_Click(sender, e);
             }
         }
+
+        private void Form_Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

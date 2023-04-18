@@ -103,6 +103,7 @@
             Controls.Add(button1);
             Name = "Form_Login";
             Text = "IMS Login";
+            FormClosed += Form_Login_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

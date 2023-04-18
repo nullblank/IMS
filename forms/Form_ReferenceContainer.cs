@@ -33,6 +33,7 @@ namespace IMS.forms
             string query = $"SELECT * FROM {table}";
             results = handler.ExecuteQuery(query);
             dgvContainer.DataSource = results;
+            this.Text = $"Now Viewing: {table}";
         }
 
         private void dgvContainer_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -40,8 +41,8 @@ namespace IMS.forms
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow selectedRow = dgvContainer.Rows[e.RowIndex];
-                txtCode.Text = selectedRow.Cells[0].Value.ToString();
-                txtDescription.Text = selectedRow.Cells[0].Value.ToString();
+                txtCode.Text = selectedRow.Cells[1].Value.ToString();
+                txtDescription.Text = selectedRow.Cells[2].Value.ToString();
                 if (txtCode.Text == "")
                 {
                     btnUpdate.Enabled = false;
@@ -51,6 +52,67 @@ namespace IMS.forms
                     btnUpdate.Enabled = true;
                 }
             }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            togglestate("New");
+        }
+
+        private void togglestate(string state)
+        {
+            switch (state)
+            {
+                case "New":
+                    dgvContainer.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnUpdate.Enabled = false;
+                    btnNew.Enabled = false;
+                    txtCode.ReadOnly = false;
+                    txtDescription.ReadOnly = false;
+                    txtCode.Clear();
+                    txtDescription.Clear();
+                    break;
+                case "Update":
+                    dgvContainer.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnUpdate.Enabled = false;
+                    btnNew.Enabled = false;
+                    txtCode.ReadOnly = false;
+                    txtDescription.ReadOnly = false;
+                    break;
+                case "Gen":
+                    dgvContainer.Enabled = true;
+                    btnSave.Enabled = false;
+                    btnCancel.Enabled = false;
+                    btnUpdate.Enabled = false;
+                    btnNew.Enabled = true;
+                    txtCode.ReadOnly = true;
+                    txtDescription.ReadOnly = true;
+                    txtCode.Clear();
+                    txtDescription.Clear();
+                    break;
+                default:
+                    MessageBox.Show("Unknown State");
+                    break;
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            togglestate("Update");
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            togglestate("Gen");
         }
     }
 }
