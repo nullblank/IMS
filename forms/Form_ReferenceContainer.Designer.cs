@@ -49,9 +49,11 @@
             dgvContainer.RowTemplate.Height = 29;
             dgvContainer.Size = new Size(650, 304);
             dgvContainer.TabIndex = 0;
+            dgvContainer.CellClick += dgvContainer_CellClick;
             // 
             // btnSave
             // 
+            btnSave.Enabled = false;
             btnSave.Location = new Point(12, 52);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(158, 49);
@@ -63,6 +65,7 @@
             // 
             txtCode.Location = new Point(62, 12);
             txtCode.Name = "txtCode";
+            txtCode.ReadOnly = true;
             txtCode.Size = new Size(125, 27);
             txtCode.TabIndex = 2;
             // 
@@ -70,6 +73,7 @@
             // 
             txtDescription.Location = new Point(307, 12);
             txtDescription.Name = "txtDescription";
+            txtDescription.ReadOnly = true;
             txtDescription.Size = new Size(125, 27);
             txtDescription.TabIndex = 3;
             // 
@@ -93,6 +97,7 @@
             // 
             // btnUpdate
             // 
+            btnUpdate.Enabled = false;
             btnUpdate.Location = new Point(176, 52);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(158, 49);
@@ -111,6 +116,7 @@
             // 
             // btnCancel
             // 
+            btnCancel.Enabled = false;
             btnCancel.Location = new Point(504, 52);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(158, 49);
