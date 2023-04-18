@@ -17,14 +17,19 @@ namespace IMS.forms
 {
     public partial class Form_ReferenceContainer : Form
     {
+        DatabaseHandler _handler;
+        SessionHandler _session;
         string _table;
         string _prefix;
+        string _state;
         public Form_ReferenceContainer(DatabaseHandler handler, SessionHandler session, string table)
         {
             InitializeComponent();
             InitContainer(table, session, handler);
             _table = table;
             _prefix = table.Substring(table.LastIndexOf("_") + 1);
+            _session = session;
+            _handler = handler;
             //This will get the last index of a string, for example "IMS_RFN_COL" -> "COL". This will be used for dynamic table controls and etc. 
         }
         private void InitContainer(string table, SessionHandler session, DatabaseHandler handler)
@@ -64,6 +69,7 @@ namespace IMS.forms
             switch (state)
             {
                 case "New":
+                    _state = state;
                     dgvContainer.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
@@ -75,6 +81,7 @@ namespace IMS.forms
                     txtDescription.Clear();
                     break;
                 case "Update":
+                    _state = state;
                     dgvContainer.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
@@ -84,6 +91,7 @@ namespace IMS.forms
                     txtDescription.ReadOnly = false;
                     break;
                 case "Gen":
+                    _state = state;
                     dgvContainer.Enabled = true;
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
@@ -107,7 +115,17 @@ namespace IMS.forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (_state == "New")
+            {//Add more controls to this and a dialogue Box for confirmation
+                Reference reference = new Reference(_handler, _session);
+                reference.AddEntry(txtCode, txtDescription, _table, _prefix);
+                InitContainer(_table, _session, _handler);
+                togglestate("Gen");
+            }
+            else if (_state == "Update")
+            {
 
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

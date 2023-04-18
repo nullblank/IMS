@@ -54,7 +54,7 @@ namespace IMS.forms
             {
                 MessageBox.Show("WARNING: ILLEGAL ACCESS DETECTED. CLOSING WINDOW!");
                 audit.LogAction("Illegal Access on: Form_Admin -> Form_Users");
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -71,7 +71,7 @@ namespace IMS.forms
             {
                 MessageBox.Show("WARNING: ILLEGAL ACCESS DETECTED. CLOSING WINDOW!");
                 audit.LogAction($"Illegal Access on: Form_Admin -> Form_ReferenceContainer({table})");
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -112,7 +112,7 @@ namespace IMS.forms
             _session.DestroySession();
             Form_Login form = new Form_Login();
             form.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }
