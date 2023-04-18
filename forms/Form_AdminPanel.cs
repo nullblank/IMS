@@ -29,7 +29,7 @@ namespace IMS.forms
         private void btnLogs_Click(object sender, EventArgs e)
         {
             Audit audit = new Audit(_handler);
-            if (_session.SessionExists() == true)
+            if (_session.SessionExists())
             {
                 Form_Logs form_Logs = new Form_Logs(_handler, _session);
                 audit.LogUserAction("Viewed the logs.", _session);
@@ -44,7 +44,7 @@ namespace IMS.forms
         private void btnUsers_Click(object sender, EventArgs e)
         {
             Audit audit = new Audit(_handler);
-            if (_session.SessionExists() == true)
+            if (_session.SessionExists())
             {
                 Form_Users form_Logs = new Form_Users(_handler, _session);
                 audit.LogUserAction("Viewed the user management.", _session);
@@ -56,6 +56,36 @@ namespace IMS.forms
                 audit.LogAction("Illegal Access on: Form_Admin -> Form_Users");
                 this.Hide();
             }
+        }
+
+        private void btnSCAT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSCA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSCOL_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSUNT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOFF_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSUP_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
