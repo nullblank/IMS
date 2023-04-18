@@ -19,6 +19,8 @@ namespace IMS
         {
             string user = txtUsername.Text;
             string pass = txtPassword.Text;
+            EncryptionHandler encrypt = new EncryptionHandler();
+            pass = encrypt.Encrypt(pass);
             if (netutil.Login(user, pass) == true)
             {
                 this.Hide();
@@ -36,12 +38,7 @@ namespace IMS
         {
             if (e.KeyCode == Keys.Enter)
             {
-                string user = txtUsername.Text;
-                string pass = txtPassword.Text;
-                if (netutil.Login(user, pass) == true)
-                {
-                    this.Hide();
-                }
+                button1_Click(sender, e);
             }
         }
     }

@@ -52,18 +52,18 @@
             // 
             dgvUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsers.Location = new Point(12, 235);
+            dgvUsers.Location = new Point(12, 191);
             dgvUsers.Name = "dgvUsers";
             dgvUsers.RowHeadersWidth = 51;
             dgvUsers.RowTemplate.Height = 29;
-            dgvUsers.Size = new Size(915, 462);
+            dgvUsers.Size = new Size(1093, 406);
             dgvUsers.TabIndex = 0;
             dgvUsers.CellClick += dgvUsers_CellClick;
             // 
             // btnSave
             // 
             btnSave.Enabled = false;
-            btnSave.Location = new Point(12, 182);
+            btnSave.Location = new Point(12, 128);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(185, 47);
             btnSave.TabIndex = 1;
@@ -74,7 +74,7 @@
             // btnUpdate
             // 
             btnUpdate.Enabled = false;
-            btnUpdate.Location = new Point(203, 182);
+            btnUpdate.Location = new Point(203, 128);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(185, 47);
             btnUpdate.TabIndex = 2;
@@ -84,7 +84,7 @@
             // 
             // btnNew
             // 
-            btnNew.Location = new Point(394, 182);
+            btnNew.Location = new Point(394, 128);
             btnNew.Name = "btnNew";
             btnNew.Size = new Size(185, 47);
             btnNew.TabIndex = 4;
@@ -95,7 +95,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(32, 15);
+            label1.Location = new Point(34, 15);
             label1.Name = "label1";
             label1.Size = new Size(57, 20);
             label1.TabIndex = 5;
@@ -104,7 +104,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(14, 48);
+            label2.Location = new Point(16, 48);
             label2.Name = "label2";
             label2.Size = new Size(75, 20);
             label2.TabIndex = 6;
@@ -113,7 +113,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(19, 81);
+            label3.Location = new Point(21, 81);
             label3.Name = "label3";
             label3.Size = new Size(70, 20);
             label3.TabIndex = 7;
@@ -122,7 +122,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(292, 14);
+            label4.Location = new Point(294, 14);
             label4.Name = "label4";
             label4.Size = new Size(85, 20);
             label4.TabIndex = 8;
@@ -131,7 +131,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(328, 48);
+            label5.Location = new Point(330, 48);
             label5.Name = "label5";
             label5.Size = new Size(49, 20);
             label5.TabIndex = 9;
@@ -139,7 +139,7 @@
             // 
             // txtID
             // 
-            txtID.Location = new Point(94, 12);
+            txtID.Location = new Point(96, 12);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
             txtID.Size = new Size(151, 27);
@@ -147,7 +147,7 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(94, 45);
+            txtUsername.Location = new Point(96, 45);
             txtUsername.Name = "txtUsername";
             txtUsername.ReadOnly = true;
             txtUsername.Size = new Size(151, 27);
@@ -155,7 +155,7 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(94, 78);
+            txtPassword.Location = new Point(96, 78);
             txtPassword.Name = "txtPassword";
             txtPassword.ReadOnly = true;
             txtPassword.Size = new Size(151, 27);
@@ -166,7 +166,7 @@
             cbPerms.DropDownStyle = ComboBoxStyle.DropDownList;
             cbPerms.Enabled = false;
             cbPerms.FormattingEnabled = true;
-            cbPerms.Location = new Point(382, 11);
+            cbPerms.Location = new Point(384, 11);
             cbPerms.Name = "cbPerms";
             cbPerms.Size = new Size(151, 28);
             cbPerms.TabIndex = 15;
@@ -176,7 +176,7 @@
             cbOffice.DropDownStyle = ComboBoxStyle.DropDownList;
             cbOffice.Enabled = false;
             cbOffice.FormattingEnabled = true;
-            cbOffice.Location = new Point(382, 45);
+            cbOffice.Location = new Point(384, 45);
             cbOffice.Name = "cbOffice";
             cbOffice.Size = new Size(151, 28);
             cbOffice.TabIndex = 16;
@@ -184,7 +184,7 @@
             // btnCancel
             // 
             btnCancel.Enabled = false;
-            btnCancel.Location = new Point(585, 182);
+            btnCancel.Location = new Point(585, 128);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(185, 47);
             btnCancel.TabIndex = 17;
@@ -195,7 +195,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(265, 82);
+            label6.Location = new Point(267, 82);
             label6.Name = "label6";
             label6.Size = new Size(112, 20);
             label6.TabIndex = 18;
@@ -207,7 +207,7 @@
             cbActive.Enabled = false;
             cbActive.FormattingEnabled = true;
             cbActive.Items.AddRange(new object[] { "No", "Yes" });
-            cbActive.Location = new Point(383, 79);
+            cbActive.Location = new Point(385, 79);
             cbActive.Name = "cbActive";
             cbActive.Size = new Size(151, 28);
             cbActive.TabIndex = 19;
@@ -216,7 +216,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(939, 709);
+            ClientSize = new Size(1117, 609);
             Controls.Add(cbActive);
             Controls.Add(label6);
             Controls.Add(btnCancel);

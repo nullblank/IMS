@@ -22,6 +22,8 @@ namespace IMS.forms
         SessionHandler _session;
         NetworkUtilities _netutil;
         string _state;
+        string _orgusername;
+        string _orgpassword;
         public Form_Users(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
@@ -38,7 +40,7 @@ namespace IMS.forms
                 string query = "SELECT u.USR_IDX, u.USR_COD, u.USR_NME, u.USR_PWD," +
                     " CASE WHEN u.USR_ROL = r.ROL_COD THEN r.ROL_DES ELSE NULL END AS ROL_DES," +
                     " CASE WHEN u.USR_OFF = o.OFF_COD THEN o.OFF_DES ELSE NULL END AS OFF_DES," +
-                    " u.USR_ACT" +
+                    " CASE WHEN u.USR_ACT = '1' THEN 'Yes' ELSE 'No' END AS USR_ACT" +
                     " FROM IMS_USR u" +
                     " LEFT JOIN IMS_RFN_ROL r ON u.USR_ROL = r.ROL_COD" +
                     " LEFT JOIN IMS_RFN_OFF o ON u.USR_OFF = o.OFF_COD";
@@ -86,6 +88,7 @@ namespace IMS.forms
                 txtPassword.Text = selectedRow.Cells["USR_PWD"].Value.ToString();
                 MatchCell(e, "ROL_DES", cbPerms);
                 MatchCell(e, "OFF_DES", cbOffice);
+                MatchCell(e, "USR_ACT", cbActive);
                 if (txtID.Text == "")
                 {
                     btnUpdate.Enabled = false;
@@ -97,7 +100,7 @@ namespace IMS.forms
             }
             else
             {
-                
+
             }
         }
 
@@ -131,7 +134,6 @@ namespace IMS.forms
                     break;
                 case "Update":
                     _state = state;
-                    txtID.ReadOnly = false;
                     txtUsername.ReadOnly = false;
                     txtPassword.ReadOnly = false;
                     cbPerms.Enabled = true;
@@ -193,7 +195,7 @@ namespace IMS.forms
                 if (InputCheck(txtUsername.Text, "username") && InputCheck(txtPassword.Text, "password"))
                 {
                     User user = new User(_handler, _session);
-                    if (user.CreateUser(txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text, cbActive.Text))
+                    if (user.UpdateUser(_orgusername, _orgpassword ,txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text, cbActive.Text))
                     {
                         ToggleState("Gen");
                         InitUsers();
@@ -232,6 +234,8 @@ namespace IMS.forms
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             ToggleState("Update");
+            _orgusername = txtUsername.Text;
+            _orgpassword = txtPassword.Text;
         }
 
     }
