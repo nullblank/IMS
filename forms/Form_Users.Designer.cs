@@ -235,7 +235,7 @@
             Controls.Add(btnSave);
             Controls.Add(dgvUsers);
             Name = "Form_Users";
-            Text = "Form1";
+            Text = "User Management";
             Load += Form_Users_Load;
             ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
             ResumeLayout(false);

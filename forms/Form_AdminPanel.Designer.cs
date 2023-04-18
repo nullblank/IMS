@@ -79,7 +79,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "Form_AdminPanel";
-            Text = "IMS Admin Panel";
+            Text = "IMS Developer's Panel";
             ResumeLayout(false);
         }
 

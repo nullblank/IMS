@@ -195,7 +195,7 @@ namespace IMS.forms
                 if (InputCheck(txtUsername.Text, "username") && InputCheck(txtPassword.Text, "password"))
                 {
                     User user = new User(_handler, _session);
-                    if (user.UpdateUser(_orgusername, _orgpassword ,txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text, cbActive.Text))
+                    if (user.UpdateUser(_orgusername, _orgpassword, txtID.Text, txtUsername.Text, txtPassword.Text, cbPerms.Text, cbOffice.Text, cbActive.Text))
                     {
                         ToggleState("Gen");
                         InitUsers();
