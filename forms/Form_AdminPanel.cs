@@ -58,34 +58,51 @@ namespace IMS.forms
             }
         }
 
+        private void ReferenceContainer(string table)
+        {
+            Audit audit = new Audit(_handler);
+            if (_session.SessionExists())
+            {
+                Form_ReferenceContainer form = new Form_ReferenceContainer(_handler, _session, table);
+                audit.LogUserAction($"Viewed Reference Container ({table})", _session);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("WARNING: ILLEGAL ACCESS DETECTED. CLOSING WINDOW!");
+                audit.LogAction($"Illegal Access on: Form_Admin -> Form_ReferenceContainer({table})");
+                this.Hide();
+            }
+        }
+
         private void btnSCAT_Click(object sender, EventArgs e)
         {
-
+            ReferenceContainer("IMS_RFN_SCAT");
         }
 
         private void btnSCA_Click(object sender, EventArgs e)
         {
-
+            ReferenceContainer("IMS_RFN_SCA");
         }
 
         private void btnSCOL_Click(object sender, EventArgs e)
         {
-
+            ReferenceContainer("IMS_RFN_SCOL");
         }
 
         private void btnSUNT_Click(object sender, EventArgs e)
         {
-
+            ReferenceContainer("IMS_RFN_SUNT");
         }
 
         private void btnOFF_Click(object sender, EventArgs e)
         {
-
+            ReferenceContainer("IMS_RFN_OFF");
         }
 
         private void btnSUP_Click(object sender, EventArgs e)
         {
-
+            ReferenceContainer("IMS_RFN_SUP");
         }
     }
 }
