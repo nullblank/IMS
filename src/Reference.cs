@@ -21,7 +21,11 @@ namespace IMS.src
             _handler.ExecuteNonQuery($"INSERT INTO {table} " +
                 $"({prefix}_COD, {prefix}_DES) " +
                 $"VALUES ('{code.Text}', '{description.Text}')");
+            return true;
+        }
 
+        public bool UpdateEntry()
+        {
             return true;
         }
     }
