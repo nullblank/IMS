@@ -23,7 +23,7 @@ namespace IMS.forms
             _session = session;
             InitData(session, handler);
         }
-       
+
         private void InitData(SessionHandler session, DatabaseHandler handler)
         {
             DataTable results = new DataTable();

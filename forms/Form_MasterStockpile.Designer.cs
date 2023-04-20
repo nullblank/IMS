@@ -34,22 +34,25 @@
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
+            textBox1 = new TextBox();
+            button5 = new Button();
+            button6 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvStockpile).BeginInit();
             SuspendLayout();
             // 
             // dgvStockpile
             // 
             dgvStockpile.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStockpile.Location = new Point(12, 12);
+            dgvStockpile.Location = new Point(12, 45);
             dgvStockpile.Name = "dgvStockpile";
             dgvStockpile.RowHeadersWidth = 51;
             dgvStockpile.RowTemplate.Height = 29;
-            dgvStockpile.Size = new Size(1134, 437);
+            dgvStockpile.Size = new Size(934, 437);
             dgvStockpile.TabIndex = 0;
             // 
             // btnDeliveries
             // 
-            btnDeliveries.Location = new Point(776, 455);
+            btnDeliveries.Location = new Point(576, 488);
             btnDeliveries.Name = "btnDeliveries";
             btnDeliveries.Size = new Size(156, 64);
             btnDeliveries.TabIndex = 1;
@@ -58,7 +61,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(938, 455);
+            button1.Location = new Point(738, 488);
             button1.Name = "button1";
             button1.Size = new Size(208, 29);
             button1.TabIndex = 2;
@@ -67,7 +70,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(938, 490);
+            button2.Location = new Point(738, 523);
             button2.Name = "button2";
             button2.Size = new Size(208, 29);
             button2.TabIndex = 3;
@@ -76,7 +79,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(12, 455);
+            button3.Location = new Point(12, 488);
             button3.Name = "button3";
             button3.Size = new Size(208, 29);
             button3.TabIndex = 4;
@@ -85,18 +88,46 @@
             // 
             // button4
             // 
-            button4.Location = new Point(12, 490);
+            button4.Location = new Point(12, 523);
             button4.Name = "button4";
             button4.Size = new Size(208, 29);
             button4.TabIndex = 5;
             button4.Text = "Supply Request Logs";
             button4.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 12);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(296, 27);
+            textBox1.TabIndex = 6;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(314, 11);
+            button5.Name = "button5";
+            button5.Size = new Size(94, 29);
+            button5.TabIndex = 7;
+            button5.Text = "Search";
+            button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(738, 10);
+            button6.Name = "button6";
+            button6.Size = new Size(208, 29);
+            button6.TabIndex = 8;
+            button6.Text = "View Item Delivery Logs";
+            button6.UseVisualStyleBackColor = true;
+            // 
             // Form_MasterStockpile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1158, 556);
+            ClientSize = new Size(959, 612);
+            Controls.Add(button6);
+            Controls.Add(button5);
+            Controls.Add(textBox1);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -107,6 +138,7 @@
             Text = "Form_MasterStockpile";
             ((System.ComponentModel.ISupportInitialize)dgvStockpile).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -117,5 +149,8 @@
         private Button button2;
         private Button button3;
         private Button button4;
+        private TextBox textBox1;
+        private Button button5;
+        private Button button6;
     }
 }

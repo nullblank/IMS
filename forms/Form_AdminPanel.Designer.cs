@@ -37,19 +37,21 @@
             btnSUNT = new Button();
             btnOFF = new Button();
             btnSUP = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
             btnMasterList = new Button();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // btnLogs
             // 
-            btnLogs.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnLogs.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnLogs.Location = new Point(59, 415);
+            btnLogs.Location = new Point(6, 26);
             btnLogs.Name = "btnLogs";
-            btnLogs.Size = new Size(272, 30);
+            btnLogs.Size = new Size(260, 30);
             btnLogs.TabIndex = 0;
             btnLogs.Text = "View Logs";
             btnLogs.UseVisualStyleBackColor = true;
@@ -59,9 +61,9 @@
             // 
             btnLogout.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnLogout.Location = new Point(59, 489);
+            btnLogout.Location = new Point(59, 485);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(272, 30);
+            btnLogout.Size = new Size(259, 30);
             btnLogout.TabIndex = 1;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = true;
@@ -71,9 +73,9 @@
             // 
             btnUsers.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnUsers.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnUsers.Location = new Point(59, 60);
+            btnUsers.Location = new Point(6, 34);
             btnUsers.Name = "btnUsers";
-            btnUsers.Size = new Size(272, 30);
+            btnUsers.Size = new Size(260, 30);
             btnUsers.TabIndex = 2;
             btnUsers.Text = "Manage Users";
             btnUsers.UseVisualStyleBackColor = true;
@@ -83,9 +85,9 @@
             // 
             btnSCAT.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCAT.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSCAT.Location = new Point(59, 165);
+            btnSCAT.Location = new Point(6, 26);
             btnSCAT.Name = "btnSCAT";
-            btnSCAT.Size = new Size(272, 30);
+            btnSCAT.Size = new Size(260, 30);
             btnSCAT.TabIndex = 3;
             btnSCAT.Text = "Manage Supply Category";
             btnSCAT.UseVisualStyleBackColor = true;
@@ -95,9 +97,9 @@
             // 
             btnSCA.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCA.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSCA.Location = new Point(59, 201);
+            btnSCA.Location = new Point(6, 62);
             btnSCA.Name = "btnSCA";
-            btnSCA.Size = new Size(272, 30);
+            btnSCA.Size = new Size(260, 30);
             btnSCA.TabIndex = 4;
             btnSCA.Text = "Manage Supply Sub Category";
             btnSCA.UseVisualStyleBackColor = true;
@@ -107,9 +109,9 @@
             // 
             btnSCOL.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCOL.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSCOL.Location = new Point(59, 237);
+            btnSCOL.Location = new Point(6, 98);
             btnSCOL.Name = "btnSCOL";
-            btnSCOL.Size = new Size(272, 30);
+            btnSCOL.Size = new Size(260, 30);
             btnSCOL.TabIndex = 5;
             btnSCOL.Text = "Manage Supply Colors";
             btnSCOL.UseVisualStyleBackColor = true;
@@ -119,9 +121,9 @@
             // 
             btnSUNT.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSUNT.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSUNT.Location = new Point(59, 273);
+            btnSUNT.Location = new Point(6, 134);
             btnSUNT.Name = "btnSUNT";
-            btnSUNT.Size = new Size(272, 30);
+            btnSUNT.Size = new Size(260, 30);
             btnSUNT.TabIndex = 6;
             btnSUNT.Text = "Manage Supply Unit";
             btnSUNT.UseVisualStyleBackColor = true;
@@ -131,9 +133,9 @@
             // 
             btnOFF.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnOFF.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnOFF.Location = new Point(59, 309);
+            btnOFF.Location = new Point(6, 170);
             btnOFF.Name = "btnOFF";
-            btnOFF.Size = new Size(272, 30);
+            btnOFF.Size = new Size(260, 30);
             btnOFF.TabIndex = 7;
             btnOFF.Text = "Manage Offices";
             btnOFF.UseVisualStyleBackColor = true;
@@ -143,80 +145,79 @@
             // 
             btnSUP.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSUP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSUP.Location = new Point(59, 345);
+            btnSUP.Location = new Point(6, 206);
             btnSUP.Name = "btnSUP";
-            btnSUP.Size = new Size(272, 30);
+            btnSUP.Size = new Size(260, 30);
             btnSUP.TabIndex = 8;
             btnSUP.Text = "Manage Suppliers";
             btnSUP.UseVisualStyleBackColor = true;
             btnSUP.Click += btnSUP_Click;
             // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Location = new Point(59, 37);
-            label1.Name = "label1";
-            label1.Size = new Size(42, 20);
-            label1.TabIndex = 9;
-            label1.Text = "Main";
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.Location = new Point(59, 142);
-            label2.Name = "label2";
-            label2.Size = new Size(81, 20);
-            label2.TabIndex = 10;
-            label2.Text = "References";
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Location = new Point(59, 392);
-            label3.Name = "label3";
-            label3.Size = new Size(42, 20);
-            label3.TabIndex = 11;
-            label3.Text = "Misc.";
-            // 
             // btnMasterList
             // 
             btnMasterList.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnMasterList.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnMasterList.Location = new Point(59, 96);
+            btnMasterList.Location = new Point(6, 70);
             btnMasterList.Name = "btnMasterList";
-            btnMasterList.Size = new Size(272, 30);
+            btnMasterList.Size = new Size(260, 30);
             btnMasterList.TabIndex = 12;
             btnMasterList.Text = "Master Stockpile List";
             btnMasterList.UseVisualStyleBackColor = true;
             btnMasterList.Click += btnMasterList_Click;
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(btnMasterList);
+            groupBox1.Controls.Add(btnUsers);
+            groupBox1.Location = new Point(53, 12);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(272, 127);
+            groupBox1.TabIndex = 13;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Main";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btnSCAT);
+            groupBox2.Controls.Add(btnSCA);
+            groupBox2.Controls.Add(btnSCOL);
+            groupBox2.Controls.Add(btnSUNT);
+            groupBox2.Controls.Add(btnSUP);
+            groupBox2.Controls.Add(btnOFF);
+            groupBox2.Location = new Point(53, 145);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(272, 246);
+            groupBox2.TabIndex = 14;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "References";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(btnLogs);
+            groupBox3.Location = new Point(53, 397);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(272, 63);
+            groupBox3.TabIndex = 15;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Misc.";
+            // 
             // Form_AdminPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(391, 567);
-            Controls.Add(btnMasterList);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(btnSUP);
-            Controls.Add(btnOFF);
-            Controls.Add(btnSUNT);
-            Controls.Add(btnSCOL);
-            Controls.Add(btnSCA);
-            Controls.Add(btnSCAT);
-            Controls.Add(btnUsers);
-            Controls.Add(btnLogs);
+            ClientSize = new Size(378, 545);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
             Controls.Add(btnLogout);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "Form_AdminPanel";
             Text = "IMS Developer's Panel";
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -230,9 +231,9 @@
         private Button btnSUNT;
         private Button btnOFF;
         private Button btnSUP;
-        private Label label1;
-        private Label label2;
-        private Label label3;
         private Button btnMasterList;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
     }
 }
