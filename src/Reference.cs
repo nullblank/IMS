@@ -1,6 +1,7 @@
 ﻿using IMS.DBHandler;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,15 +19,30 @@ namespace IMS.src
         }
         public bool AddEntry(TextBox code, TextBox description, string table, string prefix)
         {
-            _handler.ExecuteNonQuery($"INSERT INTO {table} " +
+            string query = $"INSERT INTO {table} " +
                 $"({prefix}_COD, {prefix}_DES) " +
-                $"VALUES ('{code.Text}', '{description.Text}')");
-            return true;
+                $"VALUES ('{code.Text}', '{description.Text}')";
+            if (_handler.ExecuteNonQuery(query) == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        public bool UpdateEntry()
+        public bool UpdateEntry(TextBox code, TextBox description, string table, string prefix)
         {
-            return true;
+            string query = $"UPDATE {table} SET {prefix}_DES = '{description.Text}' WHERE {prefix}_COD = {code.Text}";
+            if (_handler.ExecuteNonQuery(query) == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

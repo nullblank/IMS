@@ -22,6 +22,7 @@ namespace IMS.forms
         string _table;
         string _prefix;
         string _state;
+        string _oldEntry;
         public Form_ReferenceContainer(DatabaseHandler handler, SessionHandler session, string table)
         {
             InitializeComponent();
@@ -48,6 +49,7 @@ namespace IMS.forms
                 DataGridViewRow selectedRow = dgvContainer.Rows[e.RowIndex];
                 txtCode.Text = selectedRow.Cells[1].Value.ToString();
                 txtDescription.Text = selectedRow.Cells[2].Value.ToString();
+                _oldEntry = selectedRow.Cells[2].Value.ToString();
                 if (txtCode.Text == "")
                 {
                     btnUpdate.Enabled = false;
@@ -87,7 +89,7 @@ namespace IMS.forms
                     btnCancel.Enabled = true;
                     btnUpdate.Enabled = false;
                     btnNew.Enabled = false;
-                    txtCode.ReadOnly = false;
+                    txtCode.ReadOnly = true;
                     txtDescription.ReadOnly = false;
                     break;
                 case "Gen":
@@ -118,13 +120,24 @@ namespace IMS.forms
             if (_state == "New")
             {//Add more controls to this and a dialogue Box for confirmation
                 Reference reference = new Reference(_handler, _session);
-                reference.AddEntry(txtCode, txtDescription, _table, _prefix);
-                InitContainer(_table, _session, _handler);
+                if (reference.AddEntry(txtCode, txtDescription, _table, _prefix))
+                {
+                    Audit audit = new Audit(_handler);
+                    audit.LogUserAction($"New Entry at Table: {_table}, Entry: {txtDescription.Text}", _session);
+                    InitContainer(_table, _session, _handler);
+                }
                 togglestate("Gen");
             }
             else if (_state == "Update")
             {
-
+                Reference reference = new Reference(_handler, _session);
+                if (reference.UpdateEntry(txtCode, txtDescription, _table, _prefix))
+                {
+                    Audit audit = new Audit(_handler);
+                    audit.LogUserAction($"Updated Entry at Table: {_table}, New Entry: {txtDescription.Text}, Old Entry: {_oldEntry}", _session);
+                    InitContainer(_table, _session, _handler);
+                }
+                togglestate("Gen");
             }
         }
 

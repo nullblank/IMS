@@ -42,21 +42,22 @@
             // 
             // dgvContainer
             // 
+            dgvContainer.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvContainer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvContainer.Location = new Point(12, 117);
+            dgvContainer.Location = new Point(12, 131);
             dgvContainer.Name = "dgvContainer";
             dgvContainer.RowHeadersWidth = 51;
             dgvContainer.RowTemplate.Height = 29;
-            dgvContainer.Size = new Size(650, 304);
+            dgvContainer.Size = new Size(650, 478);
             dgvContainer.TabIndex = 0;
             dgvContainer.CellClick += dgvContainer_CellClick;
             // 
             // btnSave
             // 
             btnSave.Enabled = false;
-            btnSave.Location = new Point(12, 52);
+            btnSave.Location = new Point(12, 60);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(158, 49);
+            btnSave.Size = new Size(158, 59);
             btnSave.TabIndex = 1;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
@@ -64,7 +65,7 @@
             // 
             // txtCode
             // 
-            txtCode.Location = new Point(62, 12);
+            txtCode.Location = new Point(62, 20);
             txtCode.Name = "txtCode";
             txtCode.ReadOnly = true;
             txtCode.Size = new Size(125, 27);
@@ -72,7 +73,7 @@
             // 
             // txtDescription
             // 
-            txtDescription.Location = new Point(307, 12);
+            txtDescription.Location = new Point(307, 20);
             txtDescription.Name = "txtDescription";
             txtDescription.ReadOnly = true;
             txtDescription.Size = new Size(125, 27);
@@ -81,7 +82,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 15);
+            label1.Location = new Point(12, 23);
             label1.Name = "label1";
             label1.Size = new Size(44, 20);
             label1.TabIndex = 4;
@@ -90,7 +91,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(216, 15);
+            label2.Location = new Point(216, 23);
             label2.Name = "label2";
             label2.Size = new Size(85, 20);
             label2.TabIndex = 5;
@@ -99,9 +100,9 @@
             // btnUpdate
             // 
             btnUpdate.Enabled = false;
-            btnUpdate.Location = new Point(176, 52);
+            btnUpdate.Location = new Point(176, 60);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(158, 49);
+            btnUpdate.Size = new Size(158, 59);
             btnUpdate.TabIndex = 6;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
@@ -109,9 +110,9 @@
             // 
             // btnNew
             // 
-            btnNew.Location = new Point(340, 52);
+            btnNew.Location = new Point(340, 60);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(158, 49);
+            btnNew.Size = new Size(158, 59);
             btnNew.TabIndex = 7;
             btnNew.Text = "New";
             btnNew.UseVisualStyleBackColor = true;
@@ -120,9 +121,9 @@
             // btnCancel
             // 
             btnCancel.Enabled = false;
-            btnCancel.Location = new Point(504, 52);
+            btnCancel.Location = new Point(504, 60);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(158, 49);
+            btnCancel.Size = new Size(158, 59);
             btnCancel.TabIndex = 8;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -132,7 +133,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(676, 436);
+            ClientSize = new Size(676, 627);
             Controls.Add(btnCancel);
             Controls.Add(btnNew);
             Controls.Add(btnUpdate);
