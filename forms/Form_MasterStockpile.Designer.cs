@@ -48,7 +48,7 @@
             // dgvStockpile
             // 
             dgvStockpile.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStockpile.Location = new Point(12, 45);
+            dgvStockpile.Location = new Point(18, 45);
             dgvStockpile.Name = "dgvStockpile";
             dgvStockpile.RowHeadersWidth = 51;
             dgvStockpile.RowTemplate.Height = 29;

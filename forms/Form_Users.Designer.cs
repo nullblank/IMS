@@ -63,7 +63,7 @@
             // btnSave
             // 
             btnSave.Enabled = false;
-            btnSave.Location = new Point(12, 128);
+            btnSave.Location = new Point(16, 128);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(185, 47);
             btnSave.TabIndex = 1;
@@ -74,7 +74,7 @@
             // btnUpdate
             // 
             btnUpdate.Enabled = false;
-            btnUpdate.Location = new Point(203, 128);
+            btnUpdate.Location = new Point(398, 128);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(185, 47);
             btnUpdate.TabIndex = 2;
@@ -84,7 +84,7 @@
             // 
             // btnNew
             // 
-            btnNew.Location = new Point(394, 128);
+            btnNew.Location = new Point(589, 128);
             btnNew.Name = "btnNew";
             btnNew.Size = new Size(185, 47);
             btnNew.TabIndex = 4;
@@ -95,7 +95,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(34, 15);
+            label1.Location = new Point(16, 15);
             label1.Name = "label1";
             label1.Size = new Size(57, 20);
             label1.TabIndex = 5;
@@ -113,7 +113,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(21, 81);
+            label3.Location = new Point(16, 81);
             label3.Name = "label3";
             label3.Size = new Size(70, 20);
             label3.TabIndex = 7;
@@ -184,7 +184,7 @@
             // btnCancel
             // 
             btnCancel.Enabled = false;
-            btnCancel.Location = new Point(585, 128);
+            btnCancel.Location = new Point(207, 128);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(185, 47);
             btnCancel.TabIndex = 17;
