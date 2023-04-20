@@ -30,5 +30,22 @@ namespace IMS.forms
             string query = "SELECT * FROM IMS_SITE";
             dgvStockpile.DataSource = handler.ExecuteQuery(query);
         }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            Audit audit = new Audit(_handler);
+            if (_session.SessionExists())
+            {
+                Form_ItemContainer form = new Form_ItemContainer();
+                audit.LogUserAction("Viewed the master stockpile.", _session);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("WARNING: ILLEGAL ACCESS DETECTED. CLOSING WINDOW!");
+                audit.LogAction("Illegal Access on: Form_Developer -> Form_MasterStockpile");
+                this.Close();
+            }
+        }
     }
 }

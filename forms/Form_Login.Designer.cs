@@ -34,11 +34,13 @@
             txtPassword = new TextBox();
             label1 = new Label();
             label2 = new Label();
+            groupBox1 = new GroupBox();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(122, 141);
+            button1.Location = new Point(95, 104);
             button1.Name = "button1";
             button1.Size = new Size(201, 29);
             button1.TabIndex = 0;
@@ -48,9 +50,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(122, 229);
+            button2.Location = new Point(19, 174);
             button2.Name = "button2";
-            button2.Size = new Size(201, 29);
+            button2.Size = new Size(277, 29);
             button2.TabIndex = 1;
             button2.Text = "Test Connection";
             button2.UseVisualStyleBackColor = true;
@@ -58,14 +60,14 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(122, 47);
+            txtUsername.Location = new Point(95, 38);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(201, 27);
             txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(122, 97);
+            txtPassword.Location = new Point(95, 71);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(201, 27);
@@ -75,7 +77,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(32, 50);
+            label1.Location = new Point(14, 41);
             label1.Name = "label1";
             label1.Size = new Size(75, 20);
             label1.TabIndex = 4;
@@ -84,28 +86,39 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(32, 100);
+            label2.Location = new Point(19, 74);
             label2.Name = "label2";
             label2.Size = new Size(70, 20);
             label2.TabIndex = 5;
             label2.Text = "Password";
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(txtUsername);
+            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(txtPassword);
+            groupBox1.Location = new Point(12, 12);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(312, 209);
+            groupBox1.TabIndex = 6;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Enter your login";
+            // 
             // Form_Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(399, 294);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(txtPassword);
-            Controls.Add(txtUsername);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new Size(339, 233);
+            Controls.Add(groupBox1);
             Name = "Form_Login";
-            Text = "IMS Login";
+            Text = "Login";
             FormClosed += Form_Login_FormClosed;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -116,5 +129,6 @@
         private TextBox txtPassword;
         private Label label1;
         private Label label2;
+        private GroupBox groupBox1;
     }
 }
