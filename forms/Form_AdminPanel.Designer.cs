@@ -40,13 +40,14 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            btnMasterList = new Button();
             SuspendLayout();
             // 
             // btnLogs
             // 
             btnLogs.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnLogs.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnLogs.Location = new Point(58, 370);
+            btnLogs.Location = new Point(59, 415);
             btnLogs.Name = "btnLogs";
             btnLogs.Size = new Size(272, 30);
             btnLogs.TabIndex = 0;
@@ -58,7 +59,7 @@
             // 
             btnLogout.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnLogout.Location = new Point(58, 444);
+            btnLogout.Location = new Point(59, 489);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(272, 30);
             btnLogout.TabIndex = 1;
@@ -70,7 +71,7 @@
             // 
             btnUsers.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnUsers.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnUsers.Location = new Point(58, 54);
+            btnUsers.Location = new Point(59, 60);
             btnUsers.Name = "btnUsers";
             btnUsers.Size = new Size(272, 30);
             btnUsers.TabIndex = 2;
@@ -82,7 +83,7 @@
             // 
             btnSCAT.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCAT.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSCAT.Location = new Point(58, 120);
+            btnSCAT.Location = new Point(59, 165);
             btnSCAT.Name = "btnSCAT";
             btnSCAT.Size = new Size(272, 30);
             btnSCAT.TabIndex = 3;
@@ -94,7 +95,7 @@
             // 
             btnSCA.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCA.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSCA.Location = new Point(58, 156);
+            btnSCA.Location = new Point(59, 201);
             btnSCA.Name = "btnSCA";
             btnSCA.Size = new Size(272, 30);
             btnSCA.TabIndex = 4;
@@ -106,7 +107,7 @@
             // 
             btnSCOL.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCOL.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSCOL.Location = new Point(58, 192);
+            btnSCOL.Location = new Point(59, 237);
             btnSCOL.Name = "btnSCOL";
             btnSCOL.Size = new Size(272, 30);
             btnSCOL.TabIndex = 5;
@@ -118,7 +119,7 @@
             // 
             btnSUNT.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSUNT.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSUNT.Location = new Point(58, 228);
+            btnSUNT.Location = new Point(59, 273);
             btnSUNT.Name = "btnSUNT";
             btnSUNT.Size = new Size(272, 30);
             btnSUNT.TabIndex = 6;
@@ -130,7 +131,7 @@
             // 
             btnOFF.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnOFF.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnOFF.Location = new Point(58, 264);
+            btnOFF.Location = new Point(59, 309);
             btnOFF.Name = "btnOFF";
             btnOFF.Size = new Size(272, 30);
             btnOFF.TabIndex = 7;
@@ -142,7 +143,7 @@
             // 
             btnSUP.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSUP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSUP.Location = new Point(58, 300);
+            btnSUP.Location = new Point(59, 345);
             btnSUP.Name = "btnSUP";
             btnSUP.Size = new Size(272, 30);
             btnSUP.TabIndex = 8;
@@ -154,7 +155,7 @@
             // 
             label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(58, 31);
+            label1.Location = new Point(59, 37);
             label1.Name = "label1";
             label1.Size = new Size(42, 20);
             label1.TabIndex = 9;
@@ -164,7 +165,7 @@
             // 
             label2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(58, 97);
+            label2.Location = new Point(59, 142);
             label2.Name = "label2";
             label2.Size = new Size(81, 20);
             label2.TabIndex = 10;
@@ -174,17 +175,30 @@
             // 
             label3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
-            label3.Location = new Point(58, 347);
+            label3.Location = new Point(59, 392);
             label3.Name = "label3";
             label3.Size = new Size(42, 20);
             label3.TabIndex = 11;
             label3.Text = "Misc.";
             // 
+            // btnMasterList
+            // 
+            btnMasterList.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btnMasterList.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnMasterList.Location = new Point(59, 96);
+            btnMasterList.Name = "btnMasterList";
+            btnMasterList.Size = new Size(272, 30);
+            btnMasterList.TabIndex = 12;
+            btnMasterList.Text = "Master Stockpile List";
+            btnMasterList.UseVisualStyleBackColor = true;
+            btnMasterList.Click += btnMasterList_Click;
+            // 
             // Form_AdminPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(391, 510);
+            ClientSize = new Size(391, 567);
+            Controls.Add(btnMasterList);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -219,5 +233,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private Button btnMasterList;
     }
 }

@@ -114,5 +114,22 @@ namespace IMS.forms
             form.Show();
             this.Close();
         }
+
+        private void btnMasterList_Click(object sender, EventArgs e)
+        {
+            Audit audit = new Audit(_handler);
+            if (_session.SessionExists())
+            {
+                Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
+                audit.LogUserAction("Viewed the master stockpile.", _session);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("WARNING: ILLEGAL ACCESS DETECTED. CLOSING WINDOW!");
+                audit.LogAction("Illegal Access on: Form_Developer -> Form_MasterStockpile");
+                this.Close();
+            }
+        }
     }
 }
