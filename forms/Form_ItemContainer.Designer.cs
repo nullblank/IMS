@@ -114,7 +114,6 @@
             // cbUnit
             // 
             cbUnit.FormattingEnabled = true;
-            cbUnit.Items.AddRange(new object[] { "--" });
             cbUnit.Location = new Point(187, 73);
             cbUnit.Name = "cbUnit";
             cbUnit.Size = new Size(151, 28);
@@ -150,7 +149,6 @@
             // cbCategory
             // 
             cbCategory.FormattingEnabled = true;
-            cbCategory.Items.AddRange(new object[] { "--" });
             cbCategory.Location = new Point(187, 39);
             cbCategory.Name = "cbCategory";
             cbCategory.Size = new Size(151, 28);

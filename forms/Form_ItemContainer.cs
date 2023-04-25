@@ -3,6 +3,7 @@ using IMS.src;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -31,19 +32,65 @@ namespace IMS.forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            this.additem();
         }
 
-        private void additem()
+        private bool additem()
         {
             string code = txtCode.Text;
+            if (string.IsNullOrEmpty(code))
+            {
+                MessageBox.Show("Code Cannot be empty.");
+                return false;
+            }
             string description = txtDescription.Text;
+            if (string.IsNullOrEmpty(description))
+            {
+                MessageBox.Show("Description Cannot be empty.");
+                return false;
+            }
             string category = cbCategory.Text;
+            if (string.IsNullOrEmpty(category))
+            {
+                MessageBox.Show("Category Cannot be empty.");
+                return false;
+            }
             string unit = cbUnit.Text;
+            if (string.IsNullOrEmpty(unit))
+            {
+                MessageBox.Show("Unit Cannot be empty.");
+                return false;
+            }
             string subcategory = cbSCategory.Text;
+            if (string.IsNullOrEmpty(subcategory) || subcategory == "--")
+            {
+                subcategory = null;
+            }
             string color = cbColor.Text;
+            if (string.IsNullOrEmpty(color) || color == "--")
+            {
+                color = null;
+            }
+
             Supplies supplies = new Supplies(_handler, _session);
-            //supplies.AddItem();
+            if (supplies.AddItem(code, description, category, unit, subcategory, color))
+            {
+                MessageBox.Show("Item Added to Stockpile List!");
+                Audit audit = new Audit(_handler);
+                audit.LogUserAction($"Added Item to stockpile. " +
+                    $"code: {code}, description: {description}, category: " +
+                    $"{category}, unit: {unit}, subcategory: " +
+                    $"{subcategory}, color: {color}", _session);
+                this.Close();
+                Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
+                form.InitData(_session, _handler);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("ERROR ADDING ITEM.");
+                return false;
+            }
         }
 
         private void Form_ItemContainer_Load(object sender, EventArgs e)

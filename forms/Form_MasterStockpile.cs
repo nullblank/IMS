@@ -24,7 +24,7 @@ namespace IMS.forms
             InitData(session, handler);
         }
 
-        private void InitData(SessionHandler session, DatabaseHandler handler)
+        public void InitData(SessionHandler session, DatabaseHandler handler)
         {
             DataTable results = new DataTable();
             string query = "SELECT * FROM IMS_SITE";

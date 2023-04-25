@@ -214,6 +214,7 @@
             MaximizeBox = false;
             Name = "Form_AdminPanel";
             Text = "IMS Developer's Panel";
+            FormClosed += Form_AdminPanel_FormClosed;
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);

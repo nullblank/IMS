@@ -131,5 +131,10 @@ namespace IMS.forms
                 this.Close();
             }
         }
+
+        private void Form_AdminPanel_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

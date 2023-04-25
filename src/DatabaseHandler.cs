@@ -140,6 +140,31 @@ namespace IMS.DBHandler
             }
         }
 
+        public int GetColumnCode(string table, string column, string description)
+        {
+            try
+            {
+                OpenConnection();
+                using (SqlCommand command = new SqlCommand($"SELECT * FROM {table} WHERE {column} = '{description}'", _connection))
+                {
+                    int result;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        result = reader.GetInt32(1);
+                        return result;
+                    }
+                    reader.Close();
+                }
+                return 0;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error at GetColumnData: {ex.Message}");
+                return 0;
+            }
+        }
+
         public SqlDataReader GetActiveColumnData(string table, string column)
         {
             try
