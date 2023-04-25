@@ -139,5 +139,23 @@ namespace IMS.DBHandler
                 return null;
             }
         }
+
+        public SqlDataReader GetActiveColumnData(string table, string column)
+        {
+            try
+            {
+                OpenConnection();
+                using (SqlCommand command = new SqlCommand($"SELECT {column} FROM {table} WHERE isActive = '1'", _connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    return reader;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error at GetActiveColumnData: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

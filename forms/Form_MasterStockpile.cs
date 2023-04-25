@@ -36,7 +36,7 @@ namespace IMS.forms
             Audit audit = new Audit(_handler);
             if (_session.SessionExists())
             {
-                Form_ItemContainer form = new Form_ItemContainer();
+                Form_ItemContainer form = new Form_ItemContainer(_handler, _session);
                 audit.LogUserAction("Viewed the master stockpile.", _session);
                 form.Show();
             }

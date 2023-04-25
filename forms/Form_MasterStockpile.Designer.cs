@@ -47,6 +47,7 @@
             // 
             // dgvStockpile
             // 
+            dgvStockpile.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvStockpile.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStockpile.Location = new Point(18, 45);
             dgvStockpile.Name = "dgvStockpile";

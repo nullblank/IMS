@@ -78,7 +78,7 @@ namespace IMS.NetUtil
                 InitDb();
                 if (_handler != null)
                 {
-                    DataTable results = _handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME COLLATE Latin1_General_CS_AS = '{user}' AND USR_PWD COLLATE Latin1_General_CS_AS = '{pass}'");
+                    DataTable results = _handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME COLLATE Latin1_General_CS_AS = '{user}' AND USR_PWD COLLATE Latin1_General_CS_AS = '{pass}' AND USR_ACT = '1'");
                     if (results.Rows.Count > 0)
                     {
                         MessageBox.Show("Login Successful!");

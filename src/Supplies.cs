@@ -17,9 +17,9 @@ namespace IMS.src
             _handler = handler;
             _session = session;
         }
-        public bool AddItem()
+        public bool AddItem(string code, string description, string category, string unit, string subcategory, string color)
         {
-            string query;
+            string query = "Test";
             if (_handler.ExecuteNonQuery(query) == 0)
             {
                 return false;
@@ -31,7 +31,7 @@ namespace IMS.src
         }
         public bool EditItem()
         {
-            string query;
+            string query = "Test";
             if (_handler.ExecuteNonQuery(query) == 0)
             {
                 return false;
