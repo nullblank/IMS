@@ -211,6 +211,7 @@
             Controls.Add(groupBox1);
             Name = "Form_ItemContainer";
             Text = "#PLACEHOLDER";
+            FormClosed += Form_ItemContainer_FormClosed;
             Load += Form_ItemContainer_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

@@ -18,12 +18,14 @@ namespace IMS.forms
         DatabaseHandler _handler;
         SessionHandler _session;
         DataGridViewCellEventArgs _e;
+        Form_ItemContainer form_itemcontainer;
         public Form_MasterStockpile(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
             _handler = handler;
             _session = session;
             InitData(session, handler);
+            form_itemcontainer = new Form_ItemContainer(_handler, _session);
         }
 
         public void InitData(SessionHandler session, DatabaseHandler handler)
@@ -38,11 +40,10 @@ namespace IMS.forms
             Audit audit = new Audit(_handler);
             if (_session.SessionExists())
             {
-                Form_ItemContainer form = new Form_ItemContainer(_handler, _session);
                 audit.LogUserAction("Opened Form_ItemConatiner AddItem.", _session);
-                form.SetState(false);
-                form.ClearData();
-                form.Show();
+                form_itemcontainer.SetState(false);
+                form_itemcontainer.ClearData();
+                form_itemcontainer.Show();
             }
             else
             {
@@ -58,9 +59,9 @@ namespace IMS.forms
             {
                 _e = e;
                 DataGridViewRow row = dgvStockpile.Rows[e.RowIndex];
-                Form_ItemContainer form = new Form_ItemContainer(_handler, _session);
-                form.SetData(dgvStockpile, e);
-                if (row.Cells["SITE_COD"].Value.ToString() == null)
+                
+                form_itemcontainer.SetData(dgvStockpile, e);
+                if (row.Cells["SITE_COD"].Value.ToString() == "")
                 {
                     btnUpdate.Enabled = false;
                 }
@@ -76,11 +77,10 @@ namespace IMS.forms
             Audit audit = new Audit(_handler);
             if (_session.SessionExists())
             {
-                Form_ItemContainer form = new Form_ItemContainer(_handler, _session);
                 audit.LogUserAction("Opened Form_ItemConatiner AddItem.", _session);
-                form.SetData(dgvStockpile, _e);
-                form.SetState(true);//to check if update function
-                form.Show();
+                form_itemcontainer.SetData(dgvStockpile, _e);
+                form_itemcontainer.SetState(true);//to check if update function
+                form_itemcontainer.Show();
             }
             else
             {

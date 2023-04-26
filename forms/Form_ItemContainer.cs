@@ -26,11 +26,12 @@ namespace IMS.forms
             InitializeComponent();
             _handler = handler;
             _session = session;
+            InitItems();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace IMS.forms
             {
                 this.AddItem();
             }
-            
+
         }
 
         public bool UpdateItem()//update this
@@ -201,7 +202,12 @@ namespace IMS.forms
 
         private void Form_ItemContainer_Load(object sender, EventArgs e)
         {
-            //InitUsers();
+            
+
+        }
+
+        public void InitItems()
+        {
             using (SqlDataReader reader = _handler.GetColumnData("IMS_RFN_SCAT", "SCAT_DES"))
             {
                 while (reader.Read())
@@ -235,6 +241,11 @@ namespace IMS.forms
                 }
             }
             _handler.CloseConnection();
+        }
+
+        private void Form_ItemContainer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Hide();
         }
     }
 }
