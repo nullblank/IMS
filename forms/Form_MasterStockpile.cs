@@ -25,7 +25,7 @@ namespace IMS.forms
             _handler = handler;
             _session = session;
             InitData(session, handler);
-            form_itemcontainer = new Form_ItemContainer(_handler, _session);
+            form_itemcontainer = new Form_ItemContainer(_handler, _session, this);
         }
 
         public void InitData(SessionHandler session, DatabaseHandler handler)

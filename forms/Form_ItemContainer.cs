@@ -20,12 +20,14 @@ namespace IMS.forms
         SessionHandler _session;
         DataGridView _grid;
         DataGridViewCellEventArgs _e;
+        Form_MasterStockpile _masterstockpile;
         bool _update = false;
-        public Form_ItemContainer(DatabaseHandler handler, SessionHandler session)
+        public Form_ItemContainer(DatabaseHandler handler, SessionHandler session, Form_MasterStockpile form)
         {
             InitializeComponent();
             _handler = handler;
             _session = session;
+            _masterstockpile = form;
             InitItems();
         }
 
@@ -39,10 +41,12 @@ namespace IMS.forms
             if (_update)
             {
                 this.UpdateItem();
+                _masterstockpile.InitData(_session, _handler);
             }
             else
             {
                 this.AddItem();
+                _masterstockpile.InitData(_session, _handler);
             }
 
         }
@@ -94,7 +98,7 @@ namespace IMS.forms
                     $"code: {code}, description: {description}, category: " +
                     $"{category}, unit: {unit}, subcategory: " +
                     $"{subcategory}, color: {color}", _session);
-                this.Close();
+                this.Hide();
                 Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
                 form.InitData(_session, _handler);
                 return true;
@@ -188,7 +192,7 @@ namespace IMS.forms
                     $"code: {code}, description: {description}, category: " +
                     $"{category}, unit: {unit}, subcategory: " +
                     $"{subcategory}, color: {color}", _session);
-                this.Close();
+                this.Hide();
                 Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
                 form.InitData(_session, _handler);
                 return true;
@@ -202,7 +206,7 @@ namespace IMS.forms
 
         private void Form_ItemContainer_Load(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -245,7 +249,17 @@ namespace IMS.forms
 
         private void Form_ItemContainer_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Hide();
+
+        }
+
+        private void Form_ItemContainer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                _masterstockpile.InitData(_session, _handler);
+                this.Hide();
+            }
         }
     }
 }
