@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             dgvUsers = new DataGridView();
             btnSave = new Button();
             btnUpdate = new Button();
@@ -45,7 +46,9 @@
             btnCancel = new Button();
             label6 = new Label();
             cbActive = new ComboBox();
+            errorProvider1 = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // dgvUsers
@@ -212,6 +215,10 @@
             cbActive.Size = new Size(151, 28);
             cbActive.TabIndex = 19;
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // Form_Users
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -238,6 +245,7 @@
             Text = "User Management";
             Load += Form_Users_Load;
             ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -261,5 +269,6 @@
         private Button btnCancel;
         private Label label6;
         private ComboBox cbActive;
+        private ErrorProvider errorProvider1;
     }
 }

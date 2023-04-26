@@ -18,6 +18,9 @@ namespace IMS.forms
     {
         DatabaseHandler _handler;
         SessionHandler _session;
+        DataGridView _grid;
+        DataGridViewCellEventArgs _e;
+        bool _update = false;
         public Form_ItemContainer(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
@@ -32,10 +35,113 @@ namespace IMS.forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.additem();
+            if (_update)
+            {
+                this.UpdateItem();
+            }
+            else
+            {
+                this.AddItem();
+            }
+            
         }
 
-        private bool additem()
+        public bool UpdateItem()//update this
+        {
+            string code = txtCode.Text;
+            txtCode.Enabled = false;
+            if (string.IsNullOrEmpty(code))
+            {
+                MessageBox.Show("Code Cannot be empty.");
+                return false;
+            }
+            string description = txtDescription.Text;
+            if (string.IsNullOrEmpty(description))
+            {
+                MessageBox.Show("Description Cannot be empty.");
+                return false;
+            }
+            string category = cbCategory.Text;
+            if (string.IsNullOrEmpty(category))
+            {
+                MessageBox.Show("Category Cannot be empty.");
+                return false;
+            }
+            string unit = cbUnit.Text;
+            if (string.IsNullOrEmpty(unit))
+            {
+                MessageBox.Show("Unit Cannot be empty.");
+                return false;
+            }
+            string subcategory = cbSCategory.Text;
+            if (string.IsNullOrEmpty(subcategory) || subcategory == "--")
+            {
+                subcategory = null;
+            }
+            string color = cbColor.Text;
+            if (string.IsNullOrEmpty(color) || color == "--")
+            {
+                color = null;
+            }
+
+            Supplies supplies = new Supplies(_handler, _session);
+            if (supplies.EditItem(code, description, category, unit, subcategory, color))
+            {
+                MessageBox.Show("Item Added to Stockpile List!");
+                Audit audit = new Audit(_handler);
+                audit.LogUserAction($"Added Item to stockpile. " +
+                    $"code: {code}, description: {description}, category: " +
+                    $"{category}, unit: {unit}, subcategory: " +
+                    $"{subcategory}, color: {color}", _session);
+                this.Close();
+                Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
+                form.InitData(_session, _handler);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("ERROR ADDING ITEM.");
+                return false;
+            }
+        }
+
+        public void SetState(bool state)
+        {
+            _update = state;
+        }
+
+        public void SetData(DataGridView grid, DataGridViewCellEventArgs e)
+        {
+            _grid = grid;
+            _e = e;
+            DataGridViewRow row = grid.Rows[e.RowIndex];
+            txtCode.Text = row.Cells["SITE_COD"].Value.ToString();
+            txtDescription.Text = row.Cells["SITE_DES"].Value.ToString();
+            this.MatchCell("SITE_SCAT", cbCategory, e);
+            this.MatchCell("SITE_SCA", cbSCategory, e);
+            this.MatchCell("SITE_SUNT", cbUnit, e);
+            this.MatchCell("SITE_SCOL", cbColor, e);
+        }
+        public void ClearData()
+        {
+            txtCode.Text = "";
+            txtDescription.Text = "";
+            cbCategory.Text = "";
+            cbSCategory.Text = "";
+            cbUnit.Text = "";
+            cbColor.Text = "";
+        }
+        private void MatchCell(string column, ComboBox comboBox, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow selectedRow = _grid.Rows[e.RowIndex];
+            int itemIndex = comboBox.FindStringExact(selectedRow.Cells[column].Value.ToString());
+            if (itemIndex >= 0)
+            {
+                comboBox.SelectedIndex = itemIndex;
+            }
+        }
+
+        private bool AddItem()
         {
             string code = txtCode.Text;
             if (string.IsNullOrEmpty(code))

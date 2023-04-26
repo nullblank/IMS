@@ -32,17 +32,26 @@ namespace IMS.src
             }
             return true;
         }
-        public bool EditItem()
+        public bool EditItem(string code, string description, string category, string unit, string subcategory, string color)
         {
-            string query = "Test";
-            if (_handler.ExecuteNonQuery(query) == 0)
+            string query = $"UPDATE IMS_SITE SET SITE_DES = '{description}', SITE_SCAT = '{category}', SITE_SCA = '{subcategory}', SITE_SUNT = '{unit}', USR_SCOL = '{color}' WHERE SITE_COD = '{code}'";
+            DialogResult option = MessageBox.Show("Are you sure you want to Update the records of this Item?", "Confirm Item Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (option == DialogResult.Yes)
             {
-                return false;
+                if (_handler.ExecuteNonQuery(query) == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return true;
+                return false;
             }
+            
         }
 
     }
