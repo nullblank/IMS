@@ -41,6 +41,7 @@
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
+            btnDeliveries = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -61,7 +62,7 @@
             // 
             btnLogout.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnLogout.Location = new Point(59, 485);
+            btnLogout.Location = new Point(59, 494);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(259, 30);
             btnLogout.TabIndex = 1;
@@ -73,7 +74,7 @@
             // 
             btnUsers.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnUsers.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnUsers.Location = new Point(6, 34);
+            btnUsers.Location = new Point(6, 26);
             btnUsers.Name = "btnUsers";
             btnUsers.Size = new Size(260, 30);
             btnUsers.TabIndex = 2;
@@ -157,7 +158,7 @@
             // 
             btnMasterList.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnMasterList.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnMasterList.Location = new Point(6, 70);
+            btnMasterList.Location = new Point(6, 62);
             btnMasterList.Name = "btnMasterList";
             btnMasterList.Size = new Size(260, 30);
             btnMasterList.TabIndex = 12;
@@ -167,11 +168,12 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnDeliveries);
             groupBox1.Controls.Add(btnMasterList);
             groupBox1.Controls.Add(btnUsers);
             groupBox1.Location = new Point(53, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(272, 127);
+            groupBox1.Size = new Size(272, 140);
             groupBox1.TabIndex = 13;
             groupBox1.TabStop = false;
             groupBox1.Text = "Main";
@@ -184,7 +186,7 @@
             groupBox2.Controls.Add(btnSUNT);
             groupBox2.Controls.Add(btnSUP);
             groupBox2.Controls.Add(btnOFF);
-            groupBox2.Location = new Point(53, 145);
+            groupBox2.Location = new Point(53, 158);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(272, 246);
             groupBox2.TabIndex = 14;
@@ -194,18 +196,30 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(btnLogs);
-            groupBox3.Location = new Point(53, 397);
+            groupBox3.Location = new Point(53, 410);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(272, 63);
             groupBox3.TabIndex = 15;
             groupBox3.TabStop = false;
             groupBox3.Text = "Misc.";
             // 
+            // btnDeliveries
+            // 
+            btnDeliveries.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btnDeliveries.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnDeliveries.Location = new Point(6, 98);
+            btnDeliveries.Name = "btnDeliveries";
+            btnDeliveries.Size = new Size(259, 30);
+            btnDeliveries.TabIndex = 16;
+            btnDeliveries.Text = "Deliveries Log";
+            btnDeliveries.UseVisualStyleBackColor = true;
+            btnDeliveries.Click += btnDeliveries_Click;
+            // 
             // Form_AdminPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(378, 545);
+            ClientSize = new Size(378, 591);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -236,5 +250,6 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
+        private Button btnDeliveries;
     }
 }

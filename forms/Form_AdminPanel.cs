@@ -136,5 +136,11 @@ namespace IMS.forms
         {
             Application.Exit();
         }
+
+        private void btnDeliveries_Click(object sender, EventArgs e)
+        {
+            Form_Deliveries form = new Form_Deliveries(_handler, _session);
+            form.Show();
+        }
     }
 }
