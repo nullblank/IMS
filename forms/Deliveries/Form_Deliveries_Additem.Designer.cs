@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
+            cbCategory = new ComboBox();
             label1 = new Label();
             groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
-            comboBox2 = new ComboBox();
-            label2 = new Label();
-            comboBox3 = new ComboBox();
-            label3 = new Label();
+            txtAmount = new TextBox();
             label4 = new Label();
-            textBox1 = new TextBox();
-            comboBox4 = new ComboBox();
-            label5 = new Label();
-            textBox2 = new TextBox();
+            cbItem = new ComboBox();
+            label3 = new Label();
+            cbSCategory = new ComboBox();
+            label2 = new Label();
+            groupBox2 = new GroupBox();
+            txtCost = new TextBox();
             label6 = new Label();
-            button1 = new Button();
-            button2 = new Button();
+            cbSupplier = new ComboBox();
+            label5 = new Label();
+            btnSave = new Button();
+            btnCancel = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
-            // comboBox1
+            // cbCategory
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(101, 26);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 0;
+            cbCategory.FormattingEnabled = true;
+            cbCategory.Location = new Point(101, 26);
+            cbCategory.Name = "cbCategory";
+            cbCategory.Size = new Size(151, 28);
+            cbCategory.TabIndex = 0;
             // 
             // label1
             // 
@@ -67,13 +67,13 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txtAmount);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(comboBox3);
+            groupBox1.Controls.Add(cbItem);
             groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(comboBox2);
+            groupBox1.Controls.Add(cbSCategory);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(cbCategory);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
@@ -82,52 +82,12 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Item Details";
             // 
-            // groupBox2
+            // txtAmount
             // 
-            groupBox2.Controls.Add(textBox2);
-            groupBox2.Controls.Add(label6);
-            groupBox2.Controls.Add(comboBox4);
-            groupBox2.Controls.Add(label5);
-            groupBox2.Location = new Point(12, 121);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(756, 67);
-            groupBox2.TabIndex = 3;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Delivery Details";
-            // 
-            // comboBox2
-            // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(374, 26);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 28);
-            comboBox2.TabIndex = 2;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(276, 29);
-            label2.Name = "label2";
-            label2.Size = new Size(92, 20);
-            label2.TabIndex = 3;
-            label2.Text = "Subcategory";
-            // 
-            // comboBox3
-            // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(101, 60);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(424, 28);
-            comboBox3.TabIndex = 4;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 63);
-            label3.Name = "label3";
-            label3.Size = new Size(83, 20);
-            label3.TabIndex = 5;
-            label3.Text = "Item Name";
+            txtAmount.Location = new Point(614, 60);
+            txtAmount.Name = "txtAmount";
+            txtAmount.Size = new Size(125, 27);
+            txtAmount.TabIndex = 4;
             // 
             // label4
             // 
@@ -138,36 +98,59 @@
             label4.TabIndex = 7;
             label4.Text = "Amount";
             // 
-            // textBox1
+            // cbItem
             // 
-            textBox1.Location = new Point(614, 60);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 4;
+            cbItem.FormattingEnabled = true;
+            cbItem.Location = new Point(101, 60);
+            cbItem.Name = "cbItem";
+            cbItem.Size = new Size(424, 28);
+            cbItem.TabIndex = 4;
             // 
-            // comboBox4
+            // label3
             // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(101, 26);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(424, 28);
-            comboBox4.TabIndex = 6;
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 63);
+            label3.Name = "label3";
+            label3.Size = new Size(83, 20);
+            label3.TabIndex = 5;
+            label3.Text = "Item Name";
             // 
-            // label5
+            // cbSCategory
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(31, 29);
-            label5.Name = "label5";
-            label5.Size = new Size(64, 20);
-            label5.TabIndex = 7;
-            label5.Text = "Supplier";
+            cbSCategory.FormattingEnabled = true;
+            cbSCategory.Location = new Point(374, 26);
+            cbSCategory.Name = "cbSCategory";
+            cbSCategory.Size = new Size(151, 28);
+            cbSCategory.TabIndex = 2;
             // 
-            // textBox2
+            // label2
             // 
-            textBox2.Location = new Point(614, 26);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 8;
+            label2.AutoSize = true;
+            label2.Location = new Point(276, 29);
+            label2.Name = "label2";
+            label2.Size = new Size(92, 20);
+            label2.TabIndex = 3;
+            label2.Text = "Subcategory";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(txtCost);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(cbSupplier);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Location = new Point(12, 121);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(756, 67);
+            groupBox2.TabIndex = 3;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Delivery Details";
+            // 
+            // txtCost
+            // 
+            txtCost.Location = new Point(614, 26);
+            txtCost.Name = "txtCost";
+            txtCost.Size = new Size(125, 27);
+            txtCost.TabIndex = 8;
             // 
             // label6
             // 
@@ -178,31 +161,50 @@
             label6.TabIndex = 9;
             label6.Text = "Cost";
             // 
-            // button1
+            // cbSupplier
             // 
-            button1.Location = new Point(574, 194);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 38);
-            button1.TabIndex = 4;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
+            cbSupplier.FormattingEnabled = true;
+            cbSupplier.Location = new Point(101, 26);
+            cbSupplier.Name = "cbSupplier";
+            cbSupplier.Size = new Size(424, 28);
+            cbSupplier.TabIndex = 6;
             // 
-            // button2
+            // label5
             // 
-            button2.Location = new Point(674, 194);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 38);
-            button2.TabIndex = 5;
-            button2.Text = "Cancel";
-            button2.UseVisualStyleBackColor = true;
+            label5.AutoSize = true;
+            label5.Location = new Point(31, 29);
+            label5.Name = "label5";
+            label5.Size = new Size(64, 20);
+            label5.TabIndex = 7;
+            label5.Text = "Supplier";
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(574, 194);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(94, 38);
+            btnSave.TabIndex = 4;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Location = new Point(674, 194);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(94, 38);
+            btnCancel.TabIndex = 5;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // Form_Deliveries_Additem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(780, 244);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnCancel);
+            Controls.Add(btnSave);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "Form_Deliveries_Additem";
@@ -216,21 +218,21 @@
 
         #endregion
 
-        private ComboBox comboBox1;
+        private ComboBox cbCategory;
         private Label label1;
         private GroupBox groupBox1;
-        private TextBox textBox1;
+        private TextBox txtAmount;
         private Label label4;
-        private ComboBox comboBox3;
+        private ComboBox cbItem;
         private Label label3;
-        private ComboBox comboBox2;
+        private ComboBox cbSCategory;
         private Label label2;
         private GroupBox groupBox2;
-        private TextBox textBox2;
+        private TextBox txtCost;
         private Label label6;
-        private ComboBox comboBox4;
+        private ComboBox cbSupplier;
         private Label label5;
-        private Button button1;
-        private Button button2;
+        private Button btnSave;
+        private Button btnCancel;
     }
 }

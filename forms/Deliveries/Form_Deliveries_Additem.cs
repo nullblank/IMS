@@ -22,5 +22,15 @@ namespace IMS.forms.Deliveries
             _handler = handler;
             _session = session;
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
