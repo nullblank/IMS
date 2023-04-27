@@ -30,8 +30,7 @@
         {
             dgvDeliveries = new DataGridView();
             groupBox1 = new GroupBox();
-            button5 = new Button();
-            button1 = new Button();
+            btnAddDelivery = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvDeliveries).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -58,31 +57,22 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Deliveries";
             // 
-            // button5
+            // btnAddDelivery
             // 
-            button5.Location = new Point(12, 467);
-            button5.Name = "button5";
-            button5.Size = new Size(194, 62);
-            button5.TabIndex = 6;
-            button5.Text = "Add Delivery";
-            button5.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(212, 467);
-            button1.Name = "button1";
-            button1.Size = new Size(194, 62);
-            button1.TabIndex = 7;
-            button1.Text = "Remove Delivery";
-            button1.UseVisualStyleBackColor = true;
+            btnAddDelivery.Location = new Point(12, 467);
+            btnAddDelivery.Name = "btnAddDelivery";
+            btnAddDelivery.Size = new Size(194, 62);
+            btnAddDelivery.TabIndex = 6;
+            btnAddDelivery.Text = "Add Delivery";
+            btnAddDelivery.UseVisualStyleBackColor = true;
+            btnAddDelivery.Click += button5_Click;
             // 
             // Form_Deliveries
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1068, 541);
-            Controls.Add(button1);
-            Controls.Add(button5);
+            Controls.Add(btnAddDelivery);
             Controls.Add(groupBox1);
             Name = "Form_Deliveries";
             Text = "Form_Deliveries";
@@ -97,7 +87,6 @@
         private GroupBox groupBox1;
         private System.CodeDom.CodeTypeReference btnAdd;
         private System.CodeDom.CodeTypeReference btnRemove;
-        private Button button5;
-        private Button button1;
+        private Button btnAddDelivery;
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IMS.DBHandler;
+using IMS.src;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,13 @@ namespace IMS.forms.Deliveries
 {
     public partial class Form_Deliveries_Additem : Form
     {
-        public Form_Deliveries_Additem()
+        DatabaseHandler _handler;
+        SessionHandler _session;
+        public Form_Deliveries_Additem(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
+            _handler = handler;
+            _session = session;
         }
     }
 }

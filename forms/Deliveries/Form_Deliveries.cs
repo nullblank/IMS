@@ -1,4 +1,5 @@
 ﻿using IMS.DBHandler;
+using IMS.forms.Deliveries;
 using IMS.src;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,12 @@ namespace IMS.forms
             DataTable results = new DataTable();
             string query = "SELECT * FROM IMS_STOC";
             dgvDeliveries.DataSource = _handler.ExecuteQuery(query);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form_Deliveries_Additem form = new Form_Deliveries_Additem(_handler, _session);
+            form.Show();
         }
     }
 }
