@@ -54,7 +54,6 @@ namespace IMS.forms
         public bool UpdateItem()//update this
         {
             string code = txtCode.Text;
-            txtCode.Enabled = false;
             if (string.IsNullOrEmpty(code))
             {
                 MessageBox.Show("Code Cannot be empty.");
@@ -67,13 +66,13 @@ namespace IMS.forms
                 return false;
             }
             string category = cbCategory.Text;
-            if (string.IsNullOrEmpty(category))
+            if (string.IsNullOrEmpty(category) || category == "--")
             {
                 MessageBox.Show("Category Cannot be empty.");
                 return false;
             }
             string unit = cbUnit.Text;
-            if (string.IsNullOrEmpty(unit))
+            if (string.IsNullOrEmpty(unit) || unit == "--")
             {
                 MessageBox.Show("Unit Cannot be empty.");
                 return false;
@@ -92,9 +91,9 @@ namespace IMS.forms
             Supplies supplies = new Supplies(_handler, _session);
             if (supplies.EditItem(code, description, category, unit, subcategory, color))
             {
-                MessageBox.Show("Item Added to Stockpile List!");
+                MessageBox.Show("Item Updated!!");
                 Audit audit = new Audit(_handler);
-                audit.LogUserAction($"Added Item to stockpile. " +
+                audit.LogUserAction($"UPDATED Item to stockpile. " +
                     $"code: {code}, description: {description}, category: " +
                     $"{category}, unit: {unit}, subcategory: " +
                     $"{subcategory}, color: {color}", _session);
@@ -105,7 +104,7 @@ namespace IMS.forms
             }
             else
             {
-                MessageBox.Show("ERROR ADDING ITEM.");
+                MessageBox.Show("ERROR UPDATING ITEM.");
                 return false;
             }
         }
@@ -113,12 +112,21 @@ namespace IMS.forms
         public void SetState(bool state)
         {
             _update = state;
+            if (state)
+            {
+                txtCode.ReadOnly = true;
+            }
+            else
+            {
+                txtCode.ReadOnly = false;
+            }
         }
 
         public void SetData(DataGridView grid, DataGridViewCellEventArgs e)
         {
             _grid = grid;
             _e = e;
+            this.ClearData();
             DataGridViewRow row = grid.Rows[e.RowIndex];
             txtCode.Text = row.Cells["SITE_COD"].Value.ToString();
             txtDescription.Text = row.Cells["SITE_DES"].Value.ToString();
@@ -131,10 +139,10 @@ namespace IMS.forms
         {
             txtCode.Text = "";
             txtDescription.Text = "";
-            cbCategory.Text = "";
-            cbSCategory.Text = "";
-            cbUnit.Text = "";
-            cbColor.Text = "";
+            cbCategory.SelectedIndex = 0;
+            cbSCategory.SelectedIndex = 0;
+            cbUnit.SelectedIndex = 0;
+            cbColor.SelectedIndex = 0;
         }
         private void MatchCell(string column, ComboBox comboBox, DataGridViewCellEventArgs e)
         {
@@ -161,13 +169,13 @@ namespace IMS.forms
                 return false;
             }
             string category = cbCategory.Text;
-            if (string.IsNullOrEmpty(category))
+            if (string.IsNullOrEmpty(category) || category == "--")
             {
                 MessageBox.Show("Category Cannot be empty.");
                 return false;
             }
             string unit = cbUnit.Text;
-            if (string.IsNullOrEmpty(unit))
+            if (string.IsNullOrEmpty(unit) || unit == "--")
             {
                 MessageBox.Show("Unit Cannot be empty.");
                 return false;
@@ -184,23 +192,52 @@ namespace IMS.forms
             }
 
             Supplies supplies = new Supplies(_handler, _session);
-            if (supplies.AddItem(code, description, category, unit, subcategory, color))
+
+            //put code check here
+            if (this.CodeExists(code))
             {
-                MessageBox.Show("Item Added to Stockpile List!");
-                Audit audit = new Audit(_handler);
-                audit.LogUserAction($"Added Item to stockpile. " +
-                    $"code: {code}, description: {description}, category: " +
-                    $"{category}, unit: {unit}, subcategory: " +
-                    $"{subcategory}, color: {color}", _session);
-                this.Hide();
-                Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
-                form.InitData(_session, _handler);
-                return true;
+                if (supplies.AddItem(code, description, category, unit, subcategory, color))
+                {
+                    MessageBox.Show("Item Added to Stockpile List!");
+                    Audit audit = new Audit(_handler);
+                    audit.LogUserAction($"Added Item to stockpile. " +
+                        $"code: {code}, description: {description}, category: " +
+                        $"{category}, unit: {unit}, subcategory: " +
+                        $"{subcategory}, color: {color}", _session);
+                    this.Hide();
+                    Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
+                    form.InitData(_session, _handler);
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR ADDING ITEM.");
+                    return false;
+                }
             }
             else
             {
-                MessageBox.Show("ERROR ADDING ITEM.");
+                MessageBox.Show("Item ID already exists!");
                 return false;
+            }
+        }
+
+        private bool CodeExists(string code)
+        {
+            string query = $"SELECT COUNT(*) FROM IMS_SITE WHERE SITE_COD = '{code}'";
+            DataTable results = _handler.ExecuteQuery(query);
+            int count = 0;
+            if (results.Rows.Count > 0)
+            {
+                count = Convert.ToInt32(results.Rows[0][0]);
+            }
+            if (count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

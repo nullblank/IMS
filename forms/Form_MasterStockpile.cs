@@ -59,7 +59,6 @@ namespace IMS.forms
             {
                 _e = e;
                 DataGridViewRow row = dgvStockpile.Rows[e.RowIndex];
-                
                 form_itemcontainer.SetData(dgvStockpile, e);
                 if (row.Cells["SITE_COD"].Value.ToString() == "")
                 {
@@ -78,7 +77,7 @@ namespace IMS.forms
             if (_session.SessionExists())
             {
                 audit.LogUserAction("Opened Form_ItemConatiner AddItem.", _session);
-                form_itemcontainer.SetData(dgvStockpile, _e);
+                //form_itemcontainer.SetData(dgvStockpile, _e);
                 form_itemcontainer.SetState(true);//to check if update function
                 form_itemcontainer.Show();
             }
