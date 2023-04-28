@@ -60,7 +60,7 @@ namespace IMS.forms.Deliveries
             string supplier = cbSupplier.Text;
             int cost = Int32.Parse(txtCost.Text);
 
-            if (deliveries.AddDelivery())
+            if (deliveries.AddDelivery(itemCode, amount, supplier, cost))
             {
                 MessageBox.Show("Delivery Item Added!");
                 //Audit
