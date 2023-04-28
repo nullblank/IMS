@@ -34,7 +34,6 @@ namespace IMS.forms.Deliveries
         {
             this.GetColumnData("IMS_RFN_SCAT", "SCAT_DES", cbCategory);
             this.GetColumnData("IMS_RFN_SCA", "SCA_DES", cbSCategory);
-
             this.GetColumnData("IMS_RFN_SUP", "SUP_DES", cbSupplier);
         }
 
@@ -56,8 +55,12 @@ namespace IMS.forms.Deliveries
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            /*
-            if (/deliveries.AddDelivery())
+            string itemCode = this.GetItemCode(cbItem.Text);
+            int amount = Int32.Parse(txtAmount.Text);
+            string supplier = cbSupplier.Text;
+            int cost = Int32.Parse(txtCost.Text);
+
+            if (deliveries.AddDelivery())
             {
                 MessageBox.Show("Delivery Item Added!");
                 //Audit
@@ -66,7 +69,19 @@ namespace IMS.forms.Deliveries
             {
                 MessageBox.Show("Error adding Item!");
             }
-            */
+        }
+
+        private string GetItemCode(string itemName)
+        {
+            using (SqlDataReader reader = _handler.GetItemCode("IMS_SITE", "SITE_COD", itemName))
+            {
+                while (reader.Read())
+                {
+                    string value = reader.GetString(0);
+                    return value;
+                }
+            }
+            return null;
         }
 
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)

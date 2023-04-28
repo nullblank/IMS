@@ -208,9 +208,30 @@ namespace IMS.DBHandler
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error at GetColumnData: {ex.Message}");
+                MessageBox.Show($"Error at GetCode: {ex.Message}");
                 return null;
             }
         }
+
+        public SqlDataReader GetItemCode(string table, string column, string itemName)
+        {
+            try
+            {
+                OpenConnection();
+                using (SqlCommand command = new SqlCommand($"SELECT {column} FROM {table} WHERE SITE_DES = '{itemName}'", _connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    return reader;
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error at GetCode: {ex.Message}");
+                return null;
+            }
+        }
+
+
     }
 }
