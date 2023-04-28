@@ -182,5 +182,35 @@ namespace IMS.DBHandler
                 return null;
             }
         }
+
+        public SqlDataReader GetCode(string table, string column, string category, string scategory)
+        {
+            try
+            {
+                OpenConnection();
+                if (String.IsNullOrEmpty(scategory))
+                {
+                    using (SqlCommand command = new SqlCommand($"SELECT {column} FROM {table} WHERE SITE_SCAT = '{category}'", _connection))
+                    {
+                        SqlDataReader reader = command.ExecuteReader();
+                        return reader;
+                    }
+                }
+                else
+                {
+                    using (SqlCommand command = new SqlCommand($"SELECT {column} FROM {table} WHERE SITE_SCAT = '{category}' AND SITE_SCA = '{scategory}'", _connection))
+                    {
+                        SqlDataReader reader = command.ExecuteReader();
+                        return reader;
+                    }
+                }
+                
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error at GetColumnData: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

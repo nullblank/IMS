@@ -55,6 +55,7 @@
             cbCategory.Name = "cbCategory";
             cbCategory.Size = new Size(151, 28);
             cbCategory.TabIndex = 0;
+            cbCategory.SelectedIndexChanged += cbCategory_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -118,10 +119,12 @@
             // cbSCategory
             // 
             cbSCategory.FormattingEnabled = true;
+            cbSCategory.Items.AddRange(new object[] { "" });
             cbSCategory.Location = new Point(374, 26);
             cbSCategory.Name = "cbSCategory";
             cbSCategory.Size = new Size(151, 28);
             cbSCategory.TabIndex = 2;
+            cbSCategory.SelectedIndexChanged += cbSCategory_SelectedIndexChanged;
             // 
             // label2
             // 

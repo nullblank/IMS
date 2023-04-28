@@ -17,7 +17,7 @@ namespace IMS.src
             _session = session;
         }
 
-        public bool AddDelivery(string code, string supplier, string date, string branch, string cost, int quantiddie)
+        public bool AddDelivery(string code, string supplier, string date, string branch, string cost, int quantity)
         {
             string query = "INSERT INTO IMS_STOC (STOC_COD, STOC_SUP, STOC_DTE, STOC_BRA, STOC_COS, STOC_QTY)" +
                 $"VALUES ()";

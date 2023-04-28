@@ -1,9 +1,13 @@
 ﻿using IMS.DBHandler;
 using IMS.src;
+using Mysqlx.Crud;
+using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
@@ -24,8 +28,27 @@ namespace IMS.forms.Deliveries
             _handler = handler;
             _session = session;
             deliveries = new DelItem(_handler, _session);
+            InitData();
+        }
+        private void InitData()
+        {
+            this.GetColumnData("IMS_RFN_SCAT", "SCAT_DES", cbCategory);
+            this.GetColumnData("IMS_RFN_SCA", "SCA_DES", cbSCategory);
+
+            this.GetColumnData("IMS_RFN_SUP", "SUP_DES", cbSupplier);
         }
 
+        private void GetColumnData(string table, string column, ComboBox cb)
+        {
+            using (SqlDataReader reader = _handler.GetColumnData(table, column))
+            {
+                while (reader.Read())
+                {
+                    string value = reader.GetString(0);
+                    cb.Items.Add(value);
+                }
+            }
+        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -33,7 +56,8 @@ namespace IMS.forms.Deliveries
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (deliveries.AddDelivery())
+            /*
+            if (/deliveries.AddDelivery())
             {
                 MessageBox.Show("Delivery Item Added!");
                 //Audit
@@ -42,6 +66,43 @@ namespace IMS.forms.Deliveries
             {
                 MessageBox.Show("Error adding Item!");
             }
+            */
+        }
+
+        private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.ChkItems();
+        }
+
+        private void GetItems(string category, string sCategory)
+        {
+            using (SqlDataReader reader = _handler.GetCode("IMS_SITE", "SITE_DES", category, sCategory))
+            {
+                while (reader.Read())
+                {
+                    string value = reader.GetString(0);
+                    cbItem.Items.Add(value);
+                }
+            }
+        }
+
+        private void ChkItems()
+        {
+            cbItem.Items.Clear();
+            cbItem.Text = "";
+            if (String.IsNullOrEmpty(cbSCategory.Text))
+            {
+                this.GetItems(cbCategory.Text, null);
+            }
+            else
+            {
+                this.GetItems(cbCategory.Text, cbSCategory.Text);
+            }
+        }
+
+        private void cbSCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.ChkItems();
         }
     }
 }
