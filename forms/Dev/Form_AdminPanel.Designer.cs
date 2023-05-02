@@ -39,9 +39,10 @@
             btnSUP = new Button();
             btnMasterList = new Button();
             groupBox1 = new GroupBox();
+            btnDeliveries = new Button();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
-            btnDeliveries = new Button();
+            btnBranch = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -62,7 +63,7 @@
             // 
             btnLogout.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnLogout.Location = new Point(59, 494);
+            btnLogout.Location = new Point(59, 515);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(259, 30);
             btnLogout.TabIndex = 1;
@@ -84,7 +85,6 @@
             // 
             // btnSCAT
             // 
-            btnSCAT.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCAT.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnSCAT.Location = new Point(6, 26);
             btnSCAT.Name = "btnSCAT";
@@ -96,7 +96,6 @@
             // 
             // btnSCA
             // 
-            btnSCA.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCA.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnSCA.Location = new Point(6, 62);
             btnSCA.Name = "btnSCA";
@@ -108,7 +107,6 @@
             // 
             // btnSCOL
             // 
-            btnSCOL.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSCOL.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnSCOL.Location = new Point(6, 98);
             btnSCOL.Name = "btnSCOL";
@@ -120,7 +118,6 @@
             // 
             // btnSUNT
             // 
-            btnSUNT.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSUNT.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnSUNT.Location = new Point(6, 134);
             btnSUNT.Name = "btnSUNT";
@@ -132,7 +129,6 @@
             // 
             // btnOFF
             // 
-            btnOFF.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnOFF.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnOFF.Location = new Point(6, 170);
             btnOFF.Name = "btnOFF";
@@ -144,7 +140,6 @@
             // 
             // btnSUP
             // 
-            btnSUP.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSUP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnSUP.Location = new Point(6, 206);
             btnSUP.Name = "btnSUP";
@@ -178,31 +173,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Main";
             // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(btnSCAT);
-            groupBox2.Controls.Add(btnSCA);
-            groupBox2.Controls.Add(btnSCOL);
-            groupBox2.Controls.Add(btnSUNT);
-            groupBox2.Controls.Add(btnSUP);
-            groupBox2.Controls.Add(btnOFF);
-            groupBox2.Location = new Point(53, 158);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(272, 246);
-            groupBox2.TabIndex = 14;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "References";
-            // 
-            // groupBox3
-            // 
-            groupBox3.Controls.Add(btnLogs);
-            groupBox3.Location = new Point(53, 410);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(272, 63);
-            groupBox3.TabIndex = 15;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Misc.";
-            // 
             // btnDeliveries
             // 
             btnDeliveries.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -215,11 +185,48 @@
             btnDeliveries.UseVisualStyleBackColor = true;
             btnDeliveries.Click += btnDeliveries_Click;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btnBranch);
+            groupBox2.Controls.Add(btnSCAT);
+            groupBox2.Controls.Add(btnSCA);
+            groupBox2.Controls.Add(btnSCOL);
+            groupBox2.Controls.Add(btnSUNT);
+            groupBox2.Controls.Add(btnSUP);
+            groupBox2.Controls.Add(btnOFF);
+            groupBox2.Location = new Point(53, 158);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(272, 282);
+            groupBox2.TabIndex = 14;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "References";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(btnLogs);
+            groupBox3.Location = new Point(53, 446);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(272, 63);
+            groupBox3.TabIndex = 15;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Misc.";
+            // 
+            // btnBranch
+            // 
+            btnBranch.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnBranch.Location = new Point(6, 242);
+            btnBranch.Name = "btnBranch";
+            btnBranch.Size = new Size(259, 30);
+            btnBranch.TabIndex = 16;
+            btnBranch.Text = "Manage Branches";
+            btnBranch.UseVisualStyleBackColor = true;
+            btnBranch.Click += btnBranch_Click;
+            // 
             // Form_AdminPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(378, 591);
+            ClientSize = new Size(378, 636);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -251,5 +258,6 @@
         private GroupBox groupBox2;
         private GroupBox groupBox3;
         private Button btnDeliveries;
+        private Button btnBranch;
     }
 }

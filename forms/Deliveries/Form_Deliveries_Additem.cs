@@ -35,6 +35,7 @@ namespace IMS.forms.Deliveries
             this.GetColumnData("IMS_RFN_SCAT", "SCAT_DES", cbCategory);
             this.GetColumnData("IMS_RFN_SCA", "SCA_DES", cbSCategory);
             this.GetColumnData("IMS_RFN_SUP", "SUP_DES", cbSupplier);
+            this.GetColumnData("IMS_RFN_BRA", "BRA_DES", cbBranch);
         }
 
         private void GetColumnData(string table, string column, ComboBox cb)
@@ -59,8 +60,9 @@ namespace IMS.forms.Deliveries
             int amount = Int32.Parse(txtAmount.Text);
             string supplier = cbSupplier.Text;
             int cost = Int32.Parse(txtCost.Text);
+            string branch = cbBranch.Text;
 
-            if (deliveries.AddDelivery(itemCode, amount, supplier, cost))
+            if (deliveries.AddDelivery(itemCode, amount, supplier, branch, cost))
             {
                 MessageBox.Show("Delivery Item Added!");
                 //Audit

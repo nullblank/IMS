@@ -28,7 +28,15 @@ namespace IMS.forms
         public void InitData()
         {
             DataTable results = new DataTable();
-            string query = "SELECT * FROM IMS_STOC";
+            string query = "SELECT " +
+                "IMS_STOC.STOC_IDX," +
+                "IMS_SITE.SITE_DES," +
+                "IMS_STOC.STOC_DTE," +
+                "IMS_STOC.STOC_BRA," +
+                "IMS_STOC.STOC_COS," +
+                "IMS_STOC.STOC_QTY " +
+                "FROM IMS_STOC " +
+                "JOIN IMS_SITE ON IMS_STOC.STOC_COD = IMS_SITE.SITE_COD";
             dgvDeliveries.DataSource = _handler.ExecuteQuery(query);
         }
 

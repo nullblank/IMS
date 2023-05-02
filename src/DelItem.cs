@@ -17,10 +17,10 @@ namespace IMS.src
             _session = session;
         }
 
-        public bool AddDelivery(string itemCode, int amount, string supplier, int cost)
+        public bool AddDelivery(string itemCode, int amount, string supplier, string branch,  int cost)
         {
             string query = "INSERT INTO IMS_STOC (STOC_COD, STOC_SUP, STOC_BRA, STOC_COS, STOC_QTY)" +
-                $"VALUES ('{itemCode}', '{supplier}', '{/*Branch goes here*/}', {cost}, {amount})";
+                $"VALUES ('{itemCode}', '{supplier}', '{branch}', {cost}, {amount})";
             if (_handler.ExecuteNonQuery(query) == 0)
             {
                 return false;

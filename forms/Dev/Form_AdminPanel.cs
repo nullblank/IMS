@@ -142,5 +142,10 @@ namespace IMS.forms
             Form_Deliveries form = new Form_Deliveries(_handler, _session);
             form.Show();
         }
+
+        private void btnBranch_Click(object sender, EventArgs e)
+        {
+            ReferenceContainer("IMS_RFN_BRA");
+        }
     }
 }

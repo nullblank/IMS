@@ -31,6 +31,8 @@
             cbCategory = new ComboBox();
             label1 = new Label();
             groupBox1 = new GroupBox();
+            cbBranch = new ComboBox();
+            label7 = new Label();
             txtAmount = new TextBox();
             label4 = new Label();
             cbItem = new ComboBox();
@@ -68,6 +70,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(cbBranch);
+            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(txtAmount);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(cbItem);
@@ -78,22 +82,39 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(756, 103);
+            groupBox1.Size = new Size(756, 98);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Item Details";
             // 
+            // cbBranch
+            // 
+            cbBranch.FormattingEnabled = true;
+            cbBranch.Location = new Point(599, 60);
+            cbBranch.Name = "cbBranch";
+            cbBranch.Size = new Size(151, 28);
+            cbBranch.TabIndex = 8;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(539, 63);
+            label7.Name = "label7";
+            label7.Size = new Size(54, 20);
+            label7.TabIndex = 9;
+            label7.Text = "Branch";
+            // 
             // txtAmount
             // 
-            txtAmount.Location = new Point(614, 60);
+            txtAmount.Location = new Point(599, 27);
             txtAmount.Name = "txtAmount";
-            txtAmount.Size = new Size(125, 27);
+            txtAmount.Size = new Size(151, 27);
             txtAmount.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(546, 63);
+            label4.Location = new Point(531, 30);
             label4.Name = "label4";
             label4.Size = new Size(62, 20);
             label4.TabIndex = 7;
@@ -141,7 +162,7 @@
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(cbSupplier);
             groupBox2.Controls.Add(label5);
-            groupBox2.Location = new Point(12, 121);
+            groupBox2.Location = new Point(12, 116);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(756, 67);
             groupBox2.TabIndex = 3;
@@ -150,15 +171,15 @@
             // 
             // txtCost
             // 
-            txtCost.Location = new Point(614, 26);
+            txtCost.Location = new Point(599, 26);
             txtCost.Name = "txtCost";
-            txtCost.Size = new Size(125, 27);
+            txtCost.Size = new Size(151, 27);
             txtCost.TabIndex = 8;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(570, 29);
+            label6.Location = new Point(555, 29);
             label6.Name = "label6";
             label6.Size = new Size(38, 20);
             label6.TabIndex = 9;
@@ -183,7 +204,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(574, 194);
+            btnSave.Location = new Point(574, 189);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 38);
             btnSave.TabIndex = 4;
@@ -193,7 +214,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(674, 194);
+            btnCancel.Location = new Point(674, 189);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(94, 38);
             btnCancel.TabIndex = 5;
@@ -205,7 +226,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(780, 244);
+            ClientSize = new Size(780, 240);
             Controls.Add(btnCancel);
             Controls.Add(btnSave);
             Controls.Add(groupBox2);
@@ -237,5 +258,7 @@
         private Label label5;
         private Button btnSave;
         private Button btnCancel;
+        private ComboBox cbBranch;
+        private Label label7;
     }
 }
