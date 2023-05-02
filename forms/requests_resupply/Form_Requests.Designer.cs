@@ -1,6 +1,6 @@
 ﻿namespace IMS.forms.requests_resupply
 {
-    partial class Requests
+    partial class Form_Requests
     {
         /// <summary>
         /// Required designer variable.
@@ -171,6 +171,7 @@
             btnResupply.TabIndex = 6;
             btnResupply.Text = "Request Resupply";
             btnResupply.UseVisualStyleBackColor = true;
+            btnResupply.Click += btnResupply_Click;
             // 
             // btnCancelResupply
             // 
@@ -202,7 +203,7 @@
             dgvItemsRequested.Size = new Size(544, 264);
             dgvItemsRequested.TabIndex = 3;
             // 
-            // Requests
+            // Form_Requests
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -211,7 +212,7 @@
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Name = "Requests";
+            Name = "Form_Requests";
             Text = "Requests";
             Load += Requests_Load;
             ((System.ComponentModel.ISupportInitialize)dgvRequests).EndInit();

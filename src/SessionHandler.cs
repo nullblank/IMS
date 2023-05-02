@@ -25,11 +25,13 @@ namespace IMS.src
         {
             GenerateSessionID();
             DataTable results = handler.ExecuteQuery($"SELECT * FROM IMS_RFN_ROL WHERE ROL_COD  = '{role.ToString()}'");
-            _username = username;
             _role = results.Rows[0][2].ToString();
             results = handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME  = '{username}'");
+            _username = username;
             _userId = results.Rows[0][0].ToString();
-            _office = results.Rows[0][3].ToString();
+            _office = results.Rows[0][5].ToString();
+            results = handler.ExecuteQuery($"SELECT * FROM IMS_RFN_OFF WHERE OFF_COD  = '{_office}'");
+            _office = results.Rows[0][2].ToString();
         }
         public bool SessionExists()
         {

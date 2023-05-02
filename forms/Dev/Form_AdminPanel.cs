@@ -1,4 +1,5 @@
 ﻿using IMS.DBHandler;
+using IMS.forms.requests_resupply;
 using IMS.src;
 using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.VisualBasic.Devices;
@@ -146,6 +147,12 @@ namespace IMS.forms
         private void btnBranch_Click(object sender, EventArgs e)
         {
             ReferenceContainer("IMS_RFN_BRA");
+        }
+
+        private void btnResupply_Click(object sender, EventArgs e)
+        {
+            Form_Requests form = new Form_Requests(_handler, _session);
+            form.Show();
         }
     }
 }
