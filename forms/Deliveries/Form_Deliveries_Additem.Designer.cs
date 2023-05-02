@@ -52,6 +52,7 @@
             // 
             // cbCategory
             // 
+            cbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cbCategory.FormattingEnabled = true;
             cbCategory.Location = new Point(101, 26);
             cbCategory.Name = "cbCategory";
@@ -89,6 +90,7 @@
             // 
             // cbBranch
             // 
+            cbBranch.DropDownStyle = ComboBoxStyle.DropDownList;
             cbBranch.FormattingEnabled = true;
             cbBranch.Location = new Point(599, 60);
             cbBranch.Name = "cbBranch";
@@ -110,6 +112,7 @@
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(151, 27);
             txtAmount.TabIndex = 4;
+            txtAmount.KeyPress += txtAmount_KeyPress;
             // 
             // label4
             // 
@@ -122,6 +125,7 @@
             // 
             // cbItem
             // 
+            cbItem.DropDownStyle = ComboBoxStyle.DropDownList;
             cbItem.FormattingEnabled = true;
             cbItem.Location = new Point(101, 60);
             cbItem.Name = "cbItem";
@@ -139,6 +143,7 @@
             // 
             // cbSCategory
             // 
+            cbSCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cbSCategory.FormattingEnabled = true;
             cbSCategory.Items.AddRange(new object[] { "" });
             cbSCategory.Location = new Point(374, 26);
@@ -187,6 +192,7 @@
             // 
             // cbSupplier
             // 
+            cbSupplier.DropDownStyle = ComboBoxStyle.DropDownList;
             cbSupplier.FormattingEnabled = true;
             cbSupplier.Location = new Point(101, 26);
             cbSupplier.Name = "cbSupplier";

@@ -238,5 +238,12 @@ namespace IMS.forms
             _orgpassword = txtPassword.Text;
         }
 
+        private void txtID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

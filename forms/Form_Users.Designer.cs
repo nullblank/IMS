@@ -147,6 +147,7 @@
             txtID.ReadOnly = true;
             txtID.Size = new Size(151, 27);
             txtID.TabIndex = 10;
+            txtID.KeyPress += txtID_KeyPress;
             // 
             // txtUsername
             // 

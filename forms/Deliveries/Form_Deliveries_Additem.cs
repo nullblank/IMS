@@ -64,7 +64,32 @@ namespace IMS.forms.Deliveries
             int cost = Int32.Parse(txtCost.Text);
             string branch = cbBranch.Text;
 
-            if (deliveries.AddDelivery(itemCode, amount, supplier, branch, cost))
+            if (string.IsNullOrEmpty(cbItem.Text))
+            {
+                MessageBox.Show("Select an item!");
+                return;
+            }
+            else if (string.IsNullOrEmpty(txtAmount.Text))
+            {
+                MessageBox.Show("Enter an amount!");
+                return;
+            }
+            else if (string.IsNullOrEmpty(cbBranch.Text))
+            {
+                MessageBox.Show("Please select a branch!");
+                return;
+            }
+            else if (string.IsNullOrEmpty(cbSupplier.Text))
+            {
+                MessageBox.Show("Please select a supplier!");
+                return;
+            }
+            else if (string.IsNullOrEmpty(txtCost.Text))
+            {
+                MessageBox.Show("Enter the item's cost!");
+                return;
+            }
+            else if (deliveries.AddDelivery(itemCode, amount, supplier, branch, cost))
             {
                 MessageBox.Show("Delivery Item Added!");
                 Audit audit = new Audit(_handler);
@@ -125,6 +150,14 @@ namespace IMS.forms.Deliveries
         private void cbSCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.ChkItems();
+        }
+
+        private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

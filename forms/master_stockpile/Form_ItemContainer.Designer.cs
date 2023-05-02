@@ -92,9 +92,11 @@
             txtCode.Name = "txtCode";
             txtCode.Size = new Size(151, 27);
             txtCode.TabIndex = 0;
+            txtCode.KeyPress += txtCode_KeyPress;
             // 
             // cbColor
             // 
+            cbColor.DropDownStyle = ComboBoxStyle.DropDownList;
             cbColor.FormattingEnabled = true;
             cbColor.Items.AddRange(new object[] { "--" });
             cbColor.Location = new Point(458, 73);
@@ -113,6 +115,7 @@
             // 
             // cbUnit
             // 
+            cbUnit.DropDownStyle = ComboBoxStyle.DropDownList;
             cbUnit.FormattingEnabled = true;
             cbUnit.Items.AddRange(new object[] { "--" });
             cbUnit.Location = new Point(187, 73);
@@ -131,6 +134,7 @@
             // 
             // cbSCategory
             // 
+            cbSCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cbSCategory.FormattingEnabled = true;
             cbSCategory.Items.AddRange(new object[] { "--" });
             cbSCategory.Location = new Point(458, 39);
@@ -149,6 +153,7 @@
             // 
             // cbCategory
             // 
+            cbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cbCategory.FormattingEnabled = true;
             cbCategory.Items.AddRange(new object[] { "--" });
             cbCategory.Location = new Point(187, 39);
