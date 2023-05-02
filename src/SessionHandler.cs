@@ -16,6 +16,7 @@ namespace IMS.src
         string _userId;
         string _username;
         string _role;
+        string _office;
         public SessionHandler()
         {
             //Something something...
@@ -28,6 +29,7 @@ namespace IMS.src
             _role = results.Rows[0][2].ToString();
             results = handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME  = '{username}'");
             _userId = results.Rows[0][0].ToString();
+            _office = results.Rows[0][3].ToString();
         }
         public bool SessionExists()
         {
@@ -48,6 +50,10 @@ namespace IMS.src
         public string GetSessionID()
         {
             return _session;
+        }
+        public string GetOffice()
+        {
+            return _office;
         }
         public void DestroySession()
         {

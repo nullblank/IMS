@@ -58,48 +58,50 @@ namespace IMS.forms.Deliveries
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string itemCode = this.GetItemCode(cbItem.Text);
-            int amount = Int32.Parse(txtAmount.Text);
-            string supplier = cbSupplier.Text;
-            int cost = Int32.Parse(txtCost.Text);
-            string branch = cbBranch.Text;
-
-            if (string.IsNullOrEmpty(cbItem.Text))
+            if (string.IsNullOrEmpty(cbItem.Text) || cbItem.Text == "")
             {
                 MessageBox.Show("Select an item!");
                 return;
             }
-            else if (string.IsNullOrEmpty(txtAmount.Text))
+            else if (string.IsNullOrEmpty(txtAmount.Text) || txtAmount.Text == "")
             {
                 MessageBox.Show("Enter an amount!");
                 return;
             }
-            else if (string.IsNullOrEmpty(cbBranch.Text))
+            else if (string.IsNullOrEmpty(cbBranch.Text) || cbBranch.Text == "")
             {
                 MessageBox.Show("Please select a branch!");
                 return;
             }
-            else if (string.IsNullOrEmpty(cbSupplier.Text))
+            else if (string.IsNullOrEmpty(cbSupplier.Text) || cbSupplier.Text == "")
             {
                 MessageBox.Show("Please select a supplier!");
                 return;
             }
-            else if (string.IsNullOrEmpty(txtCost.Text))
+            else if (string.IsNullOrEmpty(txtCost.Text) || txtCost.Text == "")
             {
                 MessageBox.Show("Enter the item's cost!");
                 return;
             }
-            else if (deliveries.AddDelivery(itemCode, amount, supplier, branch, cost))
-            {
-                MessageBox.Show("Delivery Item Added!");
-                Audit audit = new Audit(_handler);
-                audit.LogUserAction($"Added Delivery. Item: {itemCode}, Amount: {amount}, Supplier: {supplier}, Branch: {branch}, Cost: {cost}", _session);
-                _form.InitData();
-                this.Close();
-            }
             else
             {
-                MessageBox.Show("Error adding Item!");
+                string itemCode = this.GetItemCode(cbItem.Text);
+                int amount = Int32.Parse(txtAmount.Text);
+                string supplier = cbSupplier.Text;
+                int cost = Int32.Parse(txtCost.Text);
+                string branch = cbBranch.Text;
+                if (deliveries.AddDelivery(itemCode, amount, supplier, branch, cost))
+                {
+                    MessageBox.Show("Delivery Item Added!");
+                    Audit audit = new Audit(_handler);
+                    audit.LogUserAction($"Added Delivery. Item: {itemCode}, Amount: {amount}, Supplier: {supplier}, Branch: {branch}, Cost: {cost}", _session);
+                    _form.InitData();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Error adding Item!");
+                }
             }
         }
 

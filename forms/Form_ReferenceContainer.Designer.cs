@@ -70,6 +70,7 @@
             txtCode.ReadOnly = true;
             txtCode.Size = new Size(125, 27);
             txtCode.TabIndex = 2;
+            txtCode.KeyPress += txtCode_KeyPress;
             // 
             // txtDescription
             // 
