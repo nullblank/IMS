@@ -29,12 +29,13 @@ namespace IMS.forms
         {
             DataTable results = new DataTable();
             string query = "SELECT " +
-                "IMS_STOC.STOC_IDX," +
-                "IMS_SITE.SITE_DES," +
-                "IMS_STOC.STOC_DTE," +
-                "IMS_STOC.STOC_BRA," +
-                "IMS_STOC.STOC_COS," +
-                "IMS_STOC.STOC_QTY " +
+                "IMS_STOC.STOC_IDX AS Stock_Index," +
+                "IMS_SITE.SITE_DES AS Stock_Description," +
+                "IMS_STOC.STOC_SUP AS Stock_Supplier," +
+                "IMS_STOC.STOC_DTE AS Stock_DateCreated," +
+                "IMS_STOC.STOC_BRA AS Stock_Branch," +
+                "IMS_STOC.STOC_COS AS Stock_Cost," +
+                "IMS_STOC.STOC_QTY AS Stock_Quantity " +
                 "FROM IMS_STOC " +
                 "JOIN IMS_SITE ON IMS_STOC.STOC_COD = IMS_SITE.SITE_COD";
             dgvDeliveries.DataSource = _handler.ExecuteQuery(query);
@@ -42,7 +43,7 @@ namespace IMS.forms
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Form_Deliveries_Additem form = new Form_Deliveries_Additem(_handler, _session);
+            Form_Deliveries_Additem form = new Form_Deliveries_Additem(_handler, _session, this);
             form.Show();
         }
     }

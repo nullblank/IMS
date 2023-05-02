@@ -53,7 +53,7 @@
             dgvStockpile.Name = "dgvStockpile";
             dgvStockpile.RowHeadersWidth = 51;
             dgvStockpile.RowTemplate.Height = 29;
-            dgvStockpile.Size = new Size(935, 437);
+            dgvStockpile.Size = new Size(1050, 437);
             dgvStockpile.TabIndex = 0;
             dgvStockpile.CellClick += dgvStockpile_CellClick;
             // 
@@ -168,7 +168,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(959, 594);
+            ClientSize = new Size(1074, 594);
             Controls.Add(label1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);

@@ -21,12 +21,14 @@ namespace IMS.forms.Deliveries
     {
         DatabaseHandler _handler;
         SessionHandler _session;
+        Form_Deliveries _form;
         DelItem deliveries;
-        public Form_Deliveries_Additem(DatabaseHandler handler, SessionHandler session)
+        public Form_Deliveries_Additem(DatabaseHandler handler, SessionHandler session, Form_Deliveries form)
         {
             InitializeComponent();
             _handler = handler;
             _session = session;
+            _form = form;
             deliveries = new DelItem(_handler, _session);
             InitData();
         }
@@ -65,7 +67,10 @@ namespace IMS.forms.Deliveries
             if (deliveries.AddDelivery(itemCode, amount, supplier, branch, cost))
             {
                 MessageBox.Show("Delivery Item Added!");
-                //Audit
+                Audit audit = new Audit(_handler);
+                audit.LogUserAction($"Added Delivery. Item: {itemCode}, Amount: {amount}, Supplier: {supplier}, Branch: {branch}, Cost: {cost}", _session);
+                _form.InitData();
+                this.Close();
             }
             else
             {
