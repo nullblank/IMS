@@ -40,10 +40,6 @@
             btnCancel = new Button();
             btnAdd = new Button();
             lvItems = new ListView();
-            columnHeader1 = new ColumnHeader();
-            columnHeader2 = new ColumnHeader();
-            columnHeader3 = new ColumnHeader();
-            columnHeader4 = new ColumnHeader();
             btnRequest = new Button();
             btnRemove = new Button();
             groupBox1.SuspendLayout();
@@ -160,28 +156,12 @@
             // 
             // lvItems
             // 
-            lvItems.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            lvItems.FullRowSelect = true;
             lvItems.Location = new Point(12, 12);
             lvItems.Name = "lvItems";
             lvItems.Size = new Size(757, 204);
             lvItems.TabIndex = 8;
             lvItems.UseCompatibleStateImageBehavior = false;
-            // 
-            // columnHeader1
-            // 
-            columnHeader1.Text = "Order ID";
-            // 
-            // columnHeader2
-            // 
-            columnHeader2.Text = "Order Item Name";
-            // 
-            // columnHeader3
-            // 
-            columnHeader3.Text = "Order Amount";
-            // 
-            // columnHeader4
-            // 
-            columnHeader4.Text = "Order Cost";
             // 
             // btnRequest
             // 
@@ -200,6 +180,7 @@
             btnRemove.TabIndex = 10;
             btnRemove.Text = "Remove";
             btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += btnRemove_Click;
             // 
             // Form_Resupply
             // 
@@ -233,10 +214,6 @@
         private Button btnCancel;
         private Button btnAdd;
         private ListView lvItems;
-        private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader2;
-        private ColumnHeader columnHeader3;
-        private ColumnHeader columnHeader4;
         private Button btnRequest;
         private Button btnRemove;
     }
