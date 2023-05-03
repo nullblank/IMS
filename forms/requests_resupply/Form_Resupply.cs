@@ -29,7 +29,6 @@ namespace IMS.forms.requests_resupply
         {
             this.GetColumnData("IMS_RFN_SCAT", "SCAT_DES", cbCategory);
             this.GetColumnData("IMS_RFN_SCA", "SCA_DES", cbSCategory);
-            this.GetColumnData("IMS_RFN_BRA", "BRA_DES", cbBranch);
         }
 
         private void GetColumnData(string table, string column, ComboBox cb)
@@ -71,6 +70,21 @@ namespace IMS.forms.requests_resupply
         }
 
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.ChkItems();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            AddToList();
+        }
+
+        private void AddToList()
+        {
+            lvItems.Items.Add("Test");//Add items to the container then have code iterate over each one of them for INSERT to the database
+        }
+
+        private void cbSCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.ChkItems();
         }
