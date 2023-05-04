@@ -122,10 +122,9 @@ namespace IMS.forms.Deliveries
         {
             this.ChkItems();
         }
-
         private void GetItems(string category, string sCategory)
         {
-            using (SqlDataReader reader = _handler.GetCode("IMS_SITE", "SITE_DES", category, sCategory))
+            using (SqlDataReader reader = _handler.GetCode("IMS_SITE", category, sCategory))
             {
                 while (reader.Read())
                 {
@@ -134,7 +133,6 @@ namespace IMS.forms.Deliveries
                 }
             }
         }
-
         private void ChkItems()
         {
             cbItem.Items.Clear();

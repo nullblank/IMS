@@ -122,13 +122,35 @@ namespace IMS.DBHandler
             }
             finally { CloseConnection(); }
         }
-
+        //==================================================================================================
+        //==================================================================================================
+        //==================================================================================================
+        //==================================================================================================
+        //==================================================================================================
         public SqlDataReader GetColumnData(string table, string column)
         {
             try
             {
                 OpenConnection() ;
                 using (SqlCommand command = new SqlCommand($"SELECT {column} FROM {table}", _connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    return reader;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error at GetColumnData: {ex.Message}");
+                return null;
+            }
+        }
+
+        public SqlDataReader GetTableData(string table)
+        {
+            try
+            {
+                OpenConnection();
+                using (SqlCommand command = new SqlCommand($"SELECT * FROM {table}", _connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
                     return reader;
@@ -184,14 +206,14 @@ namespace IMS.DBHandler
             }
         }
 
-        public SqlDataReader GetCode(string table, string column, string category, string scategory)
+        public SqlDataReader GetCode(string table, string category, string scategory)
         {
             try
             {
                 OpenConnection();
                 if (String.IsNullOrEmpty(scategory))
                 {
-                    using (SqlCommand command = new SqlCommand($"SELECT {column} FROM {table} WHERE SITE_SCAT = '{category}'", _connection))
+                    using (SqlCommand command = new SqlCommand($"SELECT * FROM {table} WHERE SITE_SCAT = '{category}'", _connection))
                     {
                         SqlDataReader reader = command.ExecuteReader();
                         return reader;
@@ -199,7 +221,7 @@ namespace IMS.DBHandler
                 }
                 else
                 {
-                    using (SqlCommand command = new SqlCommand($"SELECT {column} FROM {table} WHERE SITE_SCAT = '{category}' AND SITE_SCA = '{scategory}'", _connection))
+                    using (SqlCommand command = new SqlCommand($"SELECT * FROM {table} WHERE SITE_SCAT = '{category}' AND SITE_SCA = '{scategory}'", _connection))
                     {
                         SqlDataReader reader = command.ExecuteReader();
                         return reader;

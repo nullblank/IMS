@@ -34,7 +34,7 @@ namespace IMS.forms
                 "IMS_STOC.STOC_SUP AS Stock_Supplier," +
                 "IMS_STOC.STOC_DTE AS Stock_DateCreated," +
                 "IMS_STOC.STOC_BRA AS Stock_Branch," +
-                "IMS_STOC.STOC_COS AS Stock_Cost," +
+                "IMS_STOC.STOC_COS AS Stock_CPI," +
                 "IMS_STOC.STOC_QTY AS Stock_Quantity " +
                 "FROM IMS_STOC " +
                 "JOIN IMS_SITE ON IMS_STOC.STOC_COD = IMS_SITE.SITE_COD";

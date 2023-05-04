@@ -20,9 +20,11 @@ namespace IMS.forms.requests_resupply
         DatabaseHandler _handler;
         SessionHandler _session;
         DataTable _table;
+        DataTable _request;
         DataTable _codes;
         public Form_Resupply(DatabaseHandler handler, SessionHandler session)
         {
+            _table = handler.ExecuteQuery("SELECT * FROM IMS_SITE");
             _handler = handler;
             _session = session;
             InitializeComponent();
@@ -31,24 +33,19 @@ namespace IMS.forms.requests_resupply
 
         private void InitData()
         {
-            DataTable table = new DataTable();
-            table.Columns.Add("Item_Code");
-            table.Columns.Add("Item_Name");
-            table.Columns.Add("Amount");
             lvItems.Columns.Add("Item Code");
             lvItems.Columns[0].Width = 100;
             lvItems.Columns.Add("Item Name");
             lvItems.Columns[1].Width = 400;
             lvItems.Columns.Add("Amount");
             lvItems.Columns[2].Width = 100;
-            _table = table;
-            this.GetColumnData("IMS_RFN_SCAT", "SCAT_DES", cbCategory);
-            this.GetColumnData("IMS_RFN_SCA", "SCA_DES", cbSCategory);
+            this.GetColumnData("IMS_RFN_SCAT", cbCategory);
+            this.GetColumnData("IMS_RFN_SCA", cbSCategory);
         }
 
-        private void GetColumnData(string table, string column, System.Windows.Forms.ComboBox cb)
+        private void GetColumnData(string table, System.Windows.Forms.ComboBox cb)
         {
-            using (SqlDataReader reader = _handler.GetColumnData(table, column))
+            using (SqlDataReader reader = _handler.GetTableData(table))
             {
                 while (reader.Read())
                 {
@@ -57,7 +54,7 @@ namespace IMS.forms.requests_resupply
                     //for example, if the first (0) item added was about paperReams which has a code of 2
                     //if a user selects index 0, then code is = 2
                     //
-                    string value = reader.GetString(0);
+                    string value = reader.GetString(2);
                     cb.Items.Add(value);
                 }
             }
@@ -67,7 +64,6 @@ namespace IMS.forms.requests_resupply
         {
             cbItem.Items.Clear();
             cbItem.Text = "";
-            cbItem.Items.Add("");
             if (String.IsNullOrEmpty(cbSCategory.Text))
             {
                 this.GetItems(cbCategory.Text, null);
@@ -80,13 +76,15 @@ namespace IMS.forms.requests_resupply
 
         private void GetItems(string category, string sCategory)
         {
-            using (SqlDataReader reader = _handler.GetCode("IMS_SITE", "SITE_DES", category, sCategory))
+            _table = new DataTable();
+            _table.Columns.Add("Item_Code");
+            _table.Columns.Add("Item_Name");
+            using (SqlDataReader reader = _handler.GetCode("IMS_SITE", category, sCategory))
             {
                 while (reader.Read())
                 {
-                    string value = reader.GetString(0);
-                    cbItem.Items.Add(value);
-                    //add to datatable of both item des and item code
+                    _table.Rows.Add(reader.GetString(1), reader.GetString(2));
+                    cbItem.Items.Add(reader.GetString(2));
                 }
             }
         }
@@ -112,22 +110,24 @@ namespace IMS.forms.requests_resupply
                 cbCategory.SelectedIndex = 0;
                 cbSCategory.SelectedIndex = 0;
                 txtAmount.Text = "";
-                cbItem.SelectedIndex = 0;
             }
 
         }
 
         private void AddToList()
         {
-            _table = new DataTable();
-            _table.Columns.Add("Item_Code");
-            _table.Columns.Add("Item_Name");
-            _table.Columns.Add("Amount");
-            _table.Rows.Add(cbItem.Text, txtAmount.Text);
+            _request = new DataTable();
+            _request.Columns.Add("Item_Code");
+            _request.Columns.Add("Item_Name");
+            _request.Columns.Add("Amount");
+            DataRow data = _table.Rows[cbItem.SelectedIndex];
+            _request.Rows.Add(data[0].ToString(), data[1].ToString(), txtAmount.Text);
             lvItems.View = View.Details;
-            foreach (DataRow row in _table.Rows)//update to include item code aswell
+            
+            foreach (DataRow row in _request.Rows)//update to include item code aswell
             {
-                ListViewItem item = new ListViewItem(row["Item_Name"].ToString());
+                ListViewItem item = new ListViewItem(row["Item_Code"].ToString());
+                item.SubItems.Add(row["Item_Name"].ToString());
                 item.SubItems.Add(row["Amount"].ToString());
                 lvItems.Items.Add(item);
             }

@@ -184,11 +184,11 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(555, 29);
+            label6.Location = new Point(500, 29);
             label6.Name = "label6";
-            label6.Size = new Size(38, 20);
+            label6.Size = new Size(93, 20);
             label6.TabIndex = 9;
-            label6.Text = "Cost";
+            label6.Text = "Cost Per Unit";
             // 
             // cbSupplier
             // 
@@ -196,7 +196,7 @@
             cbSupplier.FormattingEnabled = true;
             cbSupplier.Location = new Point(101, 26);
             cbSupplier.Name = "cbSupplier";
-            cbSupplier.Size = new Size(424, 28);
+            cbSupplier.Size = new Size(380, 28);
             cbSupplier.TabIndex = 6;
             // 
             // label5
