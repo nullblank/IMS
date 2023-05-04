@@ -18,6 +18,7 @@ namespace IMS.DBHandler
         private SqlConnection _connection;
         public DatabaseHandler()
         {
+            Form_Login form = new Form_Login();
             string server = ConfigurationManager.AppSettings["ServerName"];
             string database = ConfigurationManager.AppSettings["DatabaseName"];
             string username = ConfigurationManager.AppSettings["UserName"];

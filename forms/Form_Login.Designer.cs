@@ -35,6 +35,7 @@
             label1 = new Label();
             label2 = new Label();
             groupBox1 = new GroupBox();
+            cbDebug = new ComboBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -94,6 +95,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(cbDebug);
             groupBox1.Controls.Add(txtUsername);
             groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(label2);
@@ -106,6 +108,16 @@
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Enter your login";
+            // 
+            // cbDebug
+            // 
+            cbDebug.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbDebug.FormattingEnabled = true;
+            cbDebug.Items.AddRange(new object[] { "Public", "Local" });
+            cbDebug.Location = new Point(19, 139);
+            cbDebug.Name = "cbDebug";
+            cbDebug.Size = new Size(277, 28);
+            cbDebug.TabIndex = 6;
             // 
             // Form_Login
             // 
@@ -130,5 +142,6 @@
         private Label label1;
         private Label label2;
         private GroupBox groupBox1;
+        private ComboBox cbDebug;
     }
 }

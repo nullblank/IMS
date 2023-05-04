@@ -20,6 +20,7 @@ namespace IMS.forms.requests_resupply
         DatabaseHandler _handler;
         SessionHandler _session;
         DataTable _table;
+        DataTable _codes;
         public Form_Resupply(DatabaseHandler handler, SessionHandler session)
         {
             _handler = handler;
@@ -31,12 +32,15 @@ namespace IMS.forms.requests_resupply
         private void InitData()
         {
             DataTable table = new DataTable();
+            table.Columns.Add("Item_Code");
             table.Columns.Add("Item_Name");
             table.Columns.Add("Amount");
+            lvItems.Columns.Add("Item Code");
+            lvItems.Columns[0].Width = 100;
             lvItems.Columns.Add("Item Name");
-            lvItems.Columns[0].Width = 400;
+            lvItems.Columns[1].Width = 400;
             lvItems.Columns.Add("Amount");
-            lvItems.Columns[1].Width = 100;
+            lvItems.Columns[2].Width = 100;
             _table = table;
             this.GetColumnData("IMS_RFN_SCAT", "SCAT_DES", cbCategory);
             this.GetColumnData("IMS_RFN_SCA", "SCA_DES", cbSCategory);
@@ -48,6 +52,11 @@ namespace IMS.forms.requests_resupply
             {
                 while (reader.Read())
                 {
+                    //Everytime an item is added to the combo box, it links the selection to what item from
+                    //the stockpile is selected based on the index it was added to
+                    //for example, if the first (0) item added was about paperReams which has a code of 2
+                    //if a user selects index 0, then code is = 2
+                    //
                     string value = reader.GetString(0);
                     cb.Items.Add(value);
                 }
@@ -58,6 +67,7 @@ namespace IMS.forms.requests_resupply
         {
             cbItem.Items.Clear();
             cbItem.Text = "";
+            cbItem.Items.Add("");
             if (String.IsNullOrEmpty(cbSCategory.Text))
             {
                 this.GetItems(cbCategory.Text, null);
@@ -76,6 +86,7 @@ namespace IMS.forms.requests_resupply
                 {
                     string value = reader.GetString(0);
                     cbItem.Items.Add(value);
+                    //add to datatable of both item des and item code
                 }
             }
         }
@@ -87,17 +98,34 @@ namespace IMS.forms.requests_resupply
 
         private void btnSave_Click(object sender, EventArgs e) //Add
         {
-            AddToList();
+            if (string.IsNullOrEmpty(txtAmount.Text) || txtAmount.Text == "")
+            {
+                MessageBox.Show("Enter an amount!");
+            }
+            else if (string.IsNullOrEmpty(cbItem.Text) || cbItem.Text == "")
+            {
+                MessageBox.Show("Please select an item.");
+            }
+            else
+            {
+                AddToList();
+                cbCategory.SelectedIndex = 0;
+                cbSCategory.SelectedIndex = 0;
+                txtAmount.Text = "";
+                cbItem.SelectedIndex = 0;
+            }
+
         }
 
         private void AddToList()
         {
             _table = new DataTable();
+            _table.Columns.Add("Item_Code");
             _table.Columns.Add("Item_Name");
             _table.Columns.Add("Amount");
             _table.Rows.Add(cbItem.Text, txtAmount.Text);
             lvItems.View = View.Details;
-            foreach (DataRow row in _table.Rows)
+            foreach (DataRow row in _table.Rows)//update to include item code aswell
             {
                 ListViewItem item = new ListViewItem(row["Item_Name"].ToString());
                 item.SubItems.Add(row["Amount"].ToString());

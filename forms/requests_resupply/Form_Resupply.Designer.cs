@@ -82,6 +82,7 @@
             // 
             cbItem.DropDownStyle = ComboBoxStyle.DropDownList;
             cbItem.FormattingEnabled = true;
+            cbItem.Items.AddRange(new object[] { "" });
             cbItem.Location = new Point(101, 60);
             cbItem.Name = "cbItem";
             cbItem.Size = new Size(424, 28);
@@ -120,6 +121,7 @@
             // 
             cbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cbCategory.FormattingEnabled = true;
+            cbCategory.Items.AddRange(new object[] { "" });
             cbCategory.Location = new Point(101, 26);
             cbCategory.Name = "cbCategory";
             cbCategory.Size = new Size(151, 28);
