@@ -151,8 +151,8 @@ namespace IMS.forms.requests_resupply
         }
         private int GenerateRequestID()
         {
-            int length = 10;
-            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            int length = 9;
+            string chars = "0123456789";
             Random random = new Random();
             string randomString = new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
@@ -164,6 +164,12 @@ namespace IMS.forms.requests_resupply
             if (lvItems.Items.Count == 0)
             {
                 MessageBox.Show("Please add items to request first!");
+                return;
+            }
+            else if (string.IsNullOrEmpty(txtPurpose.Text) || txtPurpose.Text == "")
+            {
+                MessageBox.Show("Please state the purpose of your request");
+                return;
             }
             else
             {
@@ -175,13 +181,17 @@ namespace IMS.forms.requests_resupply
                     requestNumber = this.GenerateRequestID();
 
                 }
+                DateTime currentDate = DateTime.Now;
+                string query = "INSERT INTO IMS_SREQ (SREQ_SRN, SREQ_DTE, SREQ_PUR, SREQ_RQU, SREQ_OFF, SREQ_STAT) ";
+                string values = $"VALUES ({requestNumber}, '{currentDate}', '{txtPurpose.Text}', '{_session.GetSessionUsername()}', '{_session.GetOffice()}', 'Pending')";
+                _handler.ExecuteNonQuery(query + values);
                 foreach (ListViewItem item in lvItems.Items)
                 {
-                    DateTime currentDate = DateTime.Now;
-                    string query = "INSERT INTO IMS_SREQ (SREQ_SRN, SREQ_DTE, SREQ_PUR, SREQ_RQU, SREQ_OFF, SREQ_STAT) ";
-                    string values = $"VALUES ({requestNumber}, '{currentDate}', '')";
-                    _handler.ExecuteNonQuery("");
+                    query = "INSERT INTO IMS_SRD (SRD_SRN, SRD_COD, SRD_QTY) ";
+                    values = $"VALUES ({requestNumber}, {item.SubItems[0].Text}, {item.SubItems[2].Text})";
+                    _handler.ExecuteNonQuery(query + values);
                 }
+                MessageBox.Show($"Items Requested! Your Request# is: {requestNumber}. You will need this to claim your request.");
             }
         }
     }

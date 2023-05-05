@@ -37,20 +37,19 @@
             label2 = new Label();
             cbCategory = new ComboBox();
             label1 = new Label();
+            txtPurpose = new TextBox();
             btnCancel = new Button();
             btnAdd = new Button();
             lvItems = new ListView();
             btnRequest = new Button();
             btnRemove = new Button();
-            label5 = new Label();
-            txtPurpose = new TextBox();
+            groupBox2 = new GroupBox();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(txtPurpose);
-            groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(txtAmount);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(cbItem);
@@ -78,9 +77,9 @@
             label4.AutoSize = true;
             label4.Location = new Point(554, 29);
             label4.Name = "label4";
-            label4.Size = new Size(62, 20);
+            label4.Size = new Size(68, 20);
             label4.TabIndex = 7;
-            label4.Text = "Amount";
+            label4.Text = "Amount*";
             // 
             // cbItem
             // 
@@ -97,9 +96,9 @@
             label3.AutoSize = true;
             label3.Location = new Point(12, 63);
             label3.Name = "label3";
-            label3.Size = new Size(83, 20);
+            label3.Size = new Size(89, 20);
             label3.TabIndex = 5;
-            label3.Text = "Item Name";
+            label3.Text = "Item Name*";
             // 
             // cbSCategory
             // 
@@ -141,6 +140,13 @@
             label1.TabIndex = 1;
             label1.Text = "Category";
             // 
+            // txtPurpose
+            // 
+            txtPurpose.Location = new Point(6, 26);
+            txtPurpose.Name = "txtPurpose";
+            txtPurpose.Size = new Size(445, 27);
+            txtPurpose.TabIndex = 9;
+            // 
             // btnCancel
             // 
             btnCancel.Location = new Point(675, 367);
@@ -171,11 +177,11 @@
             // 
             // btnRequest
             // 
-            btnRequest.Location = new Point(12, 367);
+            btnRequest.Location = new Point(475, 411);
             btnRequest.Name = "btnRequest";
-            btnRequest.Size = new Size(94, 38);
+            btnRequest.Size = new Size(294, 38);
             btnRequest.TabIndex = 9;
-            btnRequest.Text = "Request";
+            btnRequest.Text = "Finalize Request";
             btnRequest.UseVisualStyleBackColor = true;
             btnRequest.Click += btnRequest_Click;
             // 
@@ -189,27 +195,22 @@
             btnRemove.UseVisualStyleBackColor = true;
             btnRemove.Click += btnRemove_Click;
             // 
-            // label5
+            // groupBox2
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(33, 97);
-            label5.Name = "label5";
-            label5.Size = new Size(62, 20);
-            label5.TabIndex = 8;
-            label5.Text = "Purpose";
-            // 
-            // txtPurpose
-            // 
-            txtPurpose.Location = new Point(101, 94);
-            txtPurpose.Name = "txtPurpose";
-            txtPurpose.Size = new Size(424, 27);
-            txtPurpose.TabIndex = 9;
+            groupBox2.Controls.Add(txtPurpose);
+            groupBox2.Location = new Point(12, 367);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(457, 82);
+            groupBox2.TabIndex = 11;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Purpose*";
             // 
             // Form_Resupply
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(781, 420);
+            ClientSize = new Size(781, 461);
+            Controls.Add(groupBox2);
             Controls.Add(btnRemove);
             Controls.Add(btnRequest);
             Controls.Add(lvItems);
@@ -220,6 +221,8 @@
             Text = "Form_Resupply";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -240,6 +243,6 @@
         private Button btnRequest;
         private Button btnRemove;
         private TextBox txtPurpose;
-        private Label label5;
+        private GroupBox groupBox2;
     }
 }
