@@ -83,10 +83,11 @@ namespace IMS.forms.requests_resupply
         {
             DataTable table = _handler.ExecuteQuery($"SELECT * FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
             
-            if (table.Rows.Count != 0)
+            if (table.Rows.Count != 0) //Add: && if order_status == pending)
             {
                 _handler.ExecuteNonQuery($"DELETE FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
                 _handler.ExecuteNonQuery($"DELETE FROM IMS_SRD WHERE SRD_SRN = {_referenceNumber}");
+                this.InitData();
             }
         }
     }

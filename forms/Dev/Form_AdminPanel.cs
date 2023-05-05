@@ -154,5 +154,10 @@ namespace IMS.forms
             Form_Requests form = new Form_Requests(_handler, _session);
             form.Show();
         }
+
+        private void btnRealReSupply_Click(object sender, EventArgs e)
+        {
+            //Open new form instance for Admin side to satisfy requests
+        }
     }
 }

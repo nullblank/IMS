@@ -39,11 +39,12 @@
             btnSUP = new Button();
             btnMasterList = new Button();
             groupBox1 = new GroupBox();
+            btnRealReSupply = new Button();
+            btnResupply = new Button();
             btnDeliveries = new Button();
             groupBox2 = new GroupBox();
             btnBranch = new Button();
             groupBox3 = new GroupBox();
-            btnResupply = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -64,7 +65,7 @@
             // 
             btnLogout.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnLogout.Location = new Point(59, 549);
+            btnLogout.Location = new Point(59, 600);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(259, 30);
             btnLogout.TabIndex = 1;
@@ -162,16 +163,39 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnRealReSupply);
             groupBox1.Controls.Add(btnResupply);
             groupBox1.Controls.Add(btnDeliveries);
             groupBox1.Controls.Add(btnMasterList);
             groupBox1.Controls.Add(btnUsers);
             groupBox1.Location = new Point(53, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(272, 174);
+            groupBox1.Size = new Size(272, 225);
             groupBox1.TabIndex = 13;
             groupBox1.TabStop = false;
             groupBox1.Text = "Main";
+            // 
+            // btnRealReSupply
+            // 
+            btnRealReSupply.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnRealReSupply.Location = new Point(7, 170);
+            btnRealReSupply.Name = "btnRealReSupply";
+            btnRealReSupply.Size = new Size(259, 30);
+            btnRealReSupply.TabIndex = 18;
+            btnRealReSupply.Text = "Open Resupply Panel";
+            btnRealReSupply.UseVisualStyleBackColor = true;
+            btnRealReSupply.Click += btnRealReSupply_Click;
+            // 
+            // btnResupply
+            // 
+            btnResupply.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnResupply.Location = new Point(6, 134);
+            btnResupply.Name = "btnResupply";
+            btnResupply.Size = new Size(259, 30);
+            btnResupply.TabIndex = 17;
+            btnResupply.Text = "Open Requests Panel";
+            btnResupply.UseVisualStyleBackColor = true;
+            btnResupply.Click += btnResupply_Click;
             // 
             // btnDeliveries
             // 
@@ -193,7 +217,7 @@
             groupBox2.Controls.Add(btnSUNT);
             groupBox2.Controls.Add(btnSUP);
             groupBox2.Controls.Add(btnOFF);
-            groupBox2.Location = new Point(53, 192);
+            groupBox2.Location = new Point(53, 243);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(272, 282);
             groupBox2.TabIndex = 14;
@@ -214,23 +238,12 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(btnLogs);
-            groupBox3.Location = new Point(53, 480);
+            groupBox3.Location = new Point(53, 531);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(272, 63);
             groupBox3.TabIndex = 15;
             groupBox3.TabStop = false;
             groupBox3.Text = "Misc.";
-            // 
-            // btnResupply
-            // 
-            btnResupply.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnResupply.Location = new Point(6, 134);
-            btnResupply.Name = "btnResupply";
-            btnResupply.Size = new Size(259, 30);
-            btnResupply.TabIndex = 17;
-            btnResupply.Text = "Open Resupply Panel";
-            btnResupply.UseVisualStyleBackColor = true;
-            btnResupply.Click += btnResupply_Click;
             // 
             // Form_AdminPanel
             // 
@@ -270,5 +283,6 @@
         private Button btnDeliveries;
         private Button btnBranch;
         private Button btnResupply;
+        private Button btnRealReSupply;
     }
 }
