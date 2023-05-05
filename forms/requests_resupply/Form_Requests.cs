@@ -19,6 +19,7 @@ namespace IMS.forms.requests_resupply
     {
         DatabaseHandler _handler;
         SessionHandler _session;
+        int _referenceNumber;
         public Form_Requests(DatabaseHandler handler, SessionHandler session)
         {
             _handler = handler;
@@ -64,6 +65,7 @@ namespace IMS.forms.requests_resupply
             if (!string.IsNullOrEmpty(row.Cells["Request Number"].Value.ToString()) || row.Cells["Request Number"].Value.ToString() != "")
             {
                 int requestCode = Int32.Parse(row.Cells["Request Number"].Value.ToString());
+                _referenceNumber = requestCode;
                 DataTable requestedItems = _handler.ExecuteQuery($"SELECT B.SITE_DES, A.SRD_QTY " +
                     $"FROM IMS_SRD A " +
                     $"LEFT JOIN IMS_SITE B ON A.SRD_COD = B.SITE_COD " +
@@ -74,6 +76,17 @@ namespace IMS.forms.requests_resupply
                     item.SubItems.Add(rows[1].ToString());
                     lvRequestItems.Items.Add(item);
                 }
+            }
+        }
+
+        private void btnCancelResupply_Click(object sender, EventArgs e)
+        {
+            DataTable table = _handler.ExecuteQuery($"SELECT * FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
+            
+            if (table.Rows.Count != 0)
+            {
+                _handler.ExecuteNonQuery($"DELETE FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
+                _handler.ExecuteNonQuery($"DELETE FROM IMS_SRD WHERE SRD_SRN = {_referenceNumber}");
             }
         }
     }

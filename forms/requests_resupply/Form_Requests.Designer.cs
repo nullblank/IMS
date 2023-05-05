@@ -170,6 +170,7 @@
             btnCancelResupply.TabIndex = 7;
             btnCancelResupply.Text = "Cancel Resupply";
             btnCancelResupply.UseVisualStyleBackColor = true;
+            btnCancelResupply.Click += btnCancelResupply_Click;
             // 
             // groupBox4
             // 
