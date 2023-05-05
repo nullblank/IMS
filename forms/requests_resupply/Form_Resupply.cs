@@ -21,12 +21,13 @@ namespace IMS.forms.requests_resupply
         SessionHandler _session;
         DataTable _table;
         DataTable _request;
-        DataTable _codes;
-        public Form_Resupply(DatabaseHandler handler, SessionHandler session)
+        Form_Requests _form;
+        public Form_Resupply(DatabaseHandler handler, SessionHandler session, Form_Requests form)
         {
             _table = handler.ExecuteQuery("SELECT * FROM IMS_SITE");
             _handler = handler;
             _session = session;
+            _form = form;
             InitializeComponent();
             InitData();
         }
@@ -191,6 +192,7 @@ namespace IMS.forms.requests_resupply
                     values = $"VALUES ({requestNumber}, {item.SubItems[0].Text}, {item.SubItems[2].Text})";
                     _handler.ExecuteNonQuery(query + values);
                 }
+                _form.InitData();
                 MessageBox.Show($"Items Requested! Your Request# is: {requestNumber}. You will need this to claim your request.");
             }
         }

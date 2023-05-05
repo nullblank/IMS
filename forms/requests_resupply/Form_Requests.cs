@@ -1,6 +1,8 @@
 ﻿using IMS.DBHandler;
 using IMS.src;
+using Mysqlx.Resultset;
 using MySqlX.XDevAPI;
+using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,12 +24,24 @@ namespace IMS.forms.requests_resupply
             _handler = handler;
             _session = session;
             InitializeComponent();
+            lvRequestItems.Columns.Add("Item");
+            lvRequestItems.Columns.Add("Amount");
+            ColumnHeader firstColumn = lvRequestItems.Columns[0];
+            ColumnHeader secondColumn = lvRequestItems.Columns[1];
+            firstColumn.Width = 300;
+            secondColumn.Width = 75;
             InitData();
         }
-        private void InitData()
+        public void InitData()
         {
             DataTable results = new DataTable();
-            string query = "SELECT * FROM IMS_SREQ";
+            string query = "SELECT " +
+                "SREQ_SRN AS 'Request Number', " +
+                "SREQ_DTE AS 'Date Requested', " +
+                "SREQ_PUR AS 'Purpose', " +
+                "SREQ_RQU AS 'Requested by', " +
+                "SREQ_STAT AS 'Request Status'" +
+                " FROM IMS_SREQ";
             dgvRequests.DataSource = _handler.ExecuteQuery(query);
         }
         private void Requests_Load(object sender, EventArgs e)
@@ -39,8 +53,28 @@ namespace IMS.forms.requests_resupply
 
         private void btnResupply_Click(object sender, EventArgs e)
         {
-            Form_Resupply form = new Form_Resupply(_handler, _session);
+            Form_Resupply form = new Form_Resupply(_handler, _session, this);
             form.Show();
+        }
+
+        private void dgvRequests_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            lvRequestItems.Items.Clear();
+            DataGridViewRow row = dgvRequests.Rows[e.RowIndex];
+            if (!string.IsNullOrEmpty(row.Cells["Request Number"].Value.ToString()) || row.Cells["Request Number"].Value.ToString() != "")
+            {
+                int requestCode = Int32.Parse(row.Cells["Request Number"].Value.ToString());
+                DataTable requestedItems = _handler.ExecuteQuery($"SELECT B.SITE_DES, A.SRD_QTY " +
+                    $"FROM IMS_SRD A " +
+                    $"LEFT JOIN IMS_SITE B ON A.SRD_COD = B.SITE_COD " +
+                    $"WHERE A.SRD_SRN = {Int32.Parse(row.Cells["Request Number"].Value.ToString())}");
+                foreach (DataRow rows in requestedItems.Rows)
+                {
+                    ListViewItem item = new ListViewItem(rows[0].ToString());
+                    item.SubItems.Add(rows[1].ToString());
+                    lvRequestItems.Items.Add(item);
+                }
+            }
         }
     }
 }

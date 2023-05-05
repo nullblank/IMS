@@ -38,17 +38,15 @@
             lblOffice = new Label();
             label2 = new Label();
             groupBox3 = new GroupBox();
-            btnEditResupply = new Button();
             btnResupply = new Button();
             btnCancelResupply = new Button();
             groupBox4 = new GroupBox();
-            dgvItemsRequested = new DataGridView();
+            lvRequestItems = new ListView();
             ((System.ComponentModel.ISupportInitialize)dgvRequests).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvItemsRequested).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -79,6 +77,7 @@
             dgvRequests.RowTemplate.Height = 29;
             dgvRequests.Size = new Size(852, 282);
             dgvRequests.TabIndex = 2;
+            dgvRequests.CellClick += dgvRequests_CellClick;
             // 
             // groupBox1
             // 
@@ -144,7 +143,6 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(btnEditResupply);
             groupBox3.Controls.Add(btnResupply);
             groupBox3.Controls.Add(btnCancelResupply);
             groupBox3.Location = new Point(574, 163);
@@ -153,15 +151,6 @@
             groupBox3.TabIndex = 5;
             groupBox3.TabStop = false;
             groupBox3.Text = "Controls";
-            // 
-            // btnEditResupply
-            // 
-            btnEditResupply.Location = new Point(6, 61);
-            btnEditResupply.Name = "btnEditResupply";
-            btnEditResupply.Size = new Size(145, 29);
-            btnEditResupply.TabIndex = 8;
-            btnEditResupply.Text = "Edit Resupply";
-            btnEditResupply.UseVisualStyleBackColor = true;
             // 
             // btnResupply
             // 
@@ -175,7 +164,7 @@
             // 
             // btnCancelResupply
             // 
-            btnCancelResupply.Location = new Point(6, 96);
+            btnCancelResupply.Location = new Point(6, 61);
             btnCancelResupply.Name = "btnCancelResupply";
             btnCancelResupply.Size = new Size(145, 29);
             btnCancelResupply.TabIndex = 7;
@@ -184,7 +173,7 @@
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(dgvItemsRequested);
+            groupBox4.Controls.Add(lvRequestItems);
             groupBox4.Location = new Point(12, 12);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(556, 296);
@@ -192,16 +181,15 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Items Requested";
             // 
-            // dgvItemsRequested
+            // lvRequestItems
             // 
-            dgvItemsRequested.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvItemsRequested.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvItemsRequested.Location = new Point(6, 26);
-            dgvItemsRequested.Name = "dgvItemsRequested";
-            dgvItemsRequested.RowHeadersWidth = 51;
-            dgvItemsRequested.RowTemplate.Height = 29;
-            dgvItemsRequested.Size = new Size(544, 264);
-            dgvItemsRequested.TabIndex = 3;
+            lvRequestItems.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lvRequestItems.Location = new Point(6, 26);
+            lvRequestItems.Name = "lvRequestItems";
+            lvRequestItems.Size = new Size(544, 264);
+            lvRequestItems.TabIndex = 0;
+            lvRequestItems.UseCompatibleStateImageBehavior = false;
+            lvRequestItems.View = View.Details;
             // 
             // Form_Requests
             // 
@@ -221,7 +209,6 @@
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvItemsRequested).EndInit();
             ResumeLayout(false);
         }
 
@@ -239,8 +226,7 @@
         private GroupBox groupBox3;
         private Button btnResupply;
         private Button btnCancelResupply;
-        private Button btnEditResupply;
         private GroupBox groupBox4;
-        private DataGridView dgvItemsRequested;
+        private ListView lvRequestItems;
     }
 }
