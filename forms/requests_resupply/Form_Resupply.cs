@@ -123,7 +123,7 @@ namespace IMS.forms.requests_resupply
             DataRow data = _table.Rows[cbItem.SelectedIndex];
             _request.Rows.Add(data[0].ToString(), data[1].ToString(), txtAmount.Text);
             lvItems.View = View.Details;
-            
+
             foreach (DataRow row in _request.Rows)//update to include item code aswell
             {
                 ListViewItem item = new ListViewItem(row["Item_Code"].ToString());
@@ -147,6 +147,41 @@ namespace IMS.forms.requests_resupply
 
                 // Remove the item from the ListView control
                 lvItems.Items.RemoveAt(index);
+            }
+        }
+        private int GenerateRequestID()
+        {
+            int length = 10;
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            string randomString = new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            int result = Int32.Parse(randomString);
+            return result;
+        }
+        private void btnRequest_Click(object sender, EventArgs e)
+        {
+            if (lvItems.Items.Count == 0)
+            {
+                MessageBox.Show("Please add items to request first!");
+            }
+            else
+            {
+
+                int requestNumber = this.GenerateRequestID();
+                DataTable requestChk = _handler.ExecuteQuery($"SELECT * FROM IMS_SREQ WHERE SREQ_SRN = {requestNumber}");
+                if (requestChk.Rows.Count != 0)
+                {
+                    requestNumber = this.GenerateRequestID();
+
+                }
+                foreach (ListViewItem item in lvItems.Items)
+                {
+                    DateTime currentDate = DateTime.Now;
+                    string query = "INSERT INTO IMS_SREQ (SREQ_SRN, SREQ_DTE, SREQ_PUR, SREQ_RQU, SREQ_OFF, SREQ_STAT) ";
+                    string values = $"VALUES ({requestNumber}, '{currentDate}', '')";
+                    _handler.ExecuteNonQuery("");
+                }
             }
         }
     }

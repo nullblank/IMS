@@ -42,11 +42,15 @@
             lvItems = new ListView();
             btnRequest = new Button();
             btnRemove = new Button();
+            label5 = new Label();
+            txtPurpose = new TextBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtPurpose);
+            groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(txtAmount);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(cbItem);
@@ -57,7 +61,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 222);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(757, 98);
+            groupBox1.Size = new Size(757, 139);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Item Details";
@@ -139,7 +143,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(675, 326);
+            btnCancel.Location = new Point(675, 367);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(94, 38);
             btnCancel.TabIndex = 7;
@@ -148,7 +152,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(475, 326);
+            btnAdd.Location = new Point(475, 367);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(94, 38);
             btnAdd.TabIndex = 6;
@@ -167,16 +171,17 @@
             // 
             // btnRequest
             // 
-            btnRequest.Location = new Point(12, 326);
+            btnRequest.Location = new Point(12, 367);
             btnRequest.Name = "btnRequest";
             btnRequest.Size = new Size(94, 38);
             btnRequest.TabIndex = 9;
             btnRequest.Text = "Request";
             btnRequest.UseVisualStyleBackColor = true;
+            btnRequest.Click += btnRequest_Click;
             // 
             // btnRemove
             // 
-            btnRemove.Location = new Point(575, 325);
+            btnRemove.Location = new Point(575, 366);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(94, 38);
             btnRemove.TabIndex = 10;
@@ -184,11 +189,27 @@
             btnRemove.UseVisualStyleBackColor = true;
             btnRemove.Click += btnRemove_Click;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(33, 97);
+            label5.Name = "label5";
+            label5.Size = new Size(62, 20);
+            label5.TabIndex = 8;
+            label5.Text = "Purpose";
+            // 
+            // txtPurpose
+            // 
+            txtPurpose.Location = new Point(101, 94);
+            txtPurpose.Name = "txtPurpose";
+            txtPurpose.Size = new Size(424, 27);
+            txtPurpose.TabIndex = 9;
+            // 
             // Form_Resupply
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(781, 375);
+            ClientSize = new Size(781, 420);
             Controls.Add(btnRemove);
             Controls.Add(btnRequest);
             Controls.Add(lvItems);
@@ -218,5 +239,7 @@
         private ListView lvItems;
         private Button btnRequest;
         private Button btnRemove;
+        private TextBox txtPurpose;
+        private Label label5;
     }
 }
