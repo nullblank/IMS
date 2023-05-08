@@ -1,4 +1,5 @@
 ﻿using IMS.DBHandler;
+using IMS.forms.requests_deliveries;
 using IMS.forms.requests_resupply;
 using IMS.src;
 using Microsoft.VisualBasic.ApplicationServices;
@@ -158,6 +159,8 @@ namespace IMS.forms
         private void btnRealReSupply_Click(object sender, EventArgs e)
         {
             //Open new form instance for Admin side to satisfy requests
+            Form_Outbound form = new Form_Outbound(_handler, session);
+            form.Show();
         }
     }
 }
