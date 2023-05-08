@@ -161,7 +161,7 @@ namespace IMS.forms.requests_resupply
                     $"SET SITE_QOH = {newQoh} " + // 
                     $"WHERE SITE_COD = '{item_code}'");
 
-                //Make table trigger
+                //Make table triggers
                 //make tables to add these into
 
             }
