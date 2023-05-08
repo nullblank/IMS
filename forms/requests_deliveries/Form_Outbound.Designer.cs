@@ -95,37 +95,41 @@
             // 
             btnDelivered.Location = new Point(6, 131);
             btnDelivered.Name = "btnDelivered";
-            btnDelivered.Size = new Size(189, 29);
+            btnDelivered.Size = new Size(183, 29);
             btnDelivered.TabIndex = 3;
             btnDelivered.Text = "Delivered";
             btnDelivered.UseVisualStyleBackColor = true;
+            btnDelivered.Click += btnDelivered_Click;
             // 
             // btnProcessing
             // 
             btnProcessing.Location = new Point(6, 96);
             btnProcessing.Name = "btnProcessing";
-            btnProcessing.Size = new Size(189, 29);
+            btnProcessing.Size = new Size(183, 29);
             btnProcessing.TabIndex = 3;
             btnProcessing.Text = "Processing";
             btnProcessing.UseVisualStyleBackColor = true;
+            btnProcessing.Click += btnProcessing_Click;
             // 
             // btnDenied
             // 
             btnDenied.Location = new Point(6, 61);
             btnDenied.Name = "btnDenied";
-            btnDenied.Size = new Size(189, 29);
+            btnDenied.Size = new Size(183, 29);
             btnDenied.TabIndex = 3;
             btnDenied.Text = "Denied";
             btnDenied.UseVisualStyleBackColor = true;
+            btnDenied.Click += btnDenied_Click;
             // 
             // btnPending
             // 
             btnPending.Location = new Point(6, 26);
             btnPending.Name = "btnPending";
-            btnPending.Size = new Size(189, 29);
+            btnPending.Size = new Size(183, 29);
             btnPending.TabIndex = 3;
             btnPending.Text = "Pending";
             btnPending.UseVisualStyleBackColor = true;
+            btnPending.Click += btnPending_Click;
             // 
             // groupBox3
             // 
@@ -217,7 +221,7 @@
             groupBox4.Controls.Add(lvItems);
             groupBox4.Location = new Point(608, 196);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(372, 338);
+            groupBox4.Size = new Size(378, 338);
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
             groupBox4.Text = "Items";
@@ -227,7 +231,7 @@
             lvItems.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lvItems.Location = new Point(6, 26);
             lvItems.Name = "lvItems";
-            lvItems.Size = new Size(360, 306);
+            lvItems.Size = new Size(366, 306);
             lvItems.TabIndex = 0;
             lvItems.UseCompatibleStateImageBehavior = false;
             lvItems.View = View.Details;
@@ -235,9 +239,9 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(btnSatisfy);
-            groupBox5.Location = new Point(986, 328);
+            groupBox5.Location = new Point(998, 196);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(201, 74);
+            groupBox5.Size = new Size(189, 74);
             groupBox5.TabIndex = 5;
             groupBox5.TabStop = false;
             groupBox5.Text = "Status Control";
@@ -246,7 +250,7 @@
             // 
             btnSatisfy.Location = new Point(6, 26);
             btnSatisfy.Name = "btnSatisfy";
-            btnSatisfy.Size = new Size(189, 29);
+            btnSatisfy.Size = new Size(177, 29);
             btnSatisfy.TabIndex = 3;
             btnSatisfy.Text = "Satisfy Request";
             btnSatisfy.UseVisualStyleBackColor = true;

@@ -61,33 +61,44 @@ namespace IMS.forms.requests_resupply
         private void dgvRequests_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             lvRequestItems.Items.Clear();
-            DataGridViewRow row = dgvRequests.Rows[e.RowIndex];
-            if (!string.IsNullOrEmpty(row.Cells["Request Number"].Value.ToString()) || row.Cells["Request Number"].Value.ToString() != "")
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                int requestCode = Int32.Parse(row.Cells["Request Number"].Value.ToString());
-                _referenceNumber = requestCode;
-                DataTable requestedItems = _handler.ExecuteQuery($"SELECT B.SITE_DES, A.SRD_QTY " +
-                    $"FROM IMS_SRD A " +
-                    $"LEFT JOIN IMS_SITE B ON A.SRD_COD = B.SITE_COD " +
-                    $"WHERE A.SRD_SRN = {Int32.Parse(row.Cells["Request Number"].Value.ToString())}");
-                foreach (DataRow rows in requestedItems.Rows)
+                DataGridViewRow row = dgvRequests.Rows[e.RowIndex];
+                if (!string.IsNullOrEmpty(row.Cells["Request Number"].Value.ToString()) || row.Cells["Request Number"].Value.ToString() != "")
                 {
-                    ListViewItem item = new ListViewItem(rows[0].ToString());
-                    item.SubItems.Add(rows[1].ToString());
-                    lvRequestItems.Items.Add(item);
+                    int requestCode = Int32.Parse(row.Cells["Request Number"].Value.ToString());
+                    _referenceNumber = requestCode;
+                    DataTable requestedItems = _handler.ExecuteQuery($"SELECT B.SITE_DES, A.SRD_QTY " +
+                        $"FROM IMS_SRD A " +
+                        $"LEFT JOIN IMS_SITE B ON A.SRD_COD = B.SITE_COD " +
+                        $"WHERE A.SRD_SRN = {Int32.Parse(row.Cells["Request Number"].Value.ToString())}");
+                    foreach (DataRow rows in requestedItems.Rows)
+                    {
+                        ListViewItem item = new ListViewItem(rows[0].ToString());
+                        item.SubItems.Add(rows[1].ToString());
+                        lvRequestItems.Items.Add(item);
+                    }
                 }
             }
+            
         }
 
         private void btnCancelResupply_Click(object sender, EventArgs e)
         {
             DataTable table = _handler.ExecuteQuery($"SELECT * FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
-            
             if (table.Rows.Count != 0) //Add: && if order_status == pending)
             {
-                _handler.ExecuteNonQuery($"DELETE FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
-                _handler.ExecuteNonQuery($"DELETE FROM IMS_SRD WHERE SRD_SRN = {_referenceNumber}");
-                this.InitData();
+                DataRow row = table.Rows[0];
+                if (row["SREQ_STAT"].ToString() == "Pending")
+                {
+                    _handler.ExecuteNonQuery($"DELETE FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
+                    _handler.ExecuteNonQuery($"DELETE FROM IMS_SRD WHERE SRD_SRN = {_referenceNumber}");
+                    this.InitData();
+                }
+                else
+                {
+                    MessageBox.Show("Error: It's too late to cancel this request. Please go to the IMO for further inquiries.");
+                }
             }
         }
     }

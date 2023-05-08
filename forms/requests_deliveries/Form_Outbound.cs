@@ -24,6 +24,10 @@ namespace IMS.forms.requests_deliveries
             InitializeComponent();
             lvItems.Columns.Add("Item");
             lvItems.Columns.Add("Amount");
+            ColumnHeader firstColumn = lvItems.Columns[0];
+            ColumnHeader secondColumn = lvItems.Columns[1];
+            firstColumn.Width = 275;
+            secondColumn.Width = 75;
             this.InitData();
         }
         private void InitData()
@@ -39,28 +43,65 @@ namespace IMS.forms.requests_deliveries
         private void dgvRequests_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             lvItems.Items.Clear();
-            DataGridViewRow row = dgvRequests.Rows[e.RowIndex];
-            if (!string.IsNullOrEmpty(row.Cells["Request#"].Value.ToString()) || row.Cells["Request#"].Value.ToString() != "")
+            // Check that the clicked cell is not a header cell
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                int requestCode = Int32.Parse(row.Cells["Request#"].Value.ToString());
-                _referenceNumber = requestCode;
-                DataTable requestedItems = _handler.ExecuteQuery($"SELECT B.SITE_DES, A.SRD_QTY " +
-                    $"FROM IMS_SRD A " +
-                    $"LEFT JOIN IMS_SITE B ON A.SRD_COD = B.SITE_COD " +
-                    $"WHERE A.SRD_SRN = {Int32.Parse(row.Cells["Request#"].Value.ToString())}");
-                foreach (DataRow rows in requestedItems.Rows)
+                DataGridViewRow row = dgvRequests.Rows[e.RowIndex];
+                if (!string.IsNullOrEmpty(row.Cells["Request#"].Value.ToString()) || row.Cells["Request#"].Value.ToString() != "")
                 {
-                    ListViewItem item = new ListViewItem(rows[0].ToString());
-                    item.SubItems.Add(rows[1].ToString());
-                    lvItems.Items.Add(item);
+                    int requestCode = Int32.Parse(row.Cells["Request#"].Value.ToString());
+                    _referenceNumber = requestCode;
+                    DataTable requestedItems = _handler.ExecuteQuery($"SELECT B.SITE_DES, A.SRD_QTY " +
+                        $"FROM IMS_SRD A " +
+                        $"LEFT JOIN IMS_SITE B ON A.SRD_COD = B.SITE_COD " +
+                        $"WHERE A.SRD_SRN = {Int32.Parse(row.Cells["Request#"].Value.ToString())}");
+                    foreach (DataRow rows in requestedItems.Rows)
+                    {
+                        ListViewItem item = new ListViewItem(rows[0].ToString());
+                        item.SubItems.Add(rows[1].ToString());
+                        lvItems.Items.Add(item);
+                    }
+                    requestedItems = _handler.ExecuteQuery($"SELECT * FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
+                    DataRow row1 = requestedItems.Rows[0];
+
+                    txtRequestNumber.Text = _referenceNumber.ToString();
+                    txtPurpose.Text = row1[3].ToString();
+                    txtOffice.Text = row1[5].ToString();
+                    txtUser.Text = row1[4].ToString();
                 }
-                requestedItems = _handler.ExecuteQuery($"SELECT * FROM IMS_SREQ WHERE SREQ_SRN = {_referenceNumber}");
-                DataRow row1 = requestedItems.Rows[0];
-                txtRequestNumber.Text = _referenceNumber.ToString();
-                txtPurpose.Text = row1[3].ToString();
-                txtOffice.Text = row1[5].ToString();
-                txtUser.Text = row1[4].ToString();
             }
+        }
+
+        private void btnPending_Click(object sender, EventArgs e)
+        {
+            string query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Pending' WHERE SREQ_SRN = {_referenceNumber}";
+            _handler.ExecuteNonQuery(query);
+            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'PENDING'");
+            this.InitData();
+        }
+
+        private void btnDenied_Click(object sender, EventArgs e)
+        {
+            string query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Denied' WHERE SREQ_SRN = {_referenceNumber}";
+            _handler.ExecuteNonQuery(query);
+            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'Denied'");
+            this.InitData();
+        }
+
+        private void btnProcessing_Click(object sender, EventArgs e)
+        {
+            string query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Processing' WHERE SREQ_SRN = {_referenceNumber}";
+            _handler.ExecuteNonQuery(query);
+            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'Processing'");
+            this.InitData();
+        }
+
+        private void btnDelivered_Click(object sender, EventArgs e)
+        {
+            string query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Delivered' WHERE SREQ_SRN = {_referenceNumber}";
+            _handler.ExecuteNonQuery(query);
+            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'Delivered'");
+            this.InitData();
         }
     }
 }
