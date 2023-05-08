@@ -254,6 +254,7 @@
             btnSatisfy.TabIndex = 3;
             btnSatisfy.Text = "Satisfy Request";
             btnSatisfy.UseVisualStyleBackColor = true;
+            btnSatisfy.Click += btnSatisfy_Click;
             // 
             // Form_Outbound
             // 

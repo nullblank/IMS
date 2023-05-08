@@ -1,4 +1,5 @@
 ﻿using IMS.DBHandler;
+using IMS.forms.requests_resupply;
 using IMS.src;
 using System;
 using System.Collections.Generic;
@@ -102,6 +103,12 @@ namespace IMS.forms.requests_deliveries
             _handler.ExecuteNonQuery(query);
             MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'DELIVERED'");
             this.InitData();
+        }
+
+        private void btnSatisfy_Click(object sender, EventArgs e)
+        {
+            Form_Satisfy form = new Form_Satisfy(_handler, _session, _referenceNumber);
+            form.Show();
         }
     }
 }
