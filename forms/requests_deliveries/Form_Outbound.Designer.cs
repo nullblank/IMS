@@ -31,26 +31,29 @@
             dgvRequests = new DataGridView();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
+            btnDelivered = new Button();
+            btnProcessing = new Button();
+            btnDenied = new Button();
+            btnPending = new Button();
             groupBox3 = new GroupBox();
+            txtUser = new TextBox();
+            txtOffice = new TextBox();
+            txtPurpose = new TextBox();
+            txtRequestNumber = new TextBox();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            txtRequestNumber = new TextBox();
-            txtPurpose = new TextBox();
-            txtOffice = new TextBox();
-            txtUser = new TextBox();
             groupBox4 = new GroupBox();
             lvItems = new ListView();
+            groupBox5 = new GroupBox();
+            btnSatisfy = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvRequests).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
+            groupBox5.SuspendLayout();
             SuspendLayout();
             // 
             // dgvRequests
@@ -61,67 +64,68 @@
             dgvRequests.Name = "dgvRequests";
             dgvRequests.RowHeadersWidth = 51;
             dgvRequests.RowTemplate.Height = 29;
-            dgvRequests.Size = new Size(384, 490);
+            dgvRequests.Size = new Size(578, 490);
             dgvRequests.TabIndex = 0;
+            dgvRequests.CellClick += dgvRequests_CellClick;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(dgvRequests);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(396, 522);
+            groupBox1.Size = new Size(590, 522);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Requests";
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(button4);
-            groupBox2.Controls.Add(button3);
-            groupBox2.Controls.Add(button2);
-            groupBox2.Controls.Add(button1);
-            groupBox2.Location = new Point(713, 12);
+            groupBox2.Controls.Add(btnDelivered);
+            groupBox2.Controls.Add(btnProcessing);
+            groupBox2.Controls.Add(btnDenied);
+            groupBox2.Controls.Add(btnPending);
+            groupBox2.Location = new Point(992, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(177, 522);
+            groupBox2.Size = new Size(195, 178);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Controls";
+            groupBox2.Text = "Status Control";
             // 
-            // button4
+            // btnDelivered
             // 
-            button4.Location = new Point(6, 131);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 3;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            btnDelivered.Location = new Point(6, 131);
+            btnDelivered.Name = "btnDelivered";
+            btnDelivered.Size = new Size(189, 29);
+            btnDelivered.TabIndex = 3;
+            btnDelivered.Text = "Delivered";
+            btnDelivered.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnProcessing
             // 
-            button3.Location = new Point(6, 96);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 3;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnProcessing.Location = new Point(6, 96);
+            btnProcessing.Name = "btnProcessing";
+            btnProcessing.Size = new Size(189, 29);
+            btnProcessing.TabIndex = 3;
+            btnProcessing.Text = "Processing";
+            btnProcessing.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnDenied
             // 
-            button2.Location = new Point(6, 61);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 3;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnDenied.Location = new Point(6, 61);
+            btnDenied.Name = "btnDenied";
+            btnDenied.Size = new Size(189, 29);
+            btnDenied.TabIndex = 3;
+            btnDenied.Text = "Denied";
+            btnDenied.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnPending
             // 
-            button1.Location = new Point(6, 26);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 3;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnPending.Location = new Point(6, 26);
+            btnPending.Name = "btnPending";
+            btnPending.Size = new Size(189, 29);
+            btnPending.TabIndex = 3;
+            btnPending.Text = "Pending";
+            btnPending.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -133,12 +137,44 @@
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(label1);
-            groupBox3.Location = new Point(414, 12);
+            groupBox3.Location = new Point(608, 12);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(293, 178);
+            groupBox3.Size = new Size(378, 178);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Information";
+            // 
+            // txtUser
+            // 
+            txtUser.Location = new Point(95, 125);
+            txtUser.Name = "txtUser";
+            txtUser.ReadOnly = true;
+            txtUser.Size = new Size(192, 27);
+            txtUser.TabIndex = 13;
+            // 
+            // txtOffice
+            // 
+            txtOffice.Location = new Point(95, 92);
+            txtOffice.Name = "txtOffice";
+            txtOffice.ReadOnly = true;
+            txtOffice.Size = new Size(192, 27);
+            txtOffice.TabIndex = 12;
+            // 
+            // txtPurpose
+            // 
+            txtPurpose.Location = new Point(95, 59);
+            txtPurpose.Name = "txtPurpose";
+            txtPurpose.ReadOnly = true;
+            txtPurpose.Size = new Size(192, 27);
+            txtPurpose.TabIndex = 11;
+            // 
+            // txtRequestNumber
+            // 
+            txtRequestNumber.Location = new Point(95, 26);
+            txtRequestNumber.Name = "txtRequestNumber";
+            txtRequestNumber.ReadOnly = true;
+            txtRequestNumber.Size = new Size(192, 27);
+            txtRequestNumber.TabIndex = 10;
             // 
             // label4
             // 
@@ -176,44 +212,12 @@
             label1.TabIndex = 0;
             label1.Text = "Request#:";
             // 
-            // txtRequestNumber
-            // 
-            txtRequestNumber.Location = new Point(95, 26);
-            txtRequestNumber.Name = "txtRequestNumber";
-            txtRequestNumber.ReadOnly = true;
-            txtRequestNumber.Size = new Size(125, 27);
-            txtRequestNumber.TabIndex = 10;
-            // 
-            // txtPurpose
-            // 
-            txtPurpose.Location = new Point(95, 59);
-            txtPurpose.Name = "txtPurpose";
-            txtPurpose.ReadOnly = true;
-            txtPurpose.Size = new Size(125, 27);
-            txtPurpose.TabIndex = 11;
-            // 
-            // txtOffice
-            // 
-            txtOffice.Location = new Point(95, 92);
-            txtOffice.Name = "txtOffice";
-            txtOffice.ReadOnly = true;
-            txtOffice.Size = new Size(125, 27);
-            txtOffice.TabIndex = 12;
-            // 
-            // txtUser
-            // 
-            txtUser.Location = new Point(95, 125);
-            txtUser.Name = "txtUser";
-            txtUser.ReadOnly = true;
-            txtUser.Size = new Size(125, 27);
-            txtUser.TabIndex = 13;
-            // 
             // groupBox4
             // 
             groupBox4.Controls.Add(lvItems);
-            groupBox4.Location = new Point(414, 196);
+            groupBox4.Location = new Point(608, 196);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(293, 338);
+            groupBox4.Size = new Size(372, 338);
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
             groupBox4.Text = "Items";
@@ -223,15 +227,36 @@
             lvItems.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lvItems.Location = new Point(6, 26);
             lvItems.Name = "lvItems";
-            lvItems.Size = new Size(281, 306);
+            lvItems.Size = new Size(360, 306);
             lvItems.TabIndex = 0;
             lvItems.UseCompatibleStateImageBehavior = false;
+            lvItems.View = View.Details;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(btnSatisfy);
+            groupBox5.Location = new Point(986, 328);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(201, 74);
+            groupBox5.TabIndex = 5;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Status Control";
+            // 
+            // btnSatisfy
+            // 
+            btnSatisfy.Location = new Point(6, 26);
+            btnSatisfy.Name = "btnSatisfy";
+            btnSatisfy.Size = new Size(189, 29);
+            btnSatisfy.TabIndex = 3;
+            btnSatisfy.Text = "Satisfy Request";
+            btnSatisfy.UseVisualStyleBackColor = true;
             // 
             // Form_Outbound
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1091, 546);
+            ClientSize = new Size(1199, 546);
+            Controls.Add(groupBox5);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
@@ -244,6 +269,7 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             groupBox4.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -252,10 +278,10 @@
         private DataGridView dgvRequests;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
+        private Button btnDelivered;
+        private Button btnProcessing;
+        private Button btnDenied;
+        private Button btnPending;
         private GroupBox groupBox3;
         private Label label4;
         private Label label3;
@@ -267,5 +293,7 @@
         private TextBox txtRequestNumber;
         private GroupBox groupBox4;
         private ListView lvItems;
+        private GroupBox groupBox5;
+        private Button btnSatisfy;
     }
 }

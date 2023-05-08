@@ -159,7 +159,7 @@ namespace IMS.forms
         private void btnRealReSupply_Click(object sender, EventArgs e)
         {
             //Open new form instance for Admin side to satisfy requests
-            Form_Outbound form = new Form_Outbound(_handler, session);
+            Form_Outbound form = new Form_Outbound(_handler, _session);
             form.Show();
         }
     }
