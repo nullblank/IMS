@@ -84,7 +84,7 @@ namespace IMS.forms.requests_deliveries
         {
             string query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Denied' WHERE SREQ_SRN = {_referenceNumber}";
             _handler.ExecuteNonQuery(query);
-            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'Denied'");
+            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'DENIED'");
             this.InitData();
         }
 
@@ -92,7 +92,7 @@ namespace IMS.forms.requests_deliveries
         {
             string query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Processing' WHERE SREQ_SRN = {_referenceNumber}";
             _handler.ExecuteNonQuery(query);
-            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'Processing'");
+            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'PROCESSING'");
             this.InitData();
         }
 
@@ -100,7 +100,7 @@ namespace IMS.forms.requests_deliveries
         {
             string query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Delivered' WHERE SREQ_SRN = {_referenceNumber}";
             _handler.ExecuteNonQuery(query);
-            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'Delivered'");
+            MessageBox.Show($"Updated Req#:{_referenceNumber}; Status: 'DELIVERED'");
             this.InitData();
         }
     }
