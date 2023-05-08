@@ -21,6 +21,7 @@ namespace IMS.forms.requests_resupply
         DataTable _table;
         int _requestNumber;
         int _deliveryIndex;
+
         public Form_Satisfy(DatabaseHandler handler, SessionHandler session, int requestNumber)
         {
             _handler = handler;
@@ -63,8 +64,9 @@ namespace IMS.forms.requests_resupply
             {
 
                 string itemCode = lvItems.SelectedItems[0].Text;
-                string query = $"SELECT * FROM IMS_STOC WHERE STOC_COD = {itemCode}";
+                string query = $"SELECT * FROM IMS_STOC WHERE STOC_COD = {itemCode} AND STOC_QTY <> 0";
                 _table = _handler.ExecuteQuery(query);
+
                 dgvStockpile.DataSource = _table;
             }
         }
@@ -78,7 +80,7 @@ namespace IMS.forms.requests_resupply
                 DataGridViewRow row = dgvStockpile.Rows[e.RowIndex];
                 if (!string.IsNullOrEmpty(row.Cells[0].Value.ToString()) || row.Cells[0].Value.ToString() != "")
                 {
-                    
+
                     int deliveryIndex = Int32.Parse(row.Cells[0].Value.ToString());
                     _deliveryIndex = deliveryIndex;
                 }
@@ -87,7 +89,7 @@ namespace IMS.forms.requests_resupply
                     txtAmount.ReadOnly = true;
                 }
 
-                
+
             }
             else
             {
@@ -105,7 +107,7 @@ namespace IMS.forms.requests_resupply
             }
             else
             {
-                if ( Int32.Parse(txtAmount.Text) > 0 && (stockpileQty - (Int32.Parse(txtAmount.Text))) >= 0 && (stockpileQty - (Int32.Parse(txtAmount.Text)) <= stockpileQty))
+                if (Int32.Parse(txtAmount.Text) > 0 && (stockpileQty - (Int32.Parse(txtAmount.Text))) >= 0 && (stockpileQty - (Int32.Parse(txtAmount.Text)) <= stockpileQty))
                 {
                     _table.Rows[0][6] = (stockpileQty - Int32.Parse(txtAmount.Text)).ToString();
                     dgvStockpile.DataSource = _table;
@@ -137,6 +139,31 @@ namespace IMS.forms.requests_resupply
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e) //FInish delivery
+        {
+            foreach (ListViewItem item in lvSend.Items)
+            {
+                //math to deduct
+                
+                string item_code = item.SubItems[0].Text;
+                DataTable table = new DataTable();
+                table = _handler.ExecuteQuery($"SELECT * FROM IMS_SITE WHERE SITE_COD = '{item_code}'");
+                int amount = Int32.Parse(item.SubItems[1].Text);
+                string cost = item.SubItems[2].Text;
+                string tCost = item.SubItems[3].Text;
+
+                int newQoh = Int32.Parse(table.Rows[0][7].ToString()) - amount;
+                MessageBox.Show($"{item_code}, {amount}, {cost}, {tCost}");
+                _handler.ExecuteNonQuery("UPDATE IMS_SITE " +
+                    $"SET SITE_QOH = {newQoh} " + // 
+                    $"WHERE SITE_COD = '{item_code}'");
+
+                //Make table trigger
+                //make tables to add these into
+
             }
         }
     }

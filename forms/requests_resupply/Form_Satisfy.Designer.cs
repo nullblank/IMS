@@ -37,7 +37,6 @@
             button1 = new Button();
             groupBox3 = new GroupBox();
             button3 = new Button();
-            button2 = new Button();
             groupBox5 = new GroupBox();
             txtAmount = new TextBox();
             label2 = new Label();
@@ -127,7 +126,6 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(button3);
-            groupBox3.Controls.Add(button2);
             groupBox3.Controls.Add(button1);
             groupBox3.Location = new Point(780, 48);
             groupBox3.Name = "groupBox3";
@@ -144,15 +142,7 @@
             button3.TabIndex = 3;
             button3.Text = "Finalize Delivery";
             button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(6, 61);
-            button2.Name = "button2";
-            button2.Size = new Size(228, 29);
-            button2.TabIndex = 2;
-            button2.Text = "Edit Selected";
-            button2.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // groupBox5
             // 
@@ -246,7 +236,6 @@
         private DataGridView dgvStockpile;
         private Button button1;
         private GroupBox groupBox3;
-        private Button button2;
         private GroupBox groupBox5;
         private Button button3;
         private TextBox txtSelected;
