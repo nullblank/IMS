@@ -105,19 +105,20 @@ namespace IMS.forms.requests_resupply
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            DataRow row = _table.Rows[0];
-            int stockpileQty = Int32.Parse(row[6].ToString());
+            
             if (string.IsNullOrEmpty(txtAmount.Text) || txtAmount.Text == "")
             {
                 MessageBox.Show("Please enter an amount.");
             }
             else
             {
+                DataRow row = _table.Rows[0];
+                int stockpileQty = Int32.Parse(row[6].ToString());
                 if (Int32.Parse(txtAmount.Text) > 0 && (stockpileQty - (Int32.Parse(txtAmount.Text))) >= 0 && (stockpileQty - (Int32.Parse(txtAmount.Text)) <= stockpileQty))
                 {
-                    _table.Rows[0][6] = (stockpileQty - Int32.Parse(txtAmount.Text)).ToString();
+                    _row.Cells[6].Value = (stockpileQty - Int32.Parse(txtAmount.Text)).ToString();
                     dgvStockpile.DataSource = _table;
-                    //add to listview send
+                    //fix this shit
                     double cost = double.Parse(_row.Cells[5].Value.ToString());
                     double totalcost = cost * int.Parse(txtAmount.Text);
                     ListViewItem item = new ListViewItem(_deliveryIndex.ToString());
@@ -176,20 +177,32 @@ namespace IMS.forms.requests_resupply
 
                         MessageBox.Show($"{item_code}, {amount}, {cost}, {tCost}");
 
-                        _handler.ExecuteNonQuery("UPDATE IMS_SITE " +
-                            $"SET SITE_QOH = {newQoh} " + // 
-                            $"WHERE SITE_COD = '{item_code}'");
+                        //_handler.ExecuteNonQuery("UPDATE IMS_SITE " +
+                        //    $"SET SITE_QOH = {newQoh} " + // 
+                        //    $"WHERE SITE_COD = '{item_code}'");
 
                         query = "INSERT INTO IMS_SDD " +
-                            "(SDD_SDN, SDD_COD, SDD_COS, SDD_QTY, SDD_TCOS) VALUES" +
-                            $"({_requestNumber}, {item_code}, {cost}, {amount}, {tCost})";
+                            "(SDD_SDN, SDD_DIDX, SDD_COD, SDD_COS, SDD_QTY, SDD_TCOS) VALUES" +
+                            $"({_requestNumber}, {_deliveryIndex}, {item_code}, {cost}, {amount}, {tCost})";
                         _handler.ExecuteNonQuery(query);
+
+                        query = "UPDATE IMS_STOC " +
+                            $"SET STOC_QTY = STOC_QTY - {amount} " +
+                            $"WHERE STOC_IDX = {Int32.Parse(item.SubItems[0].Text)}";
+                        _handler.ExecuteNonQuery(query);
+
+
+
                     }
                     else
                     {
                         MessageBox.Show($"No item found with code '{item_code}' in IMS_SITE table.");
                     }
-                    
+
+                    query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Delivered' WHERE SREQ_SRN = {_requestNumber}";
+                    _handler.ExecuteNonQuery(query);
+                    MessageBox.Show($"Updated Req#:{_requestNumber}; Status: 'DELIVERED'");
+
 
                 }
             }

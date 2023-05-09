@@ -37,7 +37,8 @@ namespace IMS.forms.requests_deliveries
                 "SREQ_SRN AS 'Request#', " +
                 "SREQ_DTE AS 'Date Requested', " +
                 "SREQ_STAT AS 'Request Status'" +
-                " FROM IMS_SREQ";
+                " FROM IMS_SREQ " +
+                "WHERE SREQ_STAT <> 'Delivered'";
             dgvRequests.DataSource = _handler.ExecuteQuery(query);
         }
 

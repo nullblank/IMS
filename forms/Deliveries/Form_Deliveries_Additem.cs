@@ -88,7 +88,7 @@ namespace IMS.forms.Deliveries
                 string itemCode = this.GetItemCode(cbItem.Text);
                 int amount = Int32.Parse(txtAmount.Text);
                 string supplier = cbSupplier.Text;
-                int cost = Int32.Parse(txtCost.Text);
+                double cost = double.Parse(txtCost.Text);
                 string branch = cbBranch.Text;
                 if (deliveries.AddDelivery(itemCode, amount, supplier, branch, cost))
                 {
