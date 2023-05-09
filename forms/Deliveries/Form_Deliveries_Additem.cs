@@ -128,7 +128,7 @@ namespace IMS.forms.Deliveries
             {
                 while (reader.Read())
                 {
-                    string value = reader.GetString(0);
+                    string value = reader.GetValue(2).ToString();
                     cbItem.Items.Add(value);
                 }
             }
