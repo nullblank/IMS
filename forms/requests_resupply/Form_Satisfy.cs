@@ -32,7 +32,7 @@ namespace IMS.forms.requests_resupply
             InitializeComponent();
             lvItems.Columns.Add("Item Code");
             lvItems.Columns.Add("Item");
-            lvItems.Columns.Add("Amount");
+            lvItems.Columns.Add("Quantity");
             ColumnHeader firstColumn = lvItems.Columns[0];
             ColumnHeader secondColumn = lvItems.Columns[1];
             firstColumn.Width = 100;
@@ -40,7 +40,7 @@ namespace IMS.forms.requests_resupply
 
             lvSend.Columns.Add("Delivery Index");
             lvSend.Columns.Add("Item Code");
-            lvSend.Columns.Add("Amount");
+            lvSend.Columns.Add("Quantity");
             lvSend.Columns.Add("Cost/Item");
             lvSend.Columns.Add("Total cost");
 
@@ -57,6 +57,7 @@ namespace IMS.forms.requests_resupply
             {
                 ListViewItem item = new ListViewItem(rows[0].ToString());
                 item.SubItems.Add(rows[1].ToString());
+                item.SubItems.Add(rows[2].ToString());
                 lvItems.Items.Add(item);
             }
         }
@@ -105,7 +106,7 @@ namespace IMS.forms.requests_resupply
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            
+
             if (string.IsNullOrEmpty(txtAmount.Text) || txtAmount.Text == "")
             {
                 MessageBox.Show("Please enter an amount.");

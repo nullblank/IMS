@@ -24,7 +24,7 @@ namespace IMS.forms.requests_deliveries
             _session = session;
             InitializeComponent();
             lvItems.Columns.Add("Item");
-            lvItems.Columns.Add("Amount");
+            lvItems.Columns.Add("Quantity");
             ColumnHeader firstColumn = lvItems.Columns[0];
             ColumnHeader secondColumn = lvItems.Columns[1];
             firstColumn.Width = 275;

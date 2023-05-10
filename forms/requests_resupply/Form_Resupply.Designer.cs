@@ -75,11 +75,11 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(554, 29);
+            label4.Location = new Point(545, 29);
             label4.Name = "label4";
-            label4.Size = new Size(68, 20);
+            label4.Size = new Size(71, 20);
             label4.TabIndex = 7;
-            label4.Text = "Amount*";
+            label4.Text = "Quantity*";
             // 
             // cbItem
             // 

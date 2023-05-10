@@ -38,7 +38,7 @@ namespace IMS.forms.requests_resupply
             lvItems.Columns[0].Width = 100;
             lvItems.Columns.Add("Item Name");
             lvItems.Columns[1].Width = 400;
-            lvItems.Columns.Add("Amount");
+            lvItems.Columns.Add("Quantity");
             lvItems.Columns[2].Width = 100;
             this.GetColumnData("IMS_RFN_SCAT", cbCategory);
             this.GetColumnData("IMS_RFN_SCA", cbSCategory);

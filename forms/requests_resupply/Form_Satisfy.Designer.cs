@@ -171,11 +171,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(23, 62);
+            label2.Location = new Point(20, 62);
             label2.Name = "label2";
-            label2.Size = new Size(65, 20);
+            label2.Size = new Size(68, 20);
             label2.TabIndex = 7;
-            label2.Text = "Amount:";
+            label2.Text = "Quantity:";
             // 
             // txtSelected
             // 

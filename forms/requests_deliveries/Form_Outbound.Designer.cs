@@ -58,6 +58,8 @@
             // 
             // dgvRequests
             // 
+            dgvRequests.AllowUserToAddRows = false;
+            dgvRequests.AllowUserToDeleteRows = false;
             dgvRequests.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRequests.Location = new Point(6, 26);

@@ -26,7 +26,7 @@ namespace IMS.forms.requests_resupply
             _session = session;
             InitializeComponent();
             lvRequestItems.Columns.Add("Item");
-            lvRequestItems.Columns.Add("Amount");
+            lvRequestItems.Columns.Add("Quantity");
             ColumnHeader firstColumn = lvRequestItems.Columns[0];
             ColumnHeader secondColumn = lvRequestItems.Columns[1];
             firstColumn.Width = 300;
@@ -42,7 +42,8 @@ namespace IMS.forms.requests_resupply
                 "SREQ_PUR AS 'Purpose', " +
                 "SREQ_RQU AS 'Requested by', " +
                 "SREQ_STAT AS 'Request Status'" +
-                " FROM IMS_SREQ";
+                " FROM IMS_SREQ" +
+                " ORDER BY SREQ_DTE ASC";
             dgvRequests.DataSource = _handler.ExecuteQuery(query);
         }
         private void Requests_Load(object sender, EventArgs e)

@@ -12,6 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Configuration;
 using IMS.src;
 using IMS.forms;
+using IMS.forms.requests_resupply;
 
 namespace IMS.NetUtil
 {
@@ -91,8 +92,10 @@ namespace IMS.NetUtil
                         {
                             case 1:
                                 Form_AdminPanel form_AdminPanel = new Form_AdminPanel(_handler, session);
-                                form_AdminPanel.Show();
-                                break;
+                                form_AdminPanel.Show(); break;
+                            case 3:
+                                Form_Requests form_Requests = new Form_Requests(_handler, session);
+                                form_Requests.Show(); break;
                         }
                         return true;
                     }
