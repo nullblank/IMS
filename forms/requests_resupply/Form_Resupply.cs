@@ -183,17 +183,18 @@ namespace IMS.forms.requests_resupply
 
                 }
                 DateTime currentDate = DateTime.Now;
-                string query = "INSERT INTO IMS_SREQ (SREQ_SRN, SREQ_DTE, SREQ_PUR, SREQ_RQU, SREQ_OFF, SREQ_STAT) ";
-                string values = $"VALUES ({requestNumber}, '{currentDate}', '{txtPurpose.Text}', '{_session.GetSessionUsername()}', '{_session.GetOffice()}', 'Pending')";
-                _handler.ExecuteNonQuery(query + values);
+                string query = "INSERT INTO IMS_SREQ (SREQ_SRN, SREQ_DTE, SREQ_PUR, SREQ_RQU, SREQ_OFF, SREQ_STAT) " +
+                $"VALUES ({requestNumber}, '{currentDate}', '{txtPurpose.Text}', '{_session.GetSessionUsername()}', '{_session.GetOffice()}', 'Pending')";
+                _handler.ExecuteNonQuery(query);
                 foreach (ListViewItem item in lvItems.Items)
                 {
-                    query = "INSERT INTO IMS_SRD (SRD_SRN, SRD_COD, SRD_QTY) ";
-                    values = $"VALUES ({requestNumber}, {item.SubItems[0].Text}, {item.SubItems[2].Text})";
-                    _handler.ExecuteNonQuery(query + values);
+                    query = "INSERT INTO IMS_SRD (SRD_SRN, SRD_COD, SRD_QTY) "
+                    + $"VALUES ({requestNumber}, {item.SubItems[0].Text}, {item.SubItems[2].Text})";
+                    _handler.ExecuteNonQuery(query);
                 }
                 _form.InitData();
                 MessageBox.Show($"Items Requested! Your Request# is: {requestNumber}. You will need this to claim your request.");
+                this.Close();
             }
         }
     }

@@ -162,7 +162,7 @@ namespace IMS.forms.requests_resupply
                 {
                     string query = "INSERT INTO IMS_SDEL " +
                         "(SDEL_SDN, SDEL_DTE, SDEL_RQU, SDEL_OFF, SDEL_COS) VALUES" +
-                        $"({_requestNumber}, '{now}', '{_session.GetUserID()}', '{_session.GetOffice()}', 0)";
+                        $"({_requestNumber}, {now}, '{_session.GetUserID()}', '{_session.GetOffice()}', 0)";
                     _handler.ExecuteNonQuery(query);
                     foreach (ListViewItem item in lvSend.Items)
                     {
