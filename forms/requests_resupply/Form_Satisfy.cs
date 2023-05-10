@@ -150,68 +150,70 @@ namespace IMS.forms.requests_resupply
             }
         }
 
-        private void button3_Click(object sender, EventArgs e) //FInish delivery
+        private void button3_Click(object sender, EventArgs e) //Finish delivery
         {
-            DateTime now = DateTime.Now;
-
-            if (lvSend.Items.Count > 0)
+            DialogResult option = MessageBox.Show("Are you sure you want to finalize this order?", "Confirm Order Delivery", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (option == DialogResult.Yes)
             {
-                string query = "INSERT INTO IMS_SDEL " +
-                    "(SDEL_SDN, SDEL_DTE, SDEL_RQU, SDEL_OFF, SDEL_COS) VALUES" +
-                    $"({_requestNumber}, '{now}', '{_session.GetUserID()}', '{_session.GetOffice()}', 0)";
-                _handler.ExecuteNonQuery(query);
-                foreach (ListViewItem item in lvSend.Items)
+                DateTime now = DateTime.Now;
+
+                if (lvSend.Items.Count > 0)
                 {
-                    //math to deduct
-
-                    string item_code = item.SubItems[1].Text;
-                    DataTable table = new DataTable();
-                    table = _handler.ExecuteQuery($"SELECT * FROM IMS_SITE WHERE SITE_COD = '{item_code}'");
-                    if (table.Rows.Count > 0)
-                    {
-                        int amount = Int32.Parse(item.SubItems[2].Text);
-                        string cost = item.SubItems[3].Text;
-                        string tCost = item.SubItems[4].Text;
-
-                        int newQoh = Int32.Parse(table.Rows[0][7].ToString()) - amount;
-
-                        MessageBox.Show($"{item_code}, {amount}, {cost}, {tCost}");
-
-                        //_handler.ExecuteNonQuery("UPDATE IMS_SITE " +
-                        //    $"SET SITE_QOH = {newQoh} " + // 
-                        //    $"WHERE SITE_COD = '{item_code}'");
-
-                        query = "INSERT INTO IMS_SDD " +
-                            "(SDD_SDN, SDD_DIDX, SDD_COD, SDD_COS, SDD_QTY, SDD_TCOS) VALUES" +
-                            $"({_requestNumber}, {_deliveryIndex}, {item_code}, {cost}, {amount}, {tCost})";
-                        _handler.ExecuteNonQuery(query);
-
-                        query = "UPDATE IMS_STOC " +
-                            $"SET STOC_QTY = STOC_QTY - {amount} " +
-                            $"WHERE STOC_IDX = {Int32.Parse(item.SubItems[0].Text)}";
-                        _handler.ExecuteNonQuery(query);
-
-
-
-                    }
-                    else
-                    {
-                        MessageBox.Show($"No item found with code '{item_code}' in IMS_SITE table.");
-                    }
-
-                    query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Delivered' WHERE SREQ_SRN = {_requestNumber}";
+                    string query = "INSERT INTO IMS_SDEL " +
+                        "(SDEL_SDN, SDEL_DTE, SDEL_RQU, SDEL_OFF, SDEL_COS) VALUES" +
+                        $"({_requestNumber}, '{now}', '{_session.GetUserID()}', '{_session.GetOffice()}', 0)";
                     _handler.ExecuteNonQuery(query);
-                    MessageBox.Show($"Updated Req#:{_requestNumber}; Status: 'DELIVERED'");
+                    foreach (ListViewItem item in lvSend.Items)
+                    {
+                        //math to deduct
+
+                        string item_code = item.SubItems[1].Text;
+                        DataTable table = new DataTable();
+                        table = _handler.ExecuteQuery($"SELECT * FROM IMS_SITE WHERE SITE_COD = '{item_code}'");
+                        if (table.Rows.Count > 0)
+                        {
+                            int amount = Int32.Parse(item.SubItems[2].Text);
+                            string cost = item.SubItems[3].Text;
+                            string tCost = item.SubItems[4].Text;
+
+                            int newQoh = Int32.Parse(table.Rows[0][7].ToString()) - amount;
+
+                            MessageBox.Show($"{item_code}, {amount}, {cost}, {tCost}");
+
+                            //_handler.ExecuteNonQuery("UPDATE IMS_SITE " +
+                            //    $"SET SITE_QOH = {newQoh} " + // 
+                            //    $"WHERE SITE_COD = '{item_code}'");
+
+                            query = "INSERT INTO IMS_SDD " +
+                                "(SDD_SDN, SDD_DIDX, SDD_COD, SDD_COS, SDD_QTY, SDD_TCOS) VALUES" +
+                                $"({_requestNumber}, {_deliveryIndex}, {item_code}, {cost}, {amount}, {tCost})";
+                            _handler.ExecuteNonQuery(query);
+
+                            query = "UPDATE IMS_STOC " +
+                                $"SET STOC_QTY = STOC_QTY - {amount} " +
+                                $"WHERE STOC_IDX = {Int32.Parse(item.SubItems[0].Text)}";
+                            _handler.ExecuteNonQuery(query);
 
 
+
+                        }
+                        else
+                        {
+                            MessageBox.Show($"No item found with code '{item_code}' in IMS_SITE table.");
+                        }
+
+                        query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Delivered' WHERE SREQ_SRN = {_requestNumber}";
+                        _handler.ExecuteNonQuery(query);
+                        MessageBox.Show($"Updated Req#:{_requestNumber}; Status: 'DELIVERED'");
+
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please add items to deliver.");
                 }
             }
-
-            else
-            {
-                MessageBox.Show("Please add items to deliver.");
-            }
-            
         }
     }
 }

@@ -12,28 +12,25 @@ namespace IMS.src
     {
         public EncryptionHandler()
         {
-            //Free Space for encyption.
+
         }
-        public string Encrypt(string plaintext) //Encryption plain text string.
+        public string Encrypt(string plaintext)
         {
-            byte[] encryptedBytes = null;//Clear bytes whenever new encryption task is called.
+            byte[] encryptedBytes = null;
 
             using (Aes aesAlg = Aes.Create())
             {
                 string key = ConfigurationManager.AppSettings["Encryption_Key"];
-                aesAlg.Key = Encoding.UTF8.GetBytes(key); // convert the key to a byte array
-                aesAlg.IV = new byte[16]; // use a new IV each time for better security
+                aesAlg.Key = Encoding.UTF8.GetBytes(key);
+                aesAlg.IV = new byte[16];
 
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-
-                // Create the streams used for encryption
                 using (MemoryStream msEncrypt = new MemoryStream())
                 {
                     using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
                         using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                         {
-                            // Write the plaintext to the stream
                             swEncrypt.Write(plaintext);
                         }
 
