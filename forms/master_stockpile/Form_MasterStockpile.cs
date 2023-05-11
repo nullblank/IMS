@@ -1,4 +1,5 @@
 ﻿using IMS.DBHandler;
+using IMS.forms.master_stockpile;
 using IMS.src;
 using Org.BouncyCastle.Crypto.Fpe;
 using System;
@@ -19,6 +20,7 @@ namespace IMS.forms
         SessionHandler _session;
         DataGridViewCellEventArgs _e;
         Form_ItemContainer form_itemcontainer;
+        Form_SetBuffer form_SetBuffer;
         public Form_MasterStockpile(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
@@ -60,13 +62,18 @@ namespace IMS.forms
                 _e = e;
                 DataGridViewRow row = dgvStockpile.Rows[e.RowIndex];
                 form_itemcontainer.SetData(dgvStockpile, e);
+
+                form_SetBuffer = new Form_SetBuffer(dgvStockpile, e, _handler, _session);
+
                 if (row.Cells["SITE_COD"].Value.ToString() == "")
                 {
                     btnUpdate.Enabled = false;
+                    btnBuff.Enabled = false;
                 }
                 else
                 {
                     btnUpdate.Enabled = true;
+                    btnBuff.Enabled = true;
                 }
             }
         }
@@ -86,6 +93,29 @@ namespace IMS.forms
                 MessageBox.Show("WARNING: ILLEGAL ACCESS DETECTED. CLOSING WINDOW!");
                 audit.LogAction("Illegal Access on: Form_MasterStockpile -> Form_ItemContainer state: AddItem");
                 this.Close();
+            }
+        }
+
+        private void dgvStockpile_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+        }
+
+        private void btnBuff_Click(object sender, EventArgs e)
+        {
+            form_SetBuffer.Show();
+        }
+
+        private void dgvStockpile_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in this.dgvStockpile.Rows)
+            {
+                int value = Convert.ToInt32(row.Cells["SITE_QOH"].Value); // replace "YourColumnName" with the name of your column
+                int threshold = Convert.ToInt32(row.Cells["SITE_BV"].Value);
+                if (value < threshold)
+                {
+                    row.DefaultCellStyle.ForeColor = Color.Red;
+                }
             }
         }
     }

@@ -36,6 +36,7 @@
             button5 = new Button();
             button6 = new Button();
             groupBox1 = new GroupBox();
+            btnBuff = new Button();
             btnUpdate = new Button();
             btnAddItem = new Button();
             groupBox2 = new GroupBox();
@@ -56,6 +57,8 @@
             dgvStockpile.Size = new Size(1050, 437);
             dgvStockpile.TabIndex = 0;
             dgvStockpile.CellClick += dgvStockpile_CellClick;
+            dgvStockpile.CellFormatting += dgvStockpile_CellFormatting;
+            dgvStockpile.DataBindingComplete += dgvStockpile_DataBindingComplete;
             // 
             // btnDeliveries
             // 
@@ -112,6 +115,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnBuff);
             groupBox1.Controls.Add(btnUpdate);
             groupBox1.Controls.Add(btnAddItem);
             groupBox1.Controls.Add(button6);
@@ -121,6 +125,17 @@
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Item";
+            // 
+            // btnBuff
+            // 
+            btnBuff.Enabled = false;
+            btnBuff.Location = new Point(167, 61);
+            btnBuff.Name = "btnBuff";
+            btnBuff.Size = new Size(208, 29);
+            btnBuff.TabIndex = 11;
+            btnBuff.Text = "Update Buffer Value";
+            btnBuff.UseVisualStyleBackColor = true;
+            btnBuff.Click += btnBuff_Click;
             // 
             // btnUpdate
             // 
@@ -198,5 +213,6 @@
         private Button btnUpdate;
         private Button btnAddItem;
         private Label label1;
+        private Button btnBuff;
     }
 }

@@ -20,8 +20,8 @@ namespace IMS.src
         }
         public bool AddItem(string code, string description, string category, string unit, string subcategory, string color)
         {
-            string query = "INSERT INTO IMS_SITE (SITE_COD, SITE_DES, SITE_SCAT, SITE_SCA, SITE_SUNT, SITE_SCOL, SITE_QOH)" +
-                    $"VALUES ('{code}', '{description}', '{category}', '{subcategory}', '{unit}', '{color}', 0)";
+            string query = "INSERT INTO IMS_SITE (SITE_COD, SITE_DES, SITE_SCAT, SITE_SCA, SITE_SUNT, SITE_SCOL, SITE_QOH, SITE_BV)" +
+                    $"VALUES ('{code}', '{description}', '{category}', '{subcategory}', '{unit}', '{color}', 0, 0)";
             if (_handler.ExecuteNonQuery(query) == 0)
             {
                 return false;
