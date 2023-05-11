@@ -63,7 +63,7 @@ namespace IMS.forms
                 DataGridViewRow row = dgvStockpile.Rows[e.RowIndex];
                 form_itemcontainer.SetData(dgvStockpile, e);
 
-                form_SetBuffer = new Form_SetBuffer(dgvStockpile, e, _handler, _session);
+                form_SetBuffer = new Form_SetBuffer(dgvStockpile, e, _handler, _session, this);
 
                 if (row.Cells["SITE_COD"].Value.ToString() == "")
                 {

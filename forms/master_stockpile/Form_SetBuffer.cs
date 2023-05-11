@@ -18,8 +18,9 @@ namespace IMS.forms.master_stockpile
         DatabaseHandler _handler;
         SessionHandler _session;
         DataGridView _grid;
+        Form_MasterStockpile _form;
         int _index;
-        public Form_SetBuffer(DataGridView grid, DataGridViewCellEventArgs e, DatabaseHandler handler, SessionHandler session)
+        public Form_SetBuffer(DataGridView grid, DataGridViewCellEventArgs e, DatabaseHandler handler, SessionHandler session, Form_MasterStockpile form)
         {
             InitializeComponent();
             _grid = grid;
@@ -27,6 +28,7 @@ namespace IMS.forms.master_stockpile
             _index = Int32.Parse(row.Cells["SITE_IDX"].Value.ToString());
             _handler = handler;
             _session = session;
+            _form = form;
         }
 
         private void txtBuffVal_KeyPress(object sender, KeyPressEventArgs e)
@@ -36,7 +38,6 @@ namespace IMS.forms.master_stockpile
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Updating Index: {_index}");
             int buffVal;
             if (int.TryParse(txtBuffVal.Text, out buffVal))
             {
@@ -47,6 +48,7 @@ namespace IMS.forms.master_stockpile
             {
                 MessageBox.Show("ERROR: INPUT NOT VALID.");
             }
+            _form.InitData(_session, _handler);
             this.Hide();
         }
     }
