@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace IMS.src
 {
+
     internal class DelItem
     {
         DatabaseHandler _handler;
@@ -19,19 +20,27 @@ namespace IMS.src
 
         public bool AddDelivery(string itemCode, int amount, string supplier, string branch,  double cost)
         {
-            DateTime now = DateTime.Now;
-            string query = "INSERT INTO IMS_STOC (STOC_COD, STOC_SUP, STOC_BRA, STOC_COS, STOC_QTY)" +
-                $"VALUES ('{itemCode}', '{supplier}', '{branch}', {cost}, {amount})";
-            string queryLog = "INSERT INTO IMS_STOC_LOG (STOC_COD, STOC_SUP, STOC_DTE, STOC_BRA, STOC_COS, STOC_QTY, STOC_TCOS)" +
-                $"VALUES ('{itemCode}', '{supplier}', '{now}', '{branch}', {cost}, {amount}, {cost * amount})";
-            if (_handler.ExecuteNonQuery(query) == 0)
+            DialogResult result = MessageBox.Show("Are you sure these are the items you want to request?", "Finalize", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
             {
-                return false;
+                DateTime now = DateTime.Now;
+                string query = "INSERT INTO IMS_STOC (STOC_COD, STOC_SUP, STOC_BRA, STOC_COS, STOC_QTY)" +
+                    $"VALUES ('{itemCode}', '{supplier}', '{branch}', {cost}, {amount})";
+                string queryLog = "INSERT INTO IMS_STOC_LOG (STOC_COD, STOC_SUP, STOC_DTE, STOC_BRA, STOC_COS, STOC_QTY, STOC_TCOS)" +
+                    $"VALUES ('{itemCode}', '{supplier}', '{now}', '{branch}', {cost}, {amount}, {cost * amount})";
+                if (_handler.ExecuteNonQuery(query) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    _handler.ExecuteNonQuery(queryLog);
+                    return true;
+                }
             }
             else
             {
-                _handler.ExecuteNonQuery(queryLog);
-                return true;
+                return false;
             }
         }
 

@@ -162,39 +162,43 @@ namespace IMS.forms.requests_resupply
         }
         private void btnRequest_Click(object sender, EventArgs e)
         {
-            if (lvItems.Items.Count == 0)
+            DialogResult result = MessageBox.Show("Are you sure these are the items you want to request?", "Finalize", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
             {
-                MessageBox.Show("Please add items to request first!");
-                return;
-            }
-            else if (string.IsNullOrEmpty(txtPurpose.Text) || txtPurpose.Text == "")
-            {
-                MessageBox.Show("Please state the purpose of your request");
-                return;
-            }
-            else
-            {
-
-                int requestNumber = this.GenerateRequestID();
-                DataTable requestChk = _handler.ExecuteQuery($"SELECT * FROM IMS_SREQ WHERE SREQ_SRN = {requestNumber}");
-                if (requestChk.Rows.Count != 0)
+                if (lvItems.Items.Count == 0)
                 {
-                    requestNumber = this.GenerateRequestID();
-
+                    MessageBox.Show("Please add items to request first!");
+                    return;
                 }
-                DateTime currentDate = DateTime.Now;
-                string query = "INSERT INTO IMS_SREQ (SREQ_SRN, SREQ_DTE, SREQ_PUR, SREQ_RQU, SREQ_OFF, SREQ_STAT) " +
-                $"VALUES ({requestNumber}, '{currentDate}', '{txtPurpose.Text}', '{_session.GetSessionUsername()}', '{_session.GetOffice()}', 'Pending')";
-                _handler.ExecuteNonQuery(query);
-                foreach (ListViewItem item in lvItems.Items)
+                else if (string.IsNullOrEmpty(txtPurpose.Text) || txtPurpose.Text == "")
                 {
-                    query = "INSERT INTO IMS_SRD (SRD_SRN, SRD_COD, SRD_QTY) "
-                    + $"VALUES ({requestNumber}, {item.SubItems[0].Text}, {item.SubItems[2].Text})";
+                    MessageBox.Show("Please state the purpose of your request");
+                    return;
+                }
+                else
+                {
+
+                    int requestNumber = this.GenerateRequestID();
+                    DataTable requestChk = _handler.ExecuteQuery($"SELECT * FROM IMS_SREQ WHERE SREQ_SRN = {requestNumber}");
+                    if (requestChk.Rows.Count != 0)
+                    {
+                        requestNumber = this.GenerateRequestID();
+
+                    }
+                    DateTime currentDate = DateTime.Now;
+                    string query = "INSERT INTO IMS_SREQ (SREQ_SRN, SREQ_DTE, SREQ_PUR, SREQ_RQU, SREQ_OFF, SREQ_STAT) " +
+                    $"VALUES ({requestNumber}, '{currentDate}', '{txtPurpose.Text}', '{_session.GetSessionUsername()}', '{_session.GetOffice()}', 'Pending')";
                     _handler.ExecuteNonQuery(query);
+                    foreach (ListViewItem item in lvItems.Items)
+                    {
+                        query = "INSERT INTO IMS_SRD (SRD_SRN, SRD_COD, SRD_QTY) "
+                        + $"VALUES ({requestNumber}, {item.SubItems[0].Text}, {item.SubItems[2].Text})";
+                        _handler.ExecuteNonQuery(query);
+                    }
+                    _form.InitData();
+                    MessageBox.Show($"Items Requested! Your Request# is: {requestNumber}. You will need this to claim your request.");
+                    this.Close();
                 }
-                _form.InitData();
-                MessageBox.Show($"Items Requested! Your Request# is: {requestNumber}. You will need this to claim your request.");
-                this.Close();
             }
         }
     }

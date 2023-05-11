@@ -12,6 +12,30 @@ using System.Collections;
 
 namespace IMS.DBHandler
 {
+    /*
+     * Dance with me under the diamonds
+     * See me like breath in the cold
+     * Sleep with me here in the silence
+     * Come kiss me, silver and gold.
+     * 
+     * You say that I won't lose you
+     * But you can't predict the future
+     * So just hold on like you will never let go
+     * Yeah, if you ever move on without me
+     * I need to make sure you know
+     * 
+     * That you
+     * Are the only one I'll ever love
+     * ~
+     * Yeah, you,
+     * if it's not you, it's not anyone
+     * ~
+     * Lookin' back on my life, you're the only good I've ever done
+     * ~
+     * Yeah, you,
+     * if it's not you, it's not anyone
+     * ~ Not anyone.
+     */
     public class DatabaseHandler
     {
         private readonly string _connectionString;

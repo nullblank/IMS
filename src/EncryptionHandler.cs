@@ -12,7 +12,7 @@ namespace IMS.src
     {
         public EncryptionHandler()
         {
-
+            //1801251405 09'13 1915181825
         }
         public string Encrypt(string plaintext)
         {

@@ -38,7 +38,6 @@
             cbCategory = new ComboBox();
             label1 = new Label();
             txtPurpose = new TextBox();
-            btnCancel = new Button();
             btnAdd = new Button();
             lvItems = new ListView();
             btnRequest = new Button();
@@ -51,16 +50,18 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(txtAmount);
+            groupBox1.Controls.Add(btnRemove);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(cbItem);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(cbSCategory);
+            groupBox1.Controls.Add(btnAdd);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(cbCategory);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 222);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(757, 139);
+            groupBox1.Size = new Size(757, 117);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Item Details";
@@ -147,18 +148,9 @@
             txtPurpose.Size = new Size(445, 27);
             txtPurpose.TabIndex = 9;
             // 
-            // btnCancel
-            // 
-            btnCancel.Location = new Point(675, 367);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(94, 38);
-            btnCancel.TabIndex = 7;
-            btnCancel.Text = "Cancel";
-            btnCancel.UseVisualStyleBackColor = true;
-            // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(475, 367);
+            btnAdd.Location = new Point(546, 63);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(94, 38);
             btnAdd.TabIndex = 6;
@@ -177,9 +169,9 @@
             // 
             // btnRequest
             // 
-            btnRequest.Location = new Point(475, 411);
+            btnRequest.Location = new Point(475, 345);
             btnRequest.Name = "btnRequest";
-            btnRequest.Size = new Size(294, 38);
+            btnRequest.Size = new Size(294, 64);
             btnRequest.TabIndex = 9;
             btnRequest.Text = "Finalize Request";
             btnRequest.UseVisualStyleBackColor = true;
@@ -187,7 +179,7 @@
             // 
             // btnRemove
             // 
-            btnRemove.Location = new Point(575, 366);
+            btnRemove.Location = new Point(646, 63);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(94, 38);
             btnRemove.TabIndex = 10;
@@ -198,9 +190,9 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(txtPurpose);
-            groupBox2.Location = new Point(12, 367);
+            groupBox2.Location = new Point(12, 345);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(457, 82);
+            groupBox2.Size = new Size(457, 64);
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Purpose*";
@@ -209,13 +201,10 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(781, 461);
+            ClientSize = new Size(781, 422);
             Controls.Add(groupBox2);
-            Controls.Add(btnRemove);
             Controls.Add(btnRequest);
             Controls.Add(lvItems);
-            Controls.Add(btnCancel);
-            Controls.Add(btnAdd);
             Controls.Add(groupBox1);
             Name = "Form_Resupply";
             Text = "Form_Resupply";
@@ -237,7 +226,6 @@
         private Label label2;
         private ComboBox cbCategory;
         private Label label1;
-        private Button btnCancel;
         private Button btnAdd;
         private ListView lvItems;
         private Button btnRequest;
