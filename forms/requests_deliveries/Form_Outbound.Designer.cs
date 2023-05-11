@@ -143,7 +143,7 @@
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(label1);
-            groupBox3.Location = new Point(608, 12);
+            groupBox3.Location = new Point(608, 356);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(378, 178);
             groupBox3.TabIndex = 3;
@@ -221,7 +221,7 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(lvItems);
-            groupBox4.Location = new Point(608, 196);
+            groupBox4.Location = new Point(608, 12);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(378, 338);
             groupBox4.TabIndex = 4;
@@ -241,7 +241,7 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(btnSatisfy);
-            groupBox5.Location = new Point(998, 196);
+            groupBox5.Location = new Point(992, 356);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(189, 74);
             groupBox5.TabIndex = 5;

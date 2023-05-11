@@ -162,11 +162,10 @@ namespace IMS.forms.requests_resupply
                 {
                     string query = "INSERT INTO IMS_SDEL " +
                         "(SDEL_SDN, SDEL_DTE, SDEL_RQU, SDEL_OFF, SDEL_COS) VALUES" +
-                        $"({_requestNumber}, {now}, '{_session.GetUserID()}', '{_session.GetOffice()}', 0)";
+                        $"({_requestNumber}, '{now}', '{_session.GetUserID()}', '{_session.GetOffice()}', 0)";
                     _handler.ExecuteNonQuery(query);
                     foreach (ListViewItem item in lvSend.Items)
                     {
-                        //math to deduct
 
                         string item_code = item.SubItems[1].Text;
                         DataTable table = new DataTable();
@@ -177,14 +176,10 @@ namespace IMS.forms.requests_resupply
                             string cost = item.SubItems[3].Text;
                             string tCost = item.SubItems[4].Text;
 
-                            int newQoh = Int32.Parse(table.Rows[0][7].ToString()) - amount;
-
-                            MessageBox.Show($"{item_code}, {amount}, {cost}, {tCost}");
-
+                            //int newQoh = Int32.Parse(table.Rows[0][7].ToString()) - Int32.Parse(txtAmount.Text);
                             //_handler.ExecuteNonQuery("UPDATE IMS_SITE " +
                             //    $"SET SITE_QOH = {newQoh} " + // 
                             //    $"WHERE SITE_COD = '{item_code}'");
-
                             query = "INSERT INTO IMS_SDD " +
                                 "(SDD_SDN, SDD_DIDX, SDD_COD, SDD_COS, SDD_QTY, SDD_TCOS) VALUES" +
                                 $"({_requestNumber}, {_deliveryIndex}, {item_code}, {cost}, {amount}, {tCost})";
@@ -194,26 +189,32 @@ namespace IMS.forms.requests_resupply
                                 $"SET STOC_QTY = STOC_QTY - {amount} " +
                                 $"WHERE STOC_IDX = {Int32.Parse(item.SubItems[0].Text)}";
                             _handler.ExecuteNonQuery(query);
-
-
-
                         }
                         else
                         {
                             MessageBox.Show($"No item found with code '{item_code}' in IMS_SITE table.");
                         }
-
-                        query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Delivered' WHERE SREQ_SRN = {_requestNumber}";
-                        _handler.ExecuteNonQuery(query);
-                        MessageBox.Show($"Updated Req#:{_requestNumber}; Status: 'DELIVERED'");
-
-
                     }
+                    query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Delivered' WHERE SREQ_SRN = {_requestNumber}";
+                    _handler.ExecuteNonQuery(query);
+                    MessageBox.Show($"Updated Req#:{_requestNumber}; Status: 'DELIVERED'");
                 }
                 else
                 {
                     MessageBox.Show("Please add items to deliver.");
                 }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (lvSend.SelectedItems.Count > 0)
+            {
+                // Retrieve the index of the selected item
+                int index = lvSend.SelectedItems[0].Index;
+
+                // Remove the item from the ListView control
+                lvSend.Items.RemoveAt(index);
             }
         }
     }

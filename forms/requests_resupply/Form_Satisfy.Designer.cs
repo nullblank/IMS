@@ -64,6 +64,7 @@
             // lvItems
             // 
             lvItems.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lvItems.FullRowSelect = true;
             lvItems.Location = new Point(6, 26);
             lvItems.Name = "lvItems";
             lvItems.Size = new Size(366, 306);
@@ -85,6 +86,7 @@
             // lvSend
             // 
             lvSend.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lvSend.FullRowSelect = true;
             lvSend.Location = new Point(6, 26);
             lvSend.Name = "lvSend";
             lvSend.Size = new Size(366, 306);
@@ -122,6 +124,7 @@
             button1.TabIndex = 1;
             button1.Text = "Remove Selected";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // groupBox3
             // 
