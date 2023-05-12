@@ -1,4 +1,5 @@
 ﻿using IMS.DBHandler;
+using IMS.forms.report;
 using IMS.forms.requests_resupply;
 using IMS.src;
 using System;
@@ -109,6 +110,24 @@ namespace IMS.forms.requests_deliveries
         private void btnSatisfy_Click(object sender, EventArgs e)
         {
             Form_Satisfy form = new Form_Satisfy(_handler, _session, _referenceNumber);
+            form.Show();
+        }
+
+        private void btnStockpile_Click(object sender, EventArgs e)
+        {
+            Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
+            form.Show();
+        }
+
+        private void btnDeliveries_Click(object sender, EventArgs e)
+        {
+            Form_Deliveries form = new Form_Deliveries(_handler, _session);
+            form.Show();
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            Form_Reports form = new Form_Reports(_handler, _session);
             form.Show();
         }
     }

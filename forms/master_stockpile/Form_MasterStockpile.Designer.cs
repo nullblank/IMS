@@ -34,7 +34,7 @@
             button2 = new Button();
             textBox1 = new TextBox();
             button5 = new Button();
-            button6 = new Button();
+            btnViewDeliveries = new Button();
             groupBox1 = new GroupBox();
             btnBuff = new Button();
             btnUpdate = new Button();
@@ -103,22 +103,23 @@
             button5.Text = "Search";
             button5.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnViewDeliveries
             // 
-            button6.Enabled = false;
-            button6.Location = new Point(167, 26);
-            button6.Name = "button6";
-            button6.Size = new Size(208, 29);
-            button6.TabIndex = 8;
-            button6.Text = "View Item Delivery Logs";
-            button6.UseVisualStyleBackColor = true;
+            btnViewDeliveries.Enabled = false;
+            btnViewDeliveries.Location = new Point(167, 26);
+            btnViewDeliveries.Name = "btnViewDeliveries";
+            btnViewDeliveries.Size = new Size(208, 29);
+            btnViewDeliveries.TabIndex = 8;
+            btnViewDeliveries.Text = "View Item Delivery Logs";
+            btnViewDeliveries.UseVisualStyleBackColor = true;
+            btnViewDeliveries.Click += btnViewDeliveries_Click;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(btnBuff);
             groupBox1.Controls.Add(btnUpdate);
             groupBox1.Controls.Add(btnAddItem);
-            groupBox1.Controls.Add(button6);
+            groupBox1.Controls.Add(btnViewDeliveries);
             groupBox1.Location = new Point(12, 488);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(382, 97);
@@ -207,7 +208,7 @@
         private Button button2;
         private TextBox textBox1;
         private Button button5;
-        private Button button6;
+        private Button btnViewDeliveries;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private Button btnUpdate;

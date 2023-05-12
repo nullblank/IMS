@@ -69,11 +69,13 @@ namespace IMS.forms
                 {
                     btnUpdate.Enabled = false;
                     btnBuff.Enabled = false;
+                    btnViewDeliveries.Enabled = false;
                 }
                 else
                 {
                     btnUpdate.Enabled = true;
                     btnBuff.Enabled = true;
+                    btnViewDeliveries.Enabled = true;
                 }
             }
         }
@@ -117,6 +119,15 @@ namespace IMS.forms
                     row.DefaultCellStyle.ForeColor = Color.Red;
                 }
             }
+        }
+
+        private void btnViewDeliveries_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = this.dgvStockpile.Rows[_e.RowIndex];
+            int itemcode = Int32.Parse(row.Cells["SITE_COD"].Value.ToString());
+            Form_Deliveries form = new Form_Deliveries(_handler, _session);
+            form.InitDataQuery(itemcode);
+            form.Show();
         }
     }
 }

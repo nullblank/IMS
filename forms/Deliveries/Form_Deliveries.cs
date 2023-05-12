@@ -29,6 +29,22 @@ namespace IMS.forms
         {
             DataTable results = new DataTable();
             string query = "SELECT " +
+                "IMS_STOC.STOC_IDX AS 'Index'," +
+                "IMS_SITE.SITE_DES AS 'Description'," +
+                "IMS_STOC.STOC_SUP AS 'Supplier'," +
+                "IMS_STOC.STOC_DTE AS 'Date Created'," +
+                "IMS_STOC.STOC_BRA AS 'Branch'," +
+                "IMS_STOC.STOC_COS AS 'CPI'," +
+                "IMS_STOC.STOC_QTY AS 'Quantity' " +
+                "FROM IMS_STOC " +
+                "JOIN IMS_SITE ON IMS_STOC.STOC_COD = IMS_SITE.SITE_COD";
+            dgvDeliveries.DataSource = _handler.ExecuteQuery(query);
+        }
+
+        public void InitDataQuery(int itemcode)
+        {
+            DataTable results = new DataTable();
+            string query = "SELECT " +
                 "IMS_STOC.STOC_IDX AS Stock_Index," +
                 "IMS_SITE.SITE_DES AS Stock_Description," +
                 "IMS_STOC.STOC_SUP AS Stock_Supplier," +
@@ -37,8 +53,10 @@ namespace IMS.forms
                 "IMS_STOC.STOC_COS AS Stock_CPI," +
                 "IMS_STOC.STOC_QTY AS Stock_Quantity " +
                 "FROM IMS_STOC " +
-                "JOIN IMS_SITE ON IMS_STOC.STOC_COD = IMS_SITE.SITE_COD";
+                "JOIN IMS_SITE ON IMS_STOC.STOC_COD = IMS_SITE.SITE_COD " +
+                $"WHERE IMS_STOC.STOC_COD = {itemcode}";
             dgvDeliveries.DataSource = _handler.ExecuteQuery(query);
+            btnAddDelivery.Hide();
         }
 
         private void button5_Click(object sender, EventArgs e)

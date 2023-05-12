@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="docs\backups\" />
-    <Folder Include="forms\report\" />
   </ItemGroup>
 
 </Project>

@@ -48,12 +48,17 @@
             lvItems = new ListView();
             groupBox5 = new GroupBox();
             btnSatisfy = new Button();
+            groupBox6 = new GroupBox();
+            btnReports = new Button();
+            btnDeliveries = new Button();
+            btnStockpile = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvRequests).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
+            groupBox6.SuspendLayout();
             SuspendLayout();
             // 
             // dgvRequests
@@ -241,7 +246,7 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(btnSatisfy);
-            groupBox5.Location = new Point(992, 356);
+            groupBox5.Location = new Point(992, 196);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(189, 74);
             groupBox5.TabIndex = 5;
@@ -254,15 +259,58 @@
             btnSatisfy.Name = "btnSatisfy";
             btnSatisfy.Size = new Size(177, 29);
             btnSatisfy.TabIndex = 3;
-            btnSatisfy.Text = "Satisfy Request";
+            btnSatisfy.Text = "Fill Request";
             btnSatisfy.UseVisualStyleBackColor = true;
             btnSatisfy.Click += btnSatisfy_Click;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(btnReports);
+            groupBox6.Controls.Add(btnDeliveries);
+            groupBox6.Controls.Add(btnStockpile);
+            groupBox6.Location = new Point(992, 276);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(189, 258);
+            groupBox6.TabIndex = 6;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Management";
+            // 
+            // btnReports
+            // 
+            btnReports.Location = new Point(6, 96);
+            btnReports.Name = "btnReports";
+            btnReports.Size = new Size(177, 29);
+            btnReports.TabIndex = 8;
+            btnReports.Text = "Reports";
+            btnReports.UseVisualStyleBackColor = true;
+            btnReports.Click += btnReports_Click;
+            // 
+            // btnDeliveries
+            // 
+            btnDeliveries.Location = new Point(6, 61);
+            btnDeliveries.Name = "btnDeliveries";
+            btnDeliveries.Size = new Size(177, 29);
+            btnDeliveries.TabIndex = 7;
+            btnDeliveries.Text = "Deliveries";
+            btnDeliveries.UseVisualStyleBackColor = true;
+            btnDeliveries.Click += btnDeliveries_Click;
+            // 
+            // btnStockpile
+            // 
+            btnStockpile.Location = new Point(6, 26);
+            btnStockpile.Name = "btnStockpile";
+            btnStockpile.Size = new Size(177, 29);
+            btnStockpile.TabIndex = 3;
+            btnStockpile.Text = "View Stockpile";
+            btnStockpile.UseVisualStyleBackColor = true;
+            btnStockpile.Click += btnStockpile_Click;
             // 
             // Form_Outbound
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1199, 546);
+            Controls.Add(groupBox6);
             Controls.Add(groupBox5);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
@@ -277,6 +325,7 @@
             groupBox3.PerformLayout();
             groupBox4.ResumeLayout(false);
             groupBox5.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -302,5 +351,9 @@
         private ListView lvItems;
         private GroupBox groupBox5;
         private Button btnSatisfy;
+        private GroupBox groupBox6;
+        private Button btnStockpile;
+        private Button btnDeliveries;
+        private Button btnReports;
     }
 }
