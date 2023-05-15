@@ -37,6 +37,20 @@ namespace IMS.src
             return dataTable;
         }
 
+        public DataTable GetNonQueryRecords(string table)
+        {
+            string query = "SELECT * " +
+                $"FROM {table}";
+            DataTable dataTable = new DataTable();
+            dataTable = _handler.ExecuteQuery(query);
+            if (dataTable == null)
+            {
+                MessageBox.Show("ERROR! Datatable is null!");
+                return null;
+            }
+            return dataTable;
+        }
+
         private int GetMonth(string month)
         {
             switch (month)

@@ -16,6 +16,7 @@ using DataTable = System.Data.DataTable;
 
 namespace IMS.forms.report
 {
+    //REDO THIS ENTIRE THING, I HATE IT - Diego
     public partial class Form_Reports : Form
     {
         DatabaseHandler _handler;
@@ -130,6 +131,27 @@ namespace IMS.forms.report
                     {
                         MessageBox.Show($"ERROR EXPORTING TO EXCELs");
                     }
+                }
+            }
+        }
+
+        private void btnExRequestItems_Click(object sender, EventArgs e)
+        {
+            Reports report = new Reports(_handler);
+            DataTable table = report.GetNonQueryRecords("IMS_SRD");
+            if (table.Rows.Count == 0)
+            {
+                MessageBox.Show("ERROR: NO ITEMS FOUND. CALL DEVELOPER!");
+            }
+            else
+            {
+                if (report.ExporttoExcel(table, txtSavePath.Text))
+                {
+                    MessageBox.Show($"Export Finished! Exported to: {txtSavePath.Text}");
+                }
+                else
+                {
+                    MessageBox.Show($"ERROR EXPORTING TO EXCELs");
                 }
             }
         }

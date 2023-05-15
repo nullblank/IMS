@@ -177,6 +177,7 @@
             btnExRequestItems.TabIndex = 4;
             btnExRequestItems.Text = "Export Request Items";
             btnExRequestItems.UseVisualStyleBackColor = true;
+            btnExRequestItems.Click += btnExRequestItems_Click;
             // 
             // groupBox4
             // 
