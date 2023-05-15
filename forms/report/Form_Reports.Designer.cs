@@ -68,7 +68,7 @@
             // 
             // txtYear
             // 
-            txtYear.Location = new Point(482, 34);
+            txtYear.Location = new Point(503, 34);
             txtYear.Name = "txtYear";
             txtYear.Size = new Size(125, 27);
             txtYear.TabIndex = 4;
@@ -78,7 +78,7 @@
             // 
             cbMonth.FormattingEnabled = true;
             cbMonth.Items.AddRange(new object[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
-            cbMonth.Location = new Point(279, 34);
+            cbMonth.Location = new Point(294, 34);
             cbMonth.Name = "cbMonth";
             cbMonth.Size = new Size(151, 28);
             cbMonth.TabIndex = 3;
@@ -86,16 +86,16 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(436, 37);
+            label3.Location = new Point(451, 37);
             label3.Name = "label3";
-            label3.Size = new Size(40, 20);
+            label3.Size = new Size(46, 20);
             label3.TabIndex = 2;
-            label3.Text = "Year:";
+            label3.Text = "Year*:";
             // 
             // cbOffice
             // 
             cbOffice.FormattingEnabled = true;
-            cbOffice.Location = new Point(64, 34);
+            cbOffice.Location = new Point(70, 34);
             cbOffice.Name = "cbOffice";
             cbOffice.Size = new Size(151, 28);
             cbOffice.TabIndex = 1;
@@ -103,20 +103,20 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(221, 37);
+            label2.Location = new Point(227, 37);
             label2.Name = "label2";
-            label2.Size = new Size(52, 20);
+            label2.Size = new Size(61, 20);
             label2.TabIndex = 2;
-            label2.Text = "Month";
+            label2.Text = "Month*:";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(6, 37);
             label1.Name = "label1";
-            label1.Size = new Size(52, 20);
+            label1.Size = new Size(58, 20);
             label1.TabIndex = 0;
-            label1.Text = "Office:";
+            label1.Text = "Office*:";
             // 
             // btnExRequests
             // 
@@ -147,6 +147,7 @@
             btnExResupplies.TabIndex = 4;
             btnExResupplies.Text = "Export Resupplies";
             btnExResupplies.UseVisualStyleBackColor = true;
+            btnExResupplies.Click += btnExResupplies_Click;
             // 
             // groupBox3
             // 
@@ -154,14 +155,14 @@
             groupBox3.Controls.Add(btnExRequestItems);
             groupBox3.Location = new Point(12, 194);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(295, 113);
+            groupBox3.Size = new Size(295, 100);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Dump";
             // 
             // btnExResuppliedItems
             // 
-            btnExResuppliedItems.Location = new Point(6, 73);
+            btnExResuppliedItems.Location = new Point(6, 61);
             btnExResuppliedItems.Name = "btnExResuppliedItems";
             btnExResuppliedItems.Size = new Size(283, 29);
             btnExResuppliedItems.TabIndex = 5;
@@ -170,7 +171,7 @@
             // 
             // btnExRequestItems
             // 
-            btnExRequestItems.Location = new Point(6, 38);
+            btnExRequestItems.Location = new Point(6, 26);
             btnExRequestItems.Name = "btnExRequestItems";
             btnExRequestItems.Size = new Size(283, 29);
             btnExRequestItems.TabIndex = 4;
@@ -220,7 +221,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(677, 319);
+            ClientSize = new Size(677, 306);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);

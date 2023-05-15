@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,18 @@ namespace IMS.forms.report
             InitializeComponent();
             _handler = handler;
             _session = session;
+            this.GetColumnData("IMS_RFN_OFF", "OFF_DES", cbOffice);
+        }
+        private void GetColumnData(string table, string column, System.Windows.Forms.ComboBox cb)
+        {
+            using (SqlDataReader reader = _handler.GetColumnData(table, column))
+            {
+                while (reader.Read())
+                {
+                    string value = reader.GetString(0);
+                    cb.Items.Add(value);
+                }
+            }
         }
         private void txtYear_KeyDown(object sender, KeyEventArgs e)
         {
@@ -39,16 +52,23 @@ namespace IMS.forms.report
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            DateTime time = DateTime.Now;
-            string realTime = time.ToString("MM-dd-yyyy_HH-mm-ss");
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|s*.*";
-            saveFileDialog.FileName = $"Requests_{cbOffice.Text}({cbMonth.Text}-{txtYear.Text}){realTime}.xlsx";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (string.IsNullOrEmpty(cbMonth.Text) || string.IsNullOrEmpty(cbOffice.Text) || string.IsNullOrEmpty(txtYear.Text))
             {
-                string fileName = saveFileDialog.FileName;
-                txtSavePath.Text = fileName;
-                // Use fileName variable to do something with the selected file location
+                MessageBox.Show("Please make sure the Office, Month, and Year fields are not empty.");
+            }
+            else
+            {
+                DateTime time = DateTime.Now;
+                string realTime = time.ToString("MM-dd-yyyy_HH-mm-ss");
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|s*.*";
+                saveFileDialog.FileName = $"Requests_{cbOffice.Text}({cbMonth.Text}-{txtYear.Text}){realTime}.xlsx";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fileName = saveFileDialog.FileName;
+                    txtSavePath.Text = fileName;
+                    // Use fileName variable to do something with the selected file location
+                }
             }
         }
 
@@ -63,9 +83,53 @@ namespace IMS.forms.report
                 string table = "IMS_SREQ";
                 Reports report = new Reports(_handler);
                 DataTable dataTable = report.GetQueryRecords(cbMonth, txtYear, cbOffice, table);
-                if (report.ExporttoExcel(dataTable, txtSavePath.Text))
+                if (dataTable == null) { return; }
+                if (dataTable.Rows.Count == 0)
                 {
-                    MessageBox.Show($"Export Finished! Exported to: {txtSavePath.Text}");
+                    MessageBox.Show("No records found for the indicated office, month, and year. ");
+                    return;
+                }
+                else
+                {
+                    if (report.ExporttoExcel(dataTable, txtSavePath.Text))
+                    {
+                        MessageBox.Show($"Export Finished! Exported to: {txtSavePath.Text}");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"ERROR EXPORTING TO EXCELs");
+                    }
+                }
+            }
+        }
+
+        private void btnExResupplies_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSavePath.Text) || string.IsNullOrWhiteSpace(txtSavePath.Text))
+            {
+                MessageBox.Show("Please select a save path.");
+            }
+            else
+            {
+                string table = "IMS_SDEL";
+                Reports report = new Reports(_handler);
+                DataTable dataTable = report.GetQueryRecords(cbMonth, txtYear, cbOffice, table);
+                if (dataTable == null) { return; }
+                if (dataTable.Rows.Count == 0)
+                {
+                    MessageBox.Show("No records found for the indicated office, month, and year. ");
+                    return;
+                }
+                else
+                {
+                    if (report.ExporttoExcel(dataTable, txtSavePath.Text))
+                    {
+                        MessageBox.Show($"Export Finished! Exported to: {txtSavePath.Text}");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"ERROR EXPORTING TO EXCELs");
+                    }
                 }
             }
         }
