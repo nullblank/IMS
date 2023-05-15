@@ -18,23 +18,19 @@ namespace IMS.src
         {
             _handler = handler;
         }
-        public void GetQueryRecords(TextBox month, TextBox year, TextBox Office, string table, string filePath)
+        public DataTable GetQueryRecords(ComboBox month, TextBox year, ComboBox Office, string table)
         {
             string query = "SELECT *" +
-                $"FROM {table}" +
-                $"WHERE MONTH({table.Substring(4) + "_DTE"}) = {month.Text}" +
-                $"AND YEAR({table.Substring(4) + "_DTE"}) = {year.Text}" +
-                $"AND {table.Substring(4) + "_OFF"} = {Office.Text}";
+                $" FROM {table}" +  // add space here
+                $" WHERE MONTH({table.Substring(4) + "_DTE"}) = {month.Text}" +
+                $" AND YEAR({table.Substring(4) + "_DTE"}) = {year.Text}" +
+                $" AND {table.Substring(4) + "_OFF"} = {Office.Text}";
             DataTable dataTable = new DataTable();
             dataTable = _handler.ExecuteQuery(query);
-            
-            if (ExporttoExcel(dataTable, filePath))
-            {
-                MessageBox.Show($"Export Finished! Exported to: {filePath}");
-            }
+            return dataTable;
         }
 
-        private static bool ExporttoExcel(DataTable dataTable, string filePath)
+        public bool ExporttoExcel(DataTable dataTable, string filePath)
         {
             try
             {
@@ -45,26 +41,34 @@ namespace IMS.src
                 //Create a new worksheet
                 Excel.Worksheet excelWorksheet = excelWorkbook.Sheets[1];
                 //Set the column headers in the first row
-                int columnCount = dataTable.Columns.Count;
-                for (int i = 0; i < columnCount; i++)
+                if (dataTable == null)
                 {
-                    excelWorksheet.Cells[1, i + 1] = dataTable.Columns[i].ColumnName;
+                    MessageBox.Show("ERROR: DataTable does not exist!");
+                    return false;
                 }
-                //Populate the data in the remaining rows
-                int rowCount = dataTable.Rows.Count;
-                for (int i = 0; i < rowCount; i++)
+                else
                 {
-                    for (int j = 0; j < columnCount; j++)
+                    int columnCount = dataTable.Columns.Count;
+                    for (int i = 0; i < columnCount; i++)
                     {
-                        excelWorksheet.Cells[i + 2, j + 1] = dataTable.Rows[i][j].ToString();
+                        excelWorksheet.Cells[1, i + 1] = dataTable.Columns[i].ColumnName;
                     }
+                    //Populate the data in the remaining rows
+                    int rowCount = dataTable.Rows.Count;
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        for (int j = 0; j < columnCount; j++)
+                        {
+                            excelWorksheet.Cells[i + 2, j + 1] = dataTable.Rows[i][j].ToString();
+                        }
+                    }
+                    //Save the workbook to the specified file path
+                    excelWorkbook.SaveAs(filePath);
+                    //Close the workbook and release the resources
+                    excelWorkbook.Close();
+                    excelApp.Quit();
+                    return true;
                 }
-                //Save the workbook to the specified file path
-                excelWorkbook.SaveAs(filePath);
-                //Close the workbook and release the resources
-                excelWorkbook.Close();
-                excelApp.Quit();
-                return true;
             }
             catch (Exception e)
             {

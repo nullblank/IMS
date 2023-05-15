@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "IMS": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

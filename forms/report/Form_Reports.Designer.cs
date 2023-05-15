@@ -126,6 +126,7 @@
             btnExRequests.TabIndex = 1;
             btnExRequests.Text = "Export Requests";
             btnExRequests.UseVisualStyleBackColor = true;
+            btnExRequests.Click += btnExRequests_Click;
             // 
             // groupBox2
             // 

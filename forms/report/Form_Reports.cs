@@ -1,5 +1,6 @@
 ﻿using IMS.DBHandler;
 using IMS.src;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using DataTable = System.Data.DataTable;
 
 namespace IMS.forms.report
 {
@@ -47,6 +49,24 @@ namespace IMS.forms.report
                 string fileName = saveFileDialog.FileName;
                 txtSavePath.Text = fileName;
                 // Use fileName variable to do something with the selected file location
+            }
+        }
+
+        private void btnExRequests_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSavePath.Text) || string.IsNullOrWhiteSpace(txtSavePath.Text))
+            {
+                MessageBox.Show("Please select a save path.");
+            }
+            else
+            {
+                string table = "IMS_SREQ";
+                Reports report = new Reports(_handler);
+                DataTable dataTable = report.GetQueryRecords(cbMonth, txtYear, cbOffice, table);
+                if (report.ExporttoExcel(dataTable, txtSavePath.Text))
+                {
+                    MessageBox.Show($"Export Finished! Exported to: {txtSavePath.Text}");
+                }
             }
         }
     }
