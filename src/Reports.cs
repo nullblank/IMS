@@ -50,39 +50,23 @@ namespace IMS.src
             }
             return dataTable;
         }
-
-        private int GetMonth(string month)
+        public string SetFilePath(string type, string office, string month, string year)
         {
-            switch (month)
+            DateTime time = DateTime.Now;
+            string realTime = time.ToString("MM-dd-yyyy_HH-mm-ss");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|s*.*";
+            saveFileDialog.FileName = $"{office}_{type}({month}-{year}){realTime}.xlsx";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                case "January":
-                    return 1;
-                case "February":
-                    return 2;
-                case "March":
-                    return 3;
-                case "April":
-                    return 4;
-                case "May":
-                    return 5;
-                case "June":
-                    return 6;
-                case "July":
-                    return 7;
-                case "August":
-                    return 8;
-                case "September":
-                    return 9;
-                case "October":
-                    return 10;
-                case "November":
-                    return 11;
-                case "December":
-                    return 12;
-                default: return 0;
+                string fileName = saveFileDialog.FileName;
+                return fileName;
+            }
+            else
+            {
+                return null;
             }
         }
-
         public bool ExporttoExcel(DataTable dataTable, string filePath)
         {
             try
@@ -127,6 +111,25 @@ namespace IMS.src
             {
                 MessageBox.Show($"Error while exporting!: {e.Message}");
                 return false;
+            }
+        }
+        private int GetMonth(string month)
+        {
+            switch (month)
+            {
+                case "January":     return 1;
+                case "February":    return 2;
+                case "March":       return 3;
+                case "April":       return 4;
+                case "May":         return 5;
+                case "June":        return 6;
+                case "July":        return 7;
+                case "August":      return 8;
+                case "September":   return 9;
+                case "October":     return 10;
+                case "November":    return 11;
+                case "December":    return 12;
+                default:            return 0;
             }
         }
     }

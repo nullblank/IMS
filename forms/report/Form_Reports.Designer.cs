@@ -41,14 +41,9 @@
             groupBox3 = new GroupBox();
             btnExResuppliedItems = new Button();
             btnExRequestItems = new Button();
-            groupBox4 = new GroupBox();
-            btnBrowse = new Button();
-            txtSavePath = new TextBox();
-            label6 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
-            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -132,7 +127,7 @@
             // 
             groupBox2.Controls.Add(btnExResupplies);
             groupBox2.Controls.Add(btnExRequests);
-            groupBox2.Location = new Point(313, 194);
+            groupBox2.Location = new Point(313, 103);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(343, 67);
             groupBox2.TabIndex = 2;
@@ -153,7 +148,7 @@
             // 
             groupBox3.Controls.Add(btnExResuppliedItems);
             groupBox3.Controls.Add(btnExRequestItems);
-            groupBox3.Location = new Point(12, 194);
+            groupBox3.Location = new Point(12, 103);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(295, 100);
             groupBox3.TabIndex = 3;
@@ -179,51 +174,11 @@
             btnExRequestItems.UseVisualStyleBackColor = true;
             btnExRequestItems.Click += btnExRequestItems_Click;
             // 
-            // groupBox4
-            // 
-            groupBox4.Controls.Add(btnBrowse);
-            groupBox4.Controls.Add(txtSavePath);
-            groupBox4.Controls.Add(label6);
-            groupBox4.Location = new Point(12, 103);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(644, 85);
-            groupBox4.TabIndex = 4;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Filter";
-            // 
-            // btnBrowse
-            // 
-            btnBrowse.Location = new Point(476, 34);
-            btnBrowse.Name = "btnBrowse";
-            btnBrowse.Size = new Size(136, 29);
-            btnBrowse.TabIndex = 5;
-            btnBrowse.Text = "Browse";
-            btnBrowse.UseVisualStyleBackColor = true;
-            btnBrowse.Click += btnBrowse_Click;
-            // 
-            // txtSavePath
-            // 
-            txtSavePath.Location = new Point(89, 34);
-            txtSavePath.Name = "txtSavePath";
-            txtSavePath.ReadOnly = true;
-            txtSavePath.Size = new Size(381, 27);
-            txtSavePath.TabIndex = 4;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(6, 37);
-            label6.Name = "label6";
-            label6.Size = new Size(77, 20);
-            label6.TabIndex = 0;
-            label6.Text = "Save path:";
-            // 
             // Form_Reports
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(677, 306);
-            Controls.Add(groupBox4);
+            ClientSize = new Size(670, 216);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -233,8 +188,6 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -253,9 +206,5 @@
         private Button btnExResuppliedItems;
         private Button btnExRequestItems;
         private TextBox txtYear;
-        private GroupBox groupBox4;
-        private Button btnBrowse;
-        private TextBox txtSavePath;
-        private Label label6;
     }
 }
