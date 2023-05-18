@@ -41,8 +41,10 @@
             dgvDeliveries.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDeliveries.Location = new Point(6, 26);
             dgvDeliveries.Name = "dgvDeliveries";
+            dgvDeliveries.ReadOnly = true;
             dgvDeliveries.RowHeadersWidth = 51;
             dgvDeliveries.RowTemplate.Height = 29;
+            dgvDeliveries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDeliveries.Size = new Size(1032, 417);
             dgvDeliveries.TabIndex = 0;
             // 

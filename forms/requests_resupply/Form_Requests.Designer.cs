@@ -73,8 +73,10 @@
             dgvRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRequests.Location = new Point(6, 26);
             dgvRequests.Name = "dgvRequests";
+            dgvRequests.ReadOnly = true;
             dgvRequests.RowHeadersWidth = 51;
             dgvRequests.RowTemplate.Height = 29;
+            dgvRequests.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvRequests.Size = new Size(852, 282);
             dgvRequests.TabIndex = 2;
             dgvRequests.CellClick += dgvRequests_CellClick;

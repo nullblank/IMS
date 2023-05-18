@@ -46,8 +46,10 @@
             dgvContainer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvContainer.Location = new Point(12, 131);
             dgvContainer.Name = "dgvContainer";
+            dgvContainer.ReadOnly = true;
             dgvContainer.RowHeadersWidth = 51;
             dgvContainer.RowTemplate.Height = 29;
+            dgvContainer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvContainer.Size = new Size(650, 478);
             dgvContainer.TabIndex = 0;
             dgvContainer.CellClick += dgvContainer_CellClick;
