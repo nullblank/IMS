@@ -30,18 +30,18 @@
         {
             groupBox1 = new GroupBox();
             txtAmount = new TextBox();
+            btnRemove = new Button();
             label4 = new Label();
             cbItem = new ComboBox();
             label3 = new Label();
             cbSCategory = new ComboBox();
+            btnAdd = new Button();
             label2 = new Label();
             cbCategory = new ComboBox();
             label1 = new Label();
             txtPurpose = new TextBox();
-            btnAdd = new Button();
             lvItems = new ListView();
             btnRequest = new Button();
-            btnRemove = new Button();
             groupBox2 = new GroupBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -72,6 +72,17 @@
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(128, 27);
             txtAmount.TabIndex = 4;
+            txtAmount.KeyPress += txtAmount_KeyPress;
+            // 
+            // btnRemove
+            // 
+            btnRemove.Location = new Point(646, 63);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new Size(94, 38);
+            btnRemove.TabIndex = 10;
+            btnRemove.Text = "Remove";
+            btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += btnRemove_Click;
             // 
             // label4
             // 
@@ -112,6 +123,16 @@
             cbSCategory.TabIndex = 2;
             cbSCategory.SelectedIndexChanged += cbSCategory_SelectedIndexChanged;
             // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(546, 63);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(94, 38);
+            btnAdd.TabIndex = 6;
+            btnAdd.Text = "Add";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnSave_Click;
+            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -148,16 +169,6 @@
             txtPurpose.Size = new Size(445, 27);
             txtPurpose.TabIndex = 9;
             // 
-            // btnAdd
-            // 
-            btnAdd.Location = new Point(546, 63);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(94, 38);
-            btnAdd.TabIndex = 6;
-            btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnSave_Click;
-            // 
             // lvItems
             // 
             lvItems.FullRowSelect = true;
@@ -176,16 +187,6 @@
             btnRequest.Text = "Finalize Request";
             btnRequest.UseVisualStyleBackColor = true;
             btnRequest.Click += btnRequest_Click;
-            // 
-            // btnRemove
-            // 
-            btnRemove.Location = new Point(646, 63);
-            btnRemove.Name = "btnRemove";
-            btnRemove.Size = new Size(94, 38);
-            btnRemove.TabIndex = 10;
-            btnRemove.Text = "Remove";
-            btnRemove.UseVisualStyleBackColor = true;
-            btnRemove.Click += btnRemove_Click;
             // 
             // groupBox2
             // 

@@ -32,7 +32,7 @@ namespace IMS.forms.requests_deliveries
             secondColumn.Width = 75;
             this.InitData();
         }
-        private void InitData()
+        public void InitData()
         {
             string query = "SELECT " +
                 "SREQ_SRN AS 'Request#', " +
@@ -41,6 +41,11 @@ namespace IMS.forms.requests_deliveries
                 " FROM IMS_SREQ " +
                 "WHERE SREQ_STAT <> 'Delivered'";
             dgvRequests.DataSource = _handler.ExecuteQuery(query);
+        }
+
+        public void clearList()
+        {
+            lvItems.Items.Clear();
         }
 
         private void dgvRequests_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -52,6 +57,7 @@ namespace IMS.forms.requests_deliveries
                 DataGridViewRow row = dgvRequests.Rows[e.RowIndex];
                 if (!string.IsNullOrEmpty(row.Cells["Request#"].Value.ToString()) || row.Cells["Request#"].Value.ToString() != "")
                 {
+                    this.ControlState(true);
                     int requestCode = Int32.Parse(row.Cells["Request#"].Value.ToString());
                     _referenceNumber = requestCode;
                     DataTable requestedItems = _handler.ExecuteQuery($"SELECT B.SITE_DES, A.SRD_QTY " +
@@ -72,7 +78,23 @@ namespace IMS.forms.requests_deliveries
                     txtOffice.Text = row1[5].ToString();
                     txtUser.Text = row1[4].ToString();
                 }
+                else
+                {
+                    this.ControlState(false);
+                }
             }
+            else
+            {
+                this.ControlState(false);
+            }
+        }
+
+        private void ControlState(bool state)
+        {
+            btnSatisfy.Enabled = state;
+            btnDenied.Enabled = state;
+            btnPending.Enabled = state;
+            btnProcessing.Enabled = state;
         }
 
         private void btnPending_Click(object sender, EventArgs e)
@@ -109,7 +131,7 @@ namespace IMS.forms.requests_deliveries
 
         private void btnSatisfy_Click(object sender, EventArgs e)
         {
-            Form_Satisfy form = new Form_Satisfy(_handler, _session, _referenceNumber);
+            Form_Satisfy form = new Form_Satisfy(_handler, _session, _referenceNumber, this);
             form.Show();
         }
 

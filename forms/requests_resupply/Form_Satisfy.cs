@@ -1,4 +1,5 @@
 ﻿using IMS.DBHandler;
+using IMS.forms.requests_deliveries;
 using IMS.src;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,14 @@ namespace IMS.forms.requests_resupply
         SessionHandler _session;
         DataTable _table;
         DataGridViewRow _row;
+        Form_Outbound _outbound;
         int _requestNumber;
         int _deliveryIndex;
         int _itemcode;
 
-        public Form_Satisfy(DatabaseHandler handler, SessionHandler session, int requestNumber)
+        public Form_Satisfy(DatabaseHandler handler, SessionHandler session, int requestNumber, Form_Outbound outbound)
         {
+            _outbound = outbound;
             _handler = handler;
             _session = session;
             _requestNumber = requestNumber;
@@ -79,6 +82,7 @@ namespace IMS.forms.requests_resupply
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
+                txtAmount.Text = "";
                 // Get the text of the clicked cell
                 txtAmount.ReadOnly = false;
                 DataGridViewRow row = dgvStockpile.Rows[e.RowIndex];
@@ -198,6 +202,9 @@ namespace IMS.forms.requests_resupply
                     query = $"UPDATE IMS_SREQ SET SREQ_STAT = 'Delivered' WHERE SREQ_SRN = {_requestNumber}";
                     _handler.ExecuteNonQuery(query);
                     MessageBox.Show($"Updated Req#:{_requestNumber}; Status: 'DELIVERED'");
+                    _outbound.InitData();
+                    _outbound.clearList();
+                    this.Close();
                 }
                 else
                 {

@@ -110,8 +110,10 @@
             dgvStockpile.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStockpile.Location = new Point(6, 26);
             dgvStockpile.Name = "dgvStockpile";
+            dgvStockpile.ReadOnly = true;
             dgvStockpile.RowHeadersWidth = 51;
             dgvStockpile.RowTemplate.Height = 29;
+            dgvStockpile.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvStockpile.Size = new Size(750, 246);
             dgvStockpile.TabIndex = 0;
             dgvStockpile.CellClick += dgvStockpile_CellClick;

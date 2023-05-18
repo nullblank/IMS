@@ -144,7 +144,7 @@ namespace IMS.forms.report
 
         private void btnExResupplies_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cbMonth.Text) || string.IsNullOrEmpty(cbOffice.Text) || string.IsNullOrEmpty(txtYear.Text))
+            if (string.IsNullOrEmpty(cbMonth.Text) || string.IsNullOrEmpty(cbOffice.Text) || string.IsNullOrEmpty(txtYear.Text)) //if fields are empty
             {
                 MessageBox.Show("Please make sure the Office, Month, and Year fields are not empty.");
             }

@@ -100,6 +100,7 @@
             // 
             // btnDelivered
             // 
+            btnDelivered.Enabled = false;
             btnDelivered.Location = new Point(6, 131);
             btnDelivered.Name = "btnDelivered";
             btnDelivered.Size = new Size(183, 29);
@@ -110,6 +111,7 @@
             // 
             // btnProcessing
             // 
+            btnProcessing.Enabled = false;
             btnProcessing.Location = new Point(6, 96);
             btnProcessing.Name = "btnProcessing";
             btnProcessing.Size = new Size(183, 29);
@@ -120,6 +122,7 @@
             // 
             // btnDenied
             // 
+            btnDenied.Enabled = false;
             btnDenied.Location = new Point(6, 61);
             btnDenied.Name = "btnDenied";
             btnDenied.Size = new Size(183, 29);
@@ -130,6 +133,7 @@
             // 
             // btnPending
             // 
+            btnPending.Enabled = false;
             btnPending.Location = new Point(6, 26);
             btnPending.Name = "btnPending";
             btnPending.Size = new Size(183, 29);
@@ -255,6 +259,7 @@
             // 
             // btnSatisfy
             // 
+            btnSatisfy.Enabled = false;
             btnSatisfy.Location = new Point(6, 26);
             btnSatisfy.Name = "btnSatisfy";
             btnSatisfy.Size = new Size(177, 29);
@@ -317,7 +322,7 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "Form_Outbound";
-            Text = "Form_Outbound";
+            Text = "4";
             ((System.ComponentModel.ISupportInitialize)dgvRequests).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
