@@ -163,6 +163,7 @@
             btnExResuppliedItems.TabIndex = 5;
             btnExResuppliedItems.Text = "Export Resupplied Items";
             btnExResuppliedItems.UseVisualStyleBackColor = true;
+            btnExResuppliedItems.Click += btnExResuppliedItems_Click;
             // 
             // btnExRequestItems
             // 

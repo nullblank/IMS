@@ -50,31 +50,6 @@ namespace IMS.forms.report
                 e.SuppressKeyPress = true;
             }
         }
-
-        private void btnBrowse_Click(object sender, EventArgs e) //remove soon
-        {
-            /*
-            if (string.IsNullOrEmpty(cbMonth.Text) || string.IsNullOrEmpty(cbOffice.Text) || string.IsNullOrEmpty(txtYear.Text))
-            {
-                MessageBox.Show("Please make sure the Office, Month, and Year fields are not empty.");
-            }
-            else
-            {
-                DateTime time = DateTime.Now;
-                string realTime = time.ToString("MM-dd-yyyy_HH-mm-ss");
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|s*.*";
-                saveFileDialog.FileName = $"Requests_{cbOffice.Text}({cbMonth.Text}-{txtYear.Text}){realTime}.xlsx";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string fileName = saveFileDialog.FileName;
-                    txtSavePath.Text = fileName;
-                    // Use fileName variable to do something with the selected file location
-                }
-            }
-            */
-        }
-
         private void btnExRequests_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbMonth.Text) || string.IsNullOrEmpty(cbOffice.Text) || string.IsNullOrEmpty(txtYear.Text))
@@ -110,36 +85,6 @@ namespace IMS.forms.report
                     MessageBox.Show("Table was null!");
                 }
             }
-
-            /*
-            if (string.IsNullOrEmpty(txtSavePath.Text) || string.IsNullOrWhiteSpace(txtSavePath.Text))
-            {
-                MessageBox.Show("Please select a save path.");
-            }
-            else
-            {
-                string table = "IMS_SREQ";
-                Reports report = new Reports(_handler);
-                DataTable dataTable = report.GetQueryRecords(cbMonth, txtYear, cbOffice, table);
-                if (dataTable == null) { return; }
-                if (dataTable.Rows.Count == 0)
-                {
-                    MessageBox.Show("No records found for the indicated office, month, and year. ");
-                    return;
-                }
-                else
-                {
-                    if (report.ExporttoExcel(dataTable, txtSavePath.Text))
-                    {
-                        MessageBox.Show($"Export Finished! Exported to: {txtSavePath.Text}");
-                    }
-                    else
-                    {
-                        MessageBox.Show($"ERROR EXPORTING TO EXCELs");
-                    }
-                }
-            }
-            */
         }
 
         private void btnExResupplies_Click(object sender, EventArgs e)
@@ -177,58 +122,66 @@ namespace IMS.forms.report
                     MessageBox.Show("Table was null!");
                 }
             }
-            /*
-            if (string.IsNullOrEmpty(txtSavePath.Text) || string.IsNullOrWhiteSpace(txtSavePath.Text))
-            {
-                MessageBox.Show("Please select a save path.");
-            }
-            else
-            {
-                string table = "IMS_SDEL";
-                Reports report = new Reports(_handler);
-                DataTable dataTable = report.GetQueryRecords(cbMonth, txtYear, cbOffice, table);
-                if (dataTable == null) { return; }
-                if (dataTable.Rows.Count == 0)
-                {
-                    MessageBox.Show("No records found for the indicated office, month, and year. ");
-                    return;
-                }
-                else
-                {
-                    if (report.ExporttoExcel(dataTable, txtSavePath.Text))
-                    {
-                        MessageBox.Show($"Export Finished! Exported to: {txtSavePath.Text}");
-                    }
-                    else
-                    {
-                        MessageBox.Show($"ERROR EXPORTING TO EXCELs");
-                    }
-                }
-            }
-            */
         }
 
         private void btnExRequestItems_Click(object sender, EventArgs e)
         {
-            /*
-            Reports report = new Reports(_handler);
-            DataTable table = report.GetNonQueryRecords("IMS_SRD");
-            if (table.Rows.Count == 0)
+            Reports reports = new Reports(_handler);
+            DataTable table = reports.GetNonQueryRecords("IMS_SRD");
+            if (table != null)// If query did not throw back error. 
             {
-                MessageBox.Show("ERROR: NO ITEMS FOUND. CALL DEVELOPER!");
-            }
-            else
-            {
-                if (report.ExporttoExcel(table, txtSavePath.Text))
+                if (table.Rows.Count != 0 && table.Rows.Count > 0) //if data exists within user parameters
                 {
-                    MessageBox.Show($"Export Finished! Exported to: {txtSavePath.Text}");
+                    string filepath = reports.SetFilePath("Requests", cbOffice.Text, cbMonth.Text, txtYear.Text);
+                    if (!string.IsNullOrEmpty(filepath)) //if path exists and not user cancelled
+                    {
+                        if (reports.ExporttoExcel(table, filepath)) //if exporting was succesfful
+                        {
+                            MessageBox.Show($"Success! Exported to: {filepath}");
+                        }
+                    }
+                    else { return; }
                 }
                 else
                 {
-                    MessageBox.Show($"ERROR EXPORTING TO EXCELs");
+                    MessageBox.Show("No records found for the indicated office, month, and year. ");
+                    return;
                 }
             }
-            */
+            else
+            {
+                MessageBox.Show("Table was null!");
+            }
+        }
+
+        private void btnExResuppliedItems_Click(object sender, EventArgs e)
+        {
+            Reports reports = new Reports(_handler);
+            DataTable table = reports.GetNonQueryRecords("IMS_SDD");
+            if (table != null)// If query did not throw back error. 
+            {
+                if (table.Rows.Count != 0 && table.Rows.Count > 0) //if data exists within user parameters
+                {
+                    string filepath = reports.SetFilePath("Requests", cbOffice.Text, cbMonth.Text, txtYear.Text);
+                    if (!string.IsNullOrEmpty(filepath)) //if path exists and not user cancelled
+                    {
+                        if (reports.ExporttoExcel(table, filepath)) //if exporting was succesfful
+                        {
+                            MessageBox.Show($"Success! Exported to: {filepath}");
+                        }
+                    }
+                    else { return; }
+                }
+                else
+                {
+                    MessageBox.Show("No records found for the indicated office, month, and year. ");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Table was null!");
+            }
         }
     }
 }
