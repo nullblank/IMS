@@ -1,4 +1,5 @@
-﻿using IMS.DBHandler;
+﻿using Google.Protobuf.WellKnownTypes;
+using IMS.DBHandler;
 using IMS.forms.Deliveries;
 using IMS.src;
 using System;
@@ -17,6 +18,7 @@ namespace IMS.forms
     {
         DatabaseHandler _handler;
         SessionHandler _session;
+        DateTime _date;
         public Form_Deliveries(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
@@ -63,6 +65,39 @@ namespace IMS.forms
         {
             Form_Deliveries_Additem form = new Form_Deliveries_Additem(_handler, _session, this);
             form.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DelItem deliver = new DelItem(_handler, _session);
+            deliver.RemoveDelivery(_date);
+            this.InitData();
+        }
+
+        private void dgvDeliveries_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string chk = dgvDeliveries.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (string.IsNullOrEmpty(chk) || chk == "")
+                {
+                    button1.Enabled = false;
+                }
+                else
+                {
+                    DataGridViewRow clickedRow = dgvDeliveries.Rows[e.RowIndex];
+                    DataGridViewCell targetCell = clickedRow.Cells[3];
+                    if (DateTime.TryParse(targetCell.Value.ToString(), out DateTime dateValue))
+                    {
+                        _date = dateValue;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Datetime", "Error!");
+                    }
+                    button1.Enabled = true;
+                }
+            }
         }
     }
 }

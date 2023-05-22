@@ -159,5 +159,17 @@ namespace IMS.forms.Deliveries
                 e.Handled = true;
             }
         }
+
+        private void txtCost_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && ((TextBox)sender).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

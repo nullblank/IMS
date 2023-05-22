@@ -180,6 +180,7 @@
             txtCost.Name = "txtCost";
             txtCost.Size = new Size(151, 27);
             txtCost.TabIndex = 8;
+            txtCost.KeyPress += txtCost_KeyPress;
             // 
             // label6
             // 

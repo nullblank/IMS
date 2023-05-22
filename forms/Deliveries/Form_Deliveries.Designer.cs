@@ -31,6 +31,7 @@
             dgvDeliveries = new DataGridView();
             groupBox1 = new GroupBox();
             btnAddDelivery = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvDeliveries).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -47,6 +48,7 @@
             dgvDeliveries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDeliveries.Size = new Size(1032, 417);
             dgvDeliveries.TabIndex = 0;
+            dgvDeliveries.CellClick += dgvDeliveries_CellClick;
             // 
             // groupBox1
             // 
@@ -69,11 +71,23 @@
             btnAddDelivery.UseVisualStyleBackColor = true;
             btnAddDelivery.Click += button5_Click;
             // 
+            // button1
+            // 
+            button1.Enabled = false;
+            button1.Location = new Point(212, 467);
+            button1.Name = "button1";
+            button1.Size = new Size(194, 62);
+            button1.TabIndex = 7;
+            button1.Text = "Remove Delivery";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form_Deliveries
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1068, 541);
+            Controls.Add(button1);
             Controls.Add(btnAddDelivery);
             Controls.Add(groupBox1);
             Name = "Form_Deliveries";
@@ -90,5 +104,6 @@
         private System.CodeDom.CodeTypeReference btnAdd;
         private System.CodeDom.CodeTypeReference btnRemove;
         private Button btnAddDelivery;
+        private Button button1;
     }
 }
