@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -149,8 +150,23 @@ namespace IMS.forms.requests_deliveries
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            Form_Reports form = new Form_Reports(_handler, _session);
-            form.Show();
+            if (!IsRunAsAdmin())
+            {
+                var result = MessageBox.Show("This application needs to be run with administrative privileges.", "Admin Privileges Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Form_Reports form = new Form_Reports(_handler, _session);
+                form.Show();
+            }
+        }
+        static bool IsRunAsAdmin()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+
+            // Check if the current user has administrative privileges
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }

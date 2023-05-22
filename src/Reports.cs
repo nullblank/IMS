@@ -53,10 +53,10 @@ namespace IMS.src
         public string SetFilePath(string type, string office, string month, string year)
         {
             DateTime time = DateTime.Now;
-            string realTime = time.ToString("MM-dd-yyyy_HH-mm-ss");
+            //string realTime = time.ToString("MM-dd-yyyy_HH-mm-ss");
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|s*.*";
-            saveFileDialog.FileName = $"{office}_{type}({month}-{year}){realTime}.xlsx";
+            saveFileDialog.FileName = $"{office}_{type}({month}-{year}).xlsx";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = saveFileDialog.FileName;

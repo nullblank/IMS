@@ -5,6 +5,8 @@ using System.IO;
 using System.Data.SqlClient;
 using IMS.NetUtil;
 using IMS.src;
+using System.Security.Principal;
+using System.Diagnostics;
 
 namespace IMS
 {
@@ -15,14 +17,45 @@ namespace IMS
         {
             InitializeComponent();
         }
+        static bool IsRunAsAdmin()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+
+            // Check if the current user has administrative privileges
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        static void RunAsAdmin() //Unused
+        {
+            // Restart the application with admin privileges
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = Application.ExecutablePath;
+            startInfo.Verb = "runas"; // Run with administrative privileges
+
+            try
+            {
+                Process.Start(startInfo);
+                Application.Exit(); // Exit the current instance of the application
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                // Handle the case when the user cancels the UAC prompt
+                Console.WriteLine("User cancelled the UAC prompt.");
+            }
+        }
         private void button1_Click(object sender, EventArgs e) //Login
         {
             string user = txtUsername.Text;
             string pass = txtPassword.Text;
             EncryptionHandler encrypt = new EncryptionHandler();
             pass = encrypt.Encrypt(pass);
-            if (netutil.Login(user, pass) == true)
+            if (netutil.Login(user, pass))
             {
+                if (!IsRunAsAdmin())
+                {
+                    var result = MessageBox.Show("This application needs to be run with administrative privileges. Reporting option has been DISABLED for Admin users.", "Admin Privileges Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 this.Hide();
             }
         }

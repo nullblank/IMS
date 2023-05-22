@@ -69,34 +69,75 @@ namespace IMS.forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DelItem deliver = new DelItem(_handler, _session);
-            deliver.RemoveDelivery(_date);
-            this.InitData();
+            //
+            string query = $"SELECT * FROM IMS_STOC WHERE STOC_DTE = '{_date:yyyy-MM-dd HH:mm:ss.fffffff}'";
+            DataTable dataTable1 = _handler.ExecuteQuery(query);
+            query = $"SELECT * FROM IMS_STOC_LOG WHERE STOC_DTE = '{_date:yyyy-MM-dd HH:mm:ss.fffffff}'";
+            DataTable dataTable2 = _handler.ExecuteQuery(query);
+            bool isMatch = CompareColumnValues(dataTable1, dataTable2, 6);
+            if (isMatch)
+            {
+                DelItem deliver = new DelItem(_handler, _session);
+                deliver.RemoveDelivery(_date);
+                this.InitData();
+            }
+            else
+            {
+                MessageBox.Show("You can no longer remove this entry as it is already being used in resupply!","Error!");
+            }
+        }
+
+        static bool CompareColumnValues(DataTable dt1, DataTable dt2, int columnIndex)
+        {
+            // Check if the specified column index is valid for both DataTables
+            if (columnIndex < 0 || columnIndex >= dt1.Columns.Count || columnIndex >= dt2.Columns.Count)
+            {
+                throw new ArgumentException("Invalid column index.");
+            }
+
+            // Iterate over the rows and compare the values of the specified column
+            for (int i = 0; i < dt1.Rows.Count; i++)
+            {
+                if (!dt1.Rows[i].ItemArray[columnIndex].Equals(dt2.Rows[i].ItemArray[columnIndex]))
+                {
+                    return false; // Column values do not match
+                }
+            }
+
+            return true; // Column values match
         }
 
         private void dgvDeliveries_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string chk = dgvDeliveries.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (string.IsNullOrEmpty(chk) || chk == "")
+                try
                 {
-                    button1.Enabled = false;
-                }
-                else
-                {
-                    DataGridViewRow clickedRow = dgvDeliveries.Rows[e.RowIndex];
-                    DataGridViewCell targetCell = clickedRow.Cells[3];
-                    if (DateTime.TryParse(targetCell.Value.ToString(), out DateTime dateValue))
+                    string chk = dgvDeliveries.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    if (string.IsNullOrEmpty(chk) || chk == "")
                     {
-                        _date = dateValue;
+                        button1.Enabled = false;
                     }
                     else
                     {
-                        MessageBox.Show("Invalid Datetime", "Error!");
+                        DataGridViewRow clickedRow = dgvDeliveries.Rows[e.RowIndex];
+                        DataGridViewCell targetCell = clickedRow.Cells[3];
+                        if (DateTime.TryParse(targetCell.Value.ToString(), out DateTime dateValue))
+                        {
+                            _date = dateValue;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid Datetime", "Error!");
+                        }
+                        button1.Enabled = true;
                     }
-                    button1.Enabled = true;
                 }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    
+                } 
             }
         }
     }
