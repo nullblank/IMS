@@ -128,12 +128,12 @@ namespace IMS.forms
             _e = e;
             this.ClearData();
             DataGridViewRow row = grid.Rows[e.RowIndex];
-            txtCode.Text = row.Cells["SITE_COD"].Value.ToString();
-            txtDescription.Text = row.Cells["SITE_DES"].Value.ToString();
-            this.MatchCell("SITE_SCAT", cbCategory, e);
-            this.MatchCell("SITE_SCA", cbSCategory, e);
-            this.MatchCell("SITE_SUNT", cbUnit, e);
-            this.MatchCell("SITE_SCOL", cbColor, e);
+            txtCode.Text = row.Cells["Item Code"].Value.ToString();
+            txtDescription.Text = row.Cells["Description"].Value.ToString();
+            this.MatchCell("Category", cbCategory, e);
+            this.MatchCell("Subcategory", cbSCategory, e);
+            this.MatchCell("Unit", cbUnit, e);
+            this.MatchCell("Color", cbColor, e);
         }
         public void ClearData()
         {

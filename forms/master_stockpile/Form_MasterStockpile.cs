@@ -33,7 +33,17 @@ namespace IMS.forms
         public void InitData(SessionHandler session, DatabaseHandler handler)
         {
             DataTable results = new DataTable();
-            string query = "SELECT * FROM IMS_SITE";
+            string query = "SELECT" +
+                " SITE_IDX AS [Index #]," +
+                " SITE_COD AS [Item Code]," +
+                " SITE_DES AS [Description]," +
+                " SITE_SCAT AS [Category]," +
+                " SITE_SCA AS [Subcategory]," +
+                " SITE_SUNT AS [Unit]," +
+                " SITE_SCOL AS [Color]," +
+                " SITE_QOH AS [Quantity in Stock]," +
+                " SITE_BV AS [Buffer Value]" +
+                " FROM IMS_SITE";
             dgvStockpile.DataSource = handler.ExecuteQuery(query);
         }
 
@@ -65,7 +75,7 @@ namespace IMS.forms
 
                 form_SetBuffer = new Form_SetBuffer(dgvStockpile, e, _handler, _session, this);
 
-                if (row.Cells["SITE_COD"].Value.ToString() == "")
+                if (row.Cells[1].Value.ToString() == "")
                 {
                     btnUpdate.Enabled = false;
                     btnBuff.Enabled = false;
@@ -112,8 +122,8 @@ namespace IMS.forms
         {
             foreach (DataGridViewRow row in this.dgvStockpile.Rows)
             {
-                int value = Convert.ToInt32(row.Cells["SITE_QOH"].Value); // replace "YourColumnName" with the name of your column
-                int threshold = Convert.ToInt32(row.Cells["SITE_BV"].Value);
+                int value = Convert.ToInt32(row.Cells[7].Value); // replace "YourColumnName" with the name of your column
+                int threshold = Convert.ToInt32(row.Cells[8].Value);
                 if (value < threshold)
                 {
                     row.DefaultCellStyle.ForeColor = Color.Red;
@@ -124,7 +134,7 @@ namespace IMS.forms
         private void btnViewDeliveries_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = this.dgvStockpile.Rows[_e.RowIndex];
-            int itemcode = Int32.Parse(row.Cells["SITE_COD"].Value.ToString());
+            int itemcode = Int32.Parse(row.Cells[1].Value.ToString());
             Form_Deliveries form = new Form_Deliveries(_handler, _session);
             form.InitDataQuery(itemcode);
             form.Show();

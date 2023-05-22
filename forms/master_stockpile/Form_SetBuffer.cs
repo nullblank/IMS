@@ -25,9 +25,9 @@ namespace IMS.forms.master_stockpile
             InitializeComponent();
             _grid = grid;
             DataGridViewRow row = _grid.Rows[e.RowIndex];
-            if (!string.IsNullOrEmpty(row.Cells["SITE_IDX"].Value.ToString()) || row.Cells["SITE_IDX"].Value.ToString() != "")
+            if (!string.IsNullOrEmpty(row.Cells[0].Value.ToString()) || row.Cells[0].Value.ToString() != "")
             {
-                _index = Int32.Parse(row.Cells["SITE_IDX"].Value.ToString());
+                _index = Int32.Parse(row.Cells[0].Value.ToString());
             }
             _handler = handler;
             _session = session;
