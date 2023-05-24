@@ -325,6 +325,7 @@
             Controls.Add(groupBox1);
             Name = "Form_Outbound";
             Text = "4";
+            FormClosing += Form_Outbound_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dgvRequests).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);

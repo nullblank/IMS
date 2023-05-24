@@ -102,5 +102,13 @@ namespace IMS.forms.requests_resupply
                 }
             }
         }
+
+        private void Form_Requests_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_session.GetRole() == "User")
+            {
+                Application.Exit();
+            }
+        }
     }
 }

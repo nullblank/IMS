@@ -168,5 +168,13 @@ namespace IMS.forms.requests_deliveries
             // Check if the current user has administrative privileges
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
+
+        private void Form_Outbound_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_session.GetRole() == "Admin")
+            {
+                Application.Exit();
+            }
+        }
     }
 }

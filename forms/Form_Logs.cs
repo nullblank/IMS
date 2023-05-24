@@ -31,7 +31,7 @@ namespace IMS.forms
             if (_session.SessionExists() == true)
             {
                 DataTable results = new DataTable();
-                results = _handler.ExecuteQuery("SELECT * FROM IMS_LOG ORDER BY LOG_TMP DESC");
+                results = _handler.ExecuteQuery("SELECT TOP 50 * FROM IMS_LOG ORDER BY LOG_TMP DESC");
                 dgvLogs.DataSource = results;
                 dgvLogs.Columns[3].Width = 150;
                 dgvLogs.Columns[8].Width = 200;

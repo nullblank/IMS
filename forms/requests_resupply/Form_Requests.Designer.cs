@@ -205,6 +205,7 @@
             Controls.Add(groupBox1);
             Name = "Form_Requests";
             Text = "Requests";
+            FormClosing += Form_Requests_FormClosing;
             Load += Requests_Load;
             ((System.ComponentModel.ISupportInitialize)dgvRequests).EndInit();
             groupBox1.ResumeLayout(false);
