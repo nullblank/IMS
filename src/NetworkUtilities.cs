@@ -81,33 +81,40 @@ namespace IMS.NetUtil
                 if (_handler != null)
                 {
                     DataTable results = _handler.ExecuteQuery($"SELECT * FROM IMS_USR WHERE USR_NME COLLATE Latin1_General_CS_AS = '{user}' AND USR_PWD COLLATE Latin1_General_CS_AS = '{pass}' AND USR_ACT = '1'");
-                    if (results.Rows.Count > 0)
+                    if (results != null)
                     {
-                        MessageBox.Show("Login Successful!");
-                        int role = Convert.ToInt32(results.Rows[0][4]);
-                        SessionHandler session = new SessionHandler();
-                        session.NewSession(user, role, _handler);
-                        audit = new Audit(_handler);
-                        audit.LogUserAction("Successful Login", session);
-                        switch (role)
+                        if (results.Rows.Count > 0)
                         {
-                            case 1:
-                                Form_AdminPanel form_AdminPanel = new Form_AdminPanel(_handler, session);
-                                form_AdminPanel.Show(); break;
-                            case 2:
-                                Form_Outbound form_Outbound = new Form_Outbound(_handler, session);
-                                form_Outbound.Show(); break;
-                            case 3:
-                                Form_Requests form_Requests = new Form_Requests(_handler, session);
-                                form_Requests.Show(); break;
+                            MessageBox.Show("Login Successful!");
+                            int role = Convert.ToInt32(results.Rows[0][4]);
+                            SessionHandler session = new SessionHandler();
+                            session.NewSession(user, role, _handler);
+                            audit = new Audit(_handler);
+                            audit.LogUserAction("Successful Login", session);
+                            switch (role)
+                            {
+                                case 1:
+                                    Form_AdminPanel form_AdminPanel = new Form_AdminPanel(_handler, session);
+                                    form_AdminPanel.Show(); break;
+                                case 2:
+                                    Form_Outbound form_Outbound = new Form_Outbound(_handler, session);
+                                    form_Outbound.Show(); break;
+                                case 3:
+                                    Form_Requests form_Requests = new Form_Requests(_handler, session);
+                                    form_Requests.Show(); break;
+                            }
+                            return true;
                         }
-                        return true;
+                        else
+                        {
+                            MessageBox.Show("Invalid Login!");
+                            audit = new Audit(_handler);
+                            audit.LogAction("Attempted Login!");
+                            return false;
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Invalid Login!");
-                        audit = new Audit(_handler);
-                        audit.LogAction("Attempted Login!");
                         return false;
                     }
                 }

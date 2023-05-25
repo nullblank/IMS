@@ -64,6 +64,7 @@
             // 
             // btnDeliveries
             // 
+            btnDeliveries.Enabled = false;
             btnDeliveries.Location = new Point(6, 26);
             btnDeliveries.Name = "btnDeliveries";
             btnDeliveries.Size = new Size(156, 64);
@@ -73,6 +74,7 @@
             // 
             // button1
             // 
+            button1.Enabled = false;
             button1.Location = new Point(168, 26);
             button1.Name = "button1";
             button1.Size = new Size(208, 29);
@@ -82,6 +84,7 @@
             // 
             // button2
             // 
+            button2.Enabled = false;
             button2.Location = new Point(168, 61);
             button2.Name = "button2";
             button2.Size = new Size(208, 29);
@@ -91,6 +94,7 @@
             // 
             // textBox1
             // 
+            textBox1.Enabled = false;
             textBox1.Location = new Point(111, 12);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(296, 27);
@@ -98,6 +102,7 @@
             // 
             // button5
             // 
+            button5.Enabled = false;
             button5.Location = new Point(413, 11);
             button5.Name = "button5";
             button5.Size = new Size(122, 29);
@@ -166,6 +171,7 @@
             groupBox2.Controls.Add(button1);
             groupBox2.Controls.Add(btnDeliveries);
             groupBox2.Controls.Add(button2);
+            groupBox2.Enabled = false;
             groupBox2.Location = new Point(400, 488);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(381, 97);

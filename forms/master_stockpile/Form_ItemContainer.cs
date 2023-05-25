@@ -196,29 +196,56 @@ namespace IMS.forms
             //put code check here
             if (this.CodeExists(code))
             {
-                if (supplies.AddItem(code, description, category, unit, subcategory, color))
+                if (this.NameExists(description))
                 {
-                    MessageBox.Show("Item Added to Stockpile List!");
-                    Audit audit = new Audit(_handler);
-                    audit.LogUserAction($"Added Item to stockpile. " +
-                        $"code: {code}, description: {description}, category: " +
-                        $"{category}, unit: {unit}, subcategory: " +
-                        $"{subcategory}, color: {color}", _session);
-                    this.Hide();
-                    Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
-                    form.InitData(_session, _handler);
-                    return true;
+                    if (supplies.AddItem(code, description, category, unit, subcategory, color))
+                    {
+                        MessageBox.Show("Item Added to Stockpile List!");
+                        Audit audit = new Audit(_handler);
+                        audit.LogUserAction($"Added Item to stockpile. " +
+                            $"code: {code}, description: {description}, category: " +
+                            $"{category}, unit: {unit}, subcategory: " +
+                            $"{subcategory}, color: {color}", _session);
+                        this.Hide();
+                        Form_MasterStockpile form = new Form_MasterStockpile(_handler, _session);
+                        form.InitData(_session, _handler);
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR ADDING ITEM. CODE EXSTS");
+                        return false;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("ERROR ADDING ITEM.");
+                    MessageBox.Show("ERROR ADDING ITEM. NAME EXISTS"); //Change later. Replace with more relaiable checking
                     return false;
                 }
+                
             }
             else
             {
                 MessageBox.Show("Item ID already exists!");
                 return false;
+            }
+        }
+        private bool NameExists(string name)
+        {
+            string query = $"SELECT COUNT(*) FROM IMS_SITE WHERE SITE_DES = '{name}'";
+            DataTable results = _handler.ExecuteQuery(query);
+            int count = 0;
+            if (results.Rows.Count > 0)
+            {
+                count = Convert.ToInt32(results.Rows[0][0]);
+            }
+            if (count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
