@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IMS.src;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,7 @@ namespace IMS.forms.update
         {
             InitializeComponent();
             ControlBox = false;
+            UpdateHandler update = new UpdateHandler(progressBar, this);
         }
     }
 }
