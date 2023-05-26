@@ -15,6 +15,7 @@ namespace IMS.forms.update
         public Form_Update()
         {
             InitializeComponent();
+            ControlBox = false;
         }
     }
 }
