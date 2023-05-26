@@ -13,11 +13,17 @@ namespace IMS.forms.update
 {
     public partial class Form_Update : Form
     {
+        UpdateHandler update;
         public Form_Update()
         {
             InitializeComponent();
             ControlBox = false;
-            UpdateHandler update = new UpdateHandler(progressBar, this, lblAction, lblVAction);
+            update = new UpdateHandler(progressBar, this, lblAction, lblVAction);
+            init();
+            
+        }
+        private void init()
+        {
             update.CheckForUpdates();
         }
     }

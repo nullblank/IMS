@@ -84,7 +84,6 @@ namespace IMS
         private void Form_Login_Load(object sender, EventArgs e)
         {
             Form_Update form = new Form_Update();
-            form.Show();
         }
     }
 }

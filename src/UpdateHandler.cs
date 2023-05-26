@@ -33,8 +33,7 @@ namespace IMS.src
             {
                 try
                 {
-                    string currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
-                    MessageBox.Show($"DEBUG VERSION IS: {currentVersion}");
+                    string currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();//Prints current assembly version
                     string latestVersion = webClient.DownloadString(VersionFileUrl);
 
                     if (IsVersionNewer(latestVersion, currentVersion))
@@ -44,6 +43,7 @@ namespace IMS.src
                         {
                             if (IsRunAsAdmin())
                             {
+                                form_update.Show();
                                 DownloadAndApplyUpdate();
                             }
                             else
@@ -52,6 +52,10 @@ namespace IMS.src
                                 form_update.Close();
                             }
                             
+                        }
+                        else
+                        {
+                            return;
                         }
                     }
                     else
