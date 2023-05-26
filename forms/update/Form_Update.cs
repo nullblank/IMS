@@ -18,6 +18,7 @@ namespace IMS.forms.update
             InitializeComponent();
             ControlBox = false;
             UpdateHandler update = new UpdateHandler(progressBar, this, lblAction, lblVAction);
+            update.CheckForUpdates();
         }
     }
 }

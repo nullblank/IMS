@@ -7,6 +7,7 @@ using IMS.NetUtil;
 using IMS.src;
 using System.Security.Principal;
 using System.Diagnostics;
+using IMS.forms.update;
 
 namespace IMS
 {
@@ -78,6 +79,12 @@ namespace IMS
         private void Form_Login_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Form_Login_Load(object sender, EventArgs e)
+        {
+            Form_Update form = new Form_Update();
+            form.Show();
         }
     }
 }

@@ -27,13 +27,14 @@ namespace IMS.src
             this.lblAction = lblAction;
             this.lblVAction = lblVAction;
         }
-        private void CheckForUpdates()
+        public void CheckForUpdates()
         {
             using (WebClient webClient = new WebClient())
             {
                 try
                 {
                     string currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
+                    MessageBox.Show($"DEBUG VERSION IS: {currentVersion}");
                     string latestVersion = webClient.DownloadString(VersionFileUrl);
 
                     if (IsVersionNewer(latestVersion, currentVersion))

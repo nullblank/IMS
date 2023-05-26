@@ -128,6 +128,7 @@
             Name = "Form_Login";
             Text = "Login";
             FormClosed += Form_Login_FormClosed;
+            Load += Form_Login_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
