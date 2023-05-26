@@ -14,17 +14,19 @@ namespace IMS.forms.update
     public partial class Form_Update : Form
     {
         UpdateHandler update;
-        public Form_Update()
+        Form_Login form;
+        public Form_Update(Form_Login form)
         {
             InitializeComponent();
             ControlBox = false;
             update = new UpdateHandler(progressBar, this, lblAction, lblVAction);
+            this.form = form;
             init();
             
         }
         private void init()
         {
-            update.CheckForUpdates();
+            update.CheckForUpdates(this.form);
         }
     }
 }

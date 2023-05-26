@@ -27,7 +27,7 @@ namespace IMS.src
             this.lblAction = lblAction;
             this.lblVAction = lblVAction;
         }
-        public void CheckForUpdates()
+        public void CheckForUpdates(Form_Login form)
         {
             using (WebClient webClient = new WebClient())
             {
@@ -41,6 +41,7 @@ namespace IMS.src
                         DialogResult dialogResult = MessageBox.Show("A newer version is available. Do you want to update now?", "Update Available", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
+                            form.Hide();
                             if (IsRunAsAdmin())
                             {
                                 form_update.Show();
@@ -97,6 +98,11 @@ namespace IMS.src
 
                     lblAction.Text = "Extracting zip...";
                     string extractPath = Path.Combine(updateDir, "UpdateFiles");
+                    if (Directory.Exists(extractPath))
+                    {
+                        // Delete the existing 'UpdateFiles' directory and its contents
+                        Directory.Delete(extractPath, true);
+                    }
                     await Task.Run(() => ZipFile.ExtractToDirectory(tempUpdatePath, extractPath));
 
                     string[] updateFiles = Directory.GetFiles(extractPath, "*", SearchOption.AllDirectories);
@@ -109,15 +115,32 @@ namespace IMS.src
                     {
                         string relativePath = file.Substring(extractPath.Length + 1);
                         string targetPath = Path.Combine(updateDir, relativePath);
-                        lblVAction.Text = $"Overwriting: {targetPath}";
+
+                        // Check if the file already exists
+                        if (File.Exists(targetPath))
+                        {
+                            try
+                            {
+                                await Task.Delay(100);
+                                File.Delete(targetPath);
+                            }
+                            catch (IOException ex)
+                            {
+                                // Handle file deletion error
+                                MessageBox.Show("Error deleting file: " + ex.Message, "");
+                                continue;
+                            }
+                        }
+
                         var replaceTask = Task.Run(() =>
                         {
                             Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
-                            File.Copy(file, targetPath, true);
+                            File.Copy(file, targetPath);
                         });
 
                         replaceTasks.Add(replaceTask);
 
+                        // Update progress bar
                         completedFiles++;
                         int progressPercentage = (int)((float)completedFiles / totalFiles * 100);
                         UpdateProgressBar(progressPercentage);

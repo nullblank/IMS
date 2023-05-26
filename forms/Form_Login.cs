@@ -8,6 +8,7 @@ using IMS.src;
 using System.Security.Principal;
 using System.Diagnostics;
 using IMS.forms.update;
+using System.Reflection;
 
 namespace IMS
 {
@@ -83,7 +84,9 @@ namespace IMS
 
         private void Form_Login_Load(object sender, EventArgs e)
         {
-            Form_Update form = new Form_Update();
+            Form_Update form = new Form_Update(this);
+            string currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
+            gb1.Text = $"v{currentVersion}";
         }
     }
 }

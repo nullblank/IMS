@@ -34,9 +34,8 @@
             txtPassword = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            groupBox1 = new GroupBox();
-            cbDebug = new ComboBox();
-            groupBox1.SuspendLayout();
+            gb1 = new GroupBox();
+            gb1.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -93,44 +92,33 @@
             label2.TabIndex = 5;
             label2.Text = "Password";
             // 
-            // groupBox1
+            // gb1
             // 
-            groupBox1.Controls.Add(cbDebug);
-            groupBox1.Controls.Add(txtUsername);
-            groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(txtPassword);
-            groupBox1.Location = new Point(12, 12);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(312, 209);
-            groupBox1.TabIndex = 6;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Enter your login";
-            // 
-            // cbDebug
-            // 
-            cbDebug.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbDebug.FormattingEnabled = true;
-            cbDebug.Items.AddRange(new object[] { "Public", "Local" });
-            cbDebug.Location = new Point(19, 139);
-            cbDebug.Name = "cbDebug";
-            cbDebug.Size = new Size(277, 28);
-            cbDebug.TabIndex = 6;
+            gb1.Controls.Add(txtUsername);
+            gb1.Controls.Add(button2);
+            gb1.Controls.Add(label2);
+            gb1.Controls.Add(button1);
+            gb1.Controls.Add(label1);
+            gb1.Controls.Add(txtPassword);
+            gb1.Location = new Point(12, 12);
+            gb1.Name = "gb1";
+            gb1.Size = new Size(312, 209);
+            gb1.TabIndex = 6;
+            gb1.TabStop = false;
+            gb1.Text = "vX.X.X.X";
             // 
             // Form_Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(339, 233);
-            Controls.Add(groupBox1);
+            Controls.Add(gb1);
             Name = "Form_Login";
             Text = "Login IMS";
             FormClosed += Form_Login_FormClosed;
             Load += Form_Login_Load;
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            gb1.ResumeLayout(false);
+            gb1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -142,7 +130,6 @@
         private TextBox txtPassword;
         private Label label1;
         private Label label2;
-        private GroupBox groupBox1;
-        private ComboBox cbDebug;
+        private GroupBox gb1;
     }
 }
