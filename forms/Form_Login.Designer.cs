@@ -126,7 +126,7 @@
             ClientSize = new Size(339, 233);
             Controls.Add(groupBox1);
             Name = "Form_Login";
-            Text = "Login";
+            Text = "Login IMS";
             FormClosed += Form_Login_FormClosed;
             Load += Form_Login_Load;
             groupBox1.ResumeLayout(false);
