@@ -84,6 +84,40 @@ namespace IMS
 
         private void Form_Login_Load(object sender, EventArgs e)
         {
+            /*
+             * Updater works, but it cant update everything as it is currently being used by the application itself.
+             * it cant replace files ebing used by the program.
+             * to fix this, i plan to make another program, an updater that will do the functions listed in
+             * 'UpdateHandler.cs' by reading another project's assembly version first.
+             * 
+             * Flow:
+             * as soon as user clicks on main application it will tell it a new version is available and to run the update file
+             * then it will promptly close.
+             * 
+             * 
+             */
+            /* [Planned sample code]
+            
+            using System.Reflection;
+
+            -Specify the path to the assembly of the project you want to check the version of
+            string projectAssemblyPath = "Path/To/ProjectAssembly.dll";
+            
+            -Load the assembly
+            Assembly projectAssembly = Assembly.LoadFrom(projectAssemblyPath);
+            
+            -Retrieve the assembly version
+            Version assemblyVersion = projectAssembly.GetName().Version;
+            
+            -Convert the version to a string
+            string versionString = assemblyVersion.ToString();
+
+            -Display or use the version information as needed
+            Console.WriteLine("Assembly Version: " + versionString);
+            
+            */
+
+
             Form_Update form = new Form_Update(this);
             string currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
             gb1.Text = $"v{currentVersion}";
