@@ -42,6 +42,7 @@ namespace IMS.forms
                 "FROM IMS_STOC " +
                 "JOIN IMS_SITE ON IMS_STOC.STOC_COD = IMS_SITE.SITE_COD";
             dgvDeliveries.DataSource = _handler.ExecuteQuery(query);
+            dgvDeliveries.Columns["Description"].Width = 300;
         }
 
         public void InitDataQuery(int itemcode)

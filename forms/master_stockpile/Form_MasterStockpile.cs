@@ -46,6 +46,7 @@ namespace IMS.forms
                 " SITE_BV AS [Buffer Value]" +
                 " FROM IMS_SITE";
             dgvStockpile.DataSource = handler.ExecuteQuery(query);
+            dgvStockpile.Columns["Description"].Width = 500;
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)

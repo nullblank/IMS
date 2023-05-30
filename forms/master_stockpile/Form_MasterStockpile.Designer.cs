@@ -48,7 +48,7 @@
             // 
             // dgvStockpile
             // 
-            dgvStockpile.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvStockpile.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvStockpile.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStockpile.Location = new Point(18, 45);
             dgvStockpile.Name = "dgvStockpile";
@@ -123,6 +123,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             groupBox1.Controls.Add(btnBuff);
             groupBox1.Controls.Add(btnUpdate);
             groupBox1.Controls.Add(btnAddItem);
@@ -168,6 +169,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             groupBox2.Controls.Add(button1);
             groupBox2.Controls.Add(btnDeliveries);
             groupBox2.Controls.Add(button2);
