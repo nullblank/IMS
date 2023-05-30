@@ -79,6 +79,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(dgvRequests);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
@@ -89,6 +90,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBox2.Controls.Add(btnDelivered);
             groupBox2.Controls.Add(btnProcessing);
             groupBox2.Controls.Add(btnDenied);
@@ -146,6 +148,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBox3.Controls.Add(txtUser);
             groupBox3.Controls.Add(txtOffice);
             groupBox3.Controls.Add(txtPurpose);
@@ -231,6 +234,7 @@
             // 
             // groupBox4
             // 
+            groupBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBox4.Controls.Add(lvItems);
             groupBox4.Location = new Point(608, 12);
             groupBox4.Name = "groupBox4";
@@ -251,6 +255,7 @@
             // 
             // groupBox5
             // 
+            groupBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBox5.Controls.Add(btnSatisfy);
             groupBox5.Location = new Point(992, 196);
             groupBox5.Name = "groupBox5";
@@ -272,6 +277,7 @@
             // 
             // groupBox6
             // 
+            groupBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBox6.Controls.Add(btnReports);
             groupBox6.Controls.Add(btnDeliveries);
             groupBox6.Controls.Add(btnStockpile);

@@ -1,6 +1,7 @@
 ﻿using IMS.DBHandler;
 using IMS.forms.requests_deliveries;
 using IMS.src;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using DataTable = System.Data.DataTable;
 
 namespace IMS.forms.requests_resupply
 {
@@ -126,9 +128,10 @@ namespace IMS.forms.requests_resupply
             }
             else
             {
-                DataRow row = _table.Rows[0];
-                int stockpileQty = row.Field<int>("Quantity"); //Quantity of delivery
-                if (Int32.Parse(txtAmount.Text) > 0 && (stockpileQty - (Int32.Parse(txtAmount.Text))) >= 0 && (stockpileQty - (Int32.Parse(txtAmount.Text)) <= stockpileQty))
+                //DataRow row = _table.Rows[0];
+                int stockpileQty = int.Parse(_row.Cells["Quantity"].Value.ToString()); //Quantity of delivery
+                int amount = Int32.Parse(txtAmount.Text);
+                if (amount > 0 && (stockpileQty - amount) >= 0 && (stockpileQty - amount <= stockpileQty))
                 {
                     _row.Cells["Quantity"].Value = (stockpileQty - Int32.Parse(txtAmount.Text)).ToString();
                     dgvStockpile.DataSource = _table;
@@ -173,9 +176,21 @@ namespace IMS.forms.requests_resupply
 
                 if (lvSend.Items.Count > 0)
                 {//change to get office from request
+                    string office = null;
+                    string qry = $"SELECT SREQ_OFF FROM IMS_SREQ WHERE SREQ_SRN = {_requestNumber}";
+                    DataTable data = _handler.ExecuteQuery(qry);
+                    if (data != null || data.Rows.Count != 0)
+                    {
+                        office = data.Rows[0][0].ToString();
+                    }
+                    else
+                    {
+                        office = "NA";
+                    }
+
                     string query = "INSERT INTO IMS_SDEL " +
                         "(SDEL_SDN, SDEL_DTE, SDEL_RQU, SDEL_OFF, SDEL_COS) VALUES" +
-                        $"({_requestNumber}, '{now}', '{_session.GetUserID()}', '{_session.GetOffice()}', 0)";
+                        $"({_requestNumber}, '{now}', '{_session.GetUserID()}', '{office}', 0)";
                     _handler.ExecuteNonQuery(query);
                     foreach (ListViewItem item in lvSend.Items)
                     {
@@ -226,6 +241,7 @@ namespace IMS.forms.requests_resupply
         {
             if (lvSend.SelectedItems.Count > 0)
             {
+                //Make sure it adds back the item's quantity after removing to the right index!
                 // Retrieve the index of the selected item
                 int index = lvSend.SelectedItems[0].Index;
 
