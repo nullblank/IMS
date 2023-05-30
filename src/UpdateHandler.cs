@@ -38,7 +38,9 @@ namespace IMS.src
 
                     if (IsVersionNewer(latestVersion, currentVersion))
                     {
-                        DialogResult dialogResult = MessageBox.Show("A newer version is available. Do you want to update now?", "Update Available", MessageBoxButtons.YesNo);
+                        DialogResult dialogResult = MessageBox.Show("A newer version is available. Please download the latest update here: https://github.com/nullblank/IMS/releases/latest.", "Update Available", MessageBoxButtons.OK);
+                        Environment.Exit(0);
+                        /*
                         if (dialogResult == DialogResult.Yes)
                         {
                             form.Hide();
@@ -58,6 +60,7 @@ namespace IMS.src
                         {
                             return;
                         }
+                        */
                     }
                     else
                     {
