@@ -171,5 +171,10 @@ namespace IMS.forms.Deliveries
                 e.Handled = true;
             }
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

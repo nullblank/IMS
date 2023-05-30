@@ -96,7 +96,7 @@ namespace IMS.forms.report
             else
             {
                 Reports reports = new Reports(_handler);
-                DataTable table = reports.GetQueryRecords(cbMonth, txtYear, cbOffice, "IMS_SDEL");
+                DataTable table = reports.GetSDEL(cbMonth, txtYear, cbOffice, "IMS_SDEL");
                 if (table != null)// If query did not throw back error. 
                 {
                     if (table.Rows.Count != 0 && table.Rows.Count > 0) //if data exists within user parameters

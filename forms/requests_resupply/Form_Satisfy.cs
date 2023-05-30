@@ -71,7 +71,15 @@ namespace IMS.forms.requests_resupply
             {
 
                 string itemCode = lvItems.SelectedItems[0].Text;
-                string query = $"SELECT * FROM IMS_STOC WHERE STOC_COD = {itemCode} AND STOC_QTY <> 0";
+                string query = $"SELECT " +
+                    $"STOC_IDX AS [Index], " +
+                    $"STOC_COD AS [Item Code], " +
+                    $"STOC_SUP AS [Supplier], " +
+                    $"STOC_DTE AS [Delivery Date], " +
+                    $"STOC_BRA AS [Branch], " +
+                    $"STOC_COS AS [Cost], " +
+                    $"STOC_QTY [Quantity] " +
+                    $"FROM IMS_STOC WHERE STOC_COD = {itemCode} AND STOC_QTY <> 0";
                 _table = _handler.ExecuteQuery(query);
 
                 dgvStockpile.DataSource = _table;
@@ -118,13 +126,13 @@ namespace IMS.forms.requests_resupply
             else
             {
                 DataRow row = _table.Rows[0];
-                int stockpileQty = row.Field<int>("STOC_QTY"); //Quantity of delivery
+                int stockpileQty = row.Field<int>("Quantity"); //Quantity of delivery
                 if (Int32.Parse(txtAmount.Text) > 0 && (stockpileQty - (Int32.Parse(txtAmount.Text))) >= 0 && (stockpileQty - (Int32.Parse(txtAmount.Text)) <= stockpileQty))
                 {
-                    _row.Cells["STOC_QTY"].Value = (stockpileQty - Int32.Parse(txtAmount.Text)).ToString();
+                    _row.Cells["Quantity"].Value = (stockpileQty - Int32.Parse(txtAmount.Text)).ToString();
                     dgvStockpile.DataSource = _table;
                     //fix this shit
-                    double cost = double.Parse(_row.Cells["STOC_COS"].Value.ToString());
+                    double cost = double.Parse(_row.Cells["Cost"].Value.ToString());
                     double totalcost = cost * int.Parse(txtAmount.Text);
                     ListViewItem item = new ListViewItem(_deliveryIndex.ToString());
                     item.SubItems.Add(_itemcode.ToString());

@@ -18,6 +18,55 @@ namespace IMS.src
         {
             _handler = handler;
         }
+
+        public DataTable GetSREQ(ComboBox month, TextBox year, ComboBox Office, string table)
+        {
+            int mon = this.GetMonth(month.Text);
+            string query = "SELECT " +
+                "SREQ_SRN AS [Supply Number], " +
+                "SREQ_DTE AS [Date Requested], " +
+                "SREQ_PUR AS [Purpose], " +
+                "SREQ_RQU AS [Requesting User], " +
+                "SREQ_OFF AS [Requesting Office], " +
+                "SREQ_STAT AS [Status] " +
+                $"FROM {table} " +
+                $"WHERE MONTH({table.Substring(4)}_DTE) = {mon} " +
+                $"AND YEAR({table.Substring(4)}_DTE) = {year.Text} " +
+                $"AND {table.Substring(4)}_OFF = '{Office.Text}'";
+
+            DataTable dataTable = new DataTable();
+            dataTable = _handler.ExecuteQuery(query);
+            if (dataTable == null)
+            {
+                MessageBox.Show("ERROR! Datatable is null!");
+                return null;
+            }
+            return dataTable;
+        }
+
+        public DataTable GetSDEL(ComboBox month, TextBox year, ComboBox Office, string table)
+        {
+            int mon = this.GetMonth(month.Text);
+            string query = "SELECT " +
+                "SDEL_SDN AS [Requesition Number], " +
+                "SDEL_DTE AS [Date Requesitioned], " +
+                "SDEL_RQU AS [Requesitioned User's ID], " +
+                "SDEL_OFF AS [Office Requesitioned], " +
+                "SDEL_COS AS [Total Cost of Requesition] " +
+                $"FROM {table} " +
+                $"WHERE MONTH({table.Substring(4)}_DTE) = {mon} " +
+                $"AND YEAR({table.Substring(4)}_DTE) = {year.Text} " +
+                $"AND {table.Substring(4)}_OFF = '{Office.Text}'";
+
+            DataTable dataTable = new DataTable();
+            dataTable = _handler.ExecuteQuery(query);
+            if (dataTable == null)
+            {
+                MessageBox.Show("ERROR! Datatable is null!");
+                return null;
+            }
+            return dataTable;
+        }
         public DataTable GetQueryRecords(ComboBox month, TextBox year, ComboBox Office, string table)
         {
             int mon = this.GetMonth(month.Text);
