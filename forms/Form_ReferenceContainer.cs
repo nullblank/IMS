@@ -26,6 +26,7 @@ namespace IMS.forms
         public Form_ReferenceContainer(DatabaseHandler handler, SessionHandler session, string table)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitContainer(table, session, handler);
             _table = table;
             _prefix = table.Substring(table.LastIndexOf("_") + 1);

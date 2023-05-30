@@ -33,6 +33,7 @@ namespace IMS.forms.requests_resupply
             _session = session;
             _requestNumber = requestNumber;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             lvItems.Columns.Add("Item Code");
             lvItems.Columns.Add("Item");
             lvItems.Columns.Add("Quantity");

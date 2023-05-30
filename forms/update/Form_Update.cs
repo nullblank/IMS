@@ -18,6 +18,7 @@ namespace IMS.forms.update
         public Form_Update(Form_Login form)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             ControlBox = false;
             update = new UpdateHandler(progressBar, this, lblAction, lblVAction);
             this.form = form;

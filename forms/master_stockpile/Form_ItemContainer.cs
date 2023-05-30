@@ -25,6 +25,7 @@ namespace IMS.forms
         public Form_ItemContainer(DatabaseHandler handler, SessionHandler session, Form_MasterStockpile form)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             _handler = handler;
             _session = session;
             _masterstockpile = form;

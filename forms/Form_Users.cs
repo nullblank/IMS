@@ -27,6 +27,7 @@ namespace IMS.forms
         public Form_Users(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             _handler = handler;
             _session = session;
             _netutil = new NetworkUtilities();

@@ -23,6 +23,7 @@ namespace IMS.forms.master_stockpile
         public Form_SetBuffer(DataGridView grid, DataGridViewCellEventArgs e, DatabaseHandler handler, SessionHandler session, Form_MasterStockpile form)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             _grid = grid;
             DataGridViewRow row = _grid.Rows[e.RowIndex];
             if (!string.IsNullOrEmpty(row.Cells[0].Value.ToString()) || row.Cells[0].Value.ToString() != "")

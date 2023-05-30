@@ -24,6 +24,7 @@ namespace IMS.forms
         public Form_AdminPanel(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             _session = session;
             _handler = handler;
         }

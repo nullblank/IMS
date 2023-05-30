@@ -24,6 +24,7 @@ namespace IMS.forms.report
         public Form_Reports(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             _handler = handler;
             _session = session;
             this.GetColumnData("IMS_RFN_OFF", "OFF_DES", cbOffice);

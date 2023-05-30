@@ -25,6 +25,7 @@ namespace IMS.forms.requests_deliveries
             _handler = handler;
             _session = session;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             lvItems.Columns.Add("Item");
             lvItems.Columns.Add("Quantity");
             ColumnHeader firstColumn = lvItems.Columns[0];

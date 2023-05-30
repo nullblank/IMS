@@ -26,6 +26,7 @@ namespace IMS.forms.Deliveries
         public Form_Deliveries_Additem(DatabaseHandler handler, SessionHandler session, Form_Deliveries form)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             _handler = handler;
             _session = session;
             _form = form;

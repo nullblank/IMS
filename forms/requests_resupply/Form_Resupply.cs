@@ -29,6 +29,7 @@ namespace IMS.forms.requests_resupply
             _session = session;
             _form = form;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitData();
         }
 

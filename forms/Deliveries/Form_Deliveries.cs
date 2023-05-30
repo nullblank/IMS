@@ -22,6 +22,7 @@ namespace IMS.forms
         public Form_Deliveries(DatabaseHandler handler, SessionHandler session)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             _handler = handler;
             _session = session;
             this.InitData();

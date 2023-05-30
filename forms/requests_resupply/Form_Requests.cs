@@ -25,6 +25,7 @@ namespace IMS.forms.requests_resupply
             _handler = handler;
             _session = session;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             lvRequestItems.Columns.Add("Item");
             lvRequestItems.Columns.Add("Quantity");
             ColumnHeader firstColumn = lvRequestItems.Columns[0];

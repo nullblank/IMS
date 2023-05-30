@@ -18,6 +18,7 @@ namespace IMS
         public Form_Login()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
         static bool IsRunAsAdmin()
         {
