@@ -41,9 +41,13 @@
             groupBox3 = new GroupBox();
             btnExResuppliedItems = new Button();
             btnExRequestItems = new Button();
+            groupBox4 = new GroupBox();
+            btnRequesitions = new Button();
+            btnViewRecords = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -119,7 +123,7 @@
             btnExRequests.Name = "btnExRequests";
             btnExRequests.Size = new Size(156, 29);
             btnExRequests.TabIndex = 1;
-            btnExRequests.Text = "Export Requests";
+            btnExRequests.Text = "Requests";
             btnExRequests.UseVisualStyleBackColor = true;
             btnExRequests.Click += btnExRequests_Click;
             // 
@@ -127,12 +131,12 @@
             // 
             groupBox2.Controls.Add(btnExResupplies);
             groupBox2.Controls.Add(btnExRequests);
-            groupBox2.Location = new Point(313, 103);
+            groupBox2.Location = new Point(313, 176);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(343, 67);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Audit";
+            groupBox2.Text = "Export";
             // 
             // btnExResupplies
             // 
@@ -140,7 +144,7 @@
             btnExResupplies.Name = "btnExResupplies";
             btnExResupplies.Size = new Size(156, 29);
             btnExResupplies.TabIndex = 4;
-            btnExResupplies.Text = "Export Resupplies";
+            btnExResupplies.Text = "Requesitions";
             btnExResupplies.UseVisualStyleBackColor = true;
             btnExResupplies.Click += btnExResupplies_Click;
             // 
@@ -150,7 +154,7 @@
             groupBox3.Controls.Add(btnExRequestItems);
             groupBox3.Location = new Point(12, 103);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(295, 100);
+            groupBox3.Size = new Size(295, 140);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Dump";
@@ -175,11 +179,41 @@
             btnExRequestItems.UseVisualStyleBackColor = true;
             btnExRequestItems.Click += btnExRequestItems_Click;
             // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(btnRequesitions);
+            groupBox4.Controls.Add(btnViewRecords);
+            groupBox4.Location = new Point(313, 103);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(343, 67);
+            groupBox4.TabIndex = 4;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "View Records";
+            // 
+            // btnRequesitions
+            // 
+            btnRequesitions.Location = new Point(181, 26);
+            btnRequesitions.Name = "btnRequesitions";
+            btnRequesitions.Size = new Size(156, 29);
+            btnRequesitions.TabIndex = 4;
+            btnRequesitions.Text = "Requesitions";
+            btnRequesitions.UseVisualStyleBackColor = true;
+            // 
+            // btnViewRecords
+            // 
+            btnViewRecords.Location = new Point(6, 26);
+            btnViewRecords.Name = "btnViewRecords";
+            btnViewRecords.Size = new Size(156, 29);
+            btnViewRecords.TabIndex = 1;
+            btnViewRecords.Text = "Requests";
+            btnViewRecords.UseVisualStyleBackColor = true;
+            // 
             // Form_Reports
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(670, 216);
+            ClientSize = new Size(670, 255);
+            Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -189,6 +223,7 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -207,5 +242,8 @@
         private Button btnExResuppliedItems;
         private Button btnExRequestItems;
         private TextBox txtYear;
+        private GroupBox groupBox4;
+        private Button btnRequesitions;
+        private Button btnViewRecords;
     }
 }

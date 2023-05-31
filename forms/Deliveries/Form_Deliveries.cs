@@ -61,6 +61,7 @@ namespace IMS.forms
                 $"WHERE IMS_STOC.STOC_COD = {itemcode}";
             dgvDeliveries.DataSource = _handler.ExecuteQuery(query);
             btnAddDelivery.Hide();
+            button1.Hide();
         }
 
         private void button5_Click(object sender, EventArgs e)
