@@ -28,12 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form_Reports_View";
+            dgvView = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvView).BeginInit();
+            SuspendLayout();
+            // 
+            // dgvView
+            // 
+            dgvView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvView.Location = new Point(12, 12);
+            dgvView.Name = "dgvView";
+            dgvView.RowHeadersWidth = 51;
+            dgvView.RowTemplate.Height = 29;
+            dgvView.Size = new Size(1087, 653);
+            dgvView.TabIndex = 0;
+            // 
+            // Form_Reports_View
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1111, 677);
+            Controls.Add(dgvView);
+            Name = "Form_Reports_View";
+            Text = "Form_Reports_View";
+            ((System.ComponentModel.ISupportInitialize)dgvView).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView dgvView;
     }
 }

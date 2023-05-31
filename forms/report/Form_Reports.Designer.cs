@@ -198,6 +198,7 @@
             btnRequesitions.TabIndex = 4;
             btnRequesitions.Text = "Requesitions";
             btnRequesitions.UseVisualStyleBackColor = true;
+            btnRequesitions.Click += btnRequesitions_Click;
             // 
             // btnViewRecords
             // 
@@ -207,6 +208,7 @@
             btnViewRecords.TabIndex = 1;
             btnViewRecords.Text = "Requests";
             btnViewRecords.UseVisualStyleBackColor = true;
+            btnViewRecords.Click += btnViewRecords_Click;
             // 
             // Form_Reports
             // 

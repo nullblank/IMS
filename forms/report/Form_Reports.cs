@@ -184,5 +184,33 @@ namespace IMS.forms.report
                 MessageBox.Show("Table was null!");
             }
         }
+
+        private void btnViewRecords_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbMonth.Text) || string.IsNullOrEmpty(cbOffice.Text) || string.IsNullOrEmpty(txtYear.Text)) //if fields are empty
+            {
+                MessageBox.Show("Please make sure the Office, Month, and Year fields are not empty.");
+            }
+            else
+            {
+                Reports reports = new Reports(_handler);
+                Form_Reports_View form = new Form_Reports_View(_handler, _session, cbMonth, txtYear, cbOffice, "IMS_SREQ");
+                form.Show();
+            }
+        }
+
+        private void btnRequesitions_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbMonth.Text) || string.IsNullOrEmpty(cbOffice.Text) || string.IsNullOrEmpty(txtYear.Text)) //if fields are empty
+            {
+                MessageBox.Show("Please make sure the Office, Month, and Year fields are not empty.");
+            }
+            else
+            {
+                Reports reports = new Reports(_handler);
+                Form_Reports_View form = new Form_Reports_View(_handler, _session, cbMonth, txtYear, cbOffice, "IMS_SDEL");
+                form.Show();
+            }
+        }
     }
 }
